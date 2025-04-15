@@ -1,0 +1,180 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Books
+  fields:
+    - name: amount
+      type: Int2
+    - name: id
+      type: Uuid!
+    - name: title
+      type: Varchar!
+  graphql:
+    typeName: Books
+    inputTypeName: BooksInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: Books
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Books
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - id
+          - title
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: BooksBoolExp
+  operand:
+    object:
+      type: Books
+      comparableFields:
+        - fieldName: amount
+          booleanExpressionType: Int2BoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: title
+          booleanExpressionType: VarcharBoolExp
+      comparableRelationships:
+        - relationshipName: borrowedBooks
+        - relationshipName: returnedBooks
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: BooksBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: BooksAggExp
+  operand:
+    object:
+      aggregatedType: Books
+      aggregatableFields:
+        - fieldName: amount
+          aggregateExpression: Int2AggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: title
+          aggregateExpression: VarcharAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: BooksAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: BooksOrderByExp
+  operand:
+    object:
+      orderedType: Books
+      orderableFields:
+        - fieldName: amount
+          orderByExpression: Int2OrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: title
+          orderByExpression: VarcharOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: BooksOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: Books
+  objectType: Books
+  source:
+    dataConnectorName: pg_db
+    collection: Books
+  filterExpressionType: BooksBoolExp
+  aggregateExpression: BooksAggExp
+  orderByExpression: BooksOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: books
+      subscription:
+        rootField: books
+    selectUniques:
+      - queryRootField: booksById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: booksById
+    filterInputTypeName: BooksFilterInput
+    aggregate:
+      queryRootField: booksAggregate
+      subscription:
+        rootField: booksAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Books
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: borrowedBooks
+  sourceType: Books
+  target:
+    model:
+      name: BorrowedBooks
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: BorrowedBooksAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: bookId
+  graphql:
+    aggregateFieldName: borrowedBooksAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: returnedBooks
+  sourceType: Books
+  target:
+    model:
+      name: ReturnedBooks
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: ReturnedBooksAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: bookId
+  graphql:
+    aggregateFieldName: returnedBooksAggregate
+

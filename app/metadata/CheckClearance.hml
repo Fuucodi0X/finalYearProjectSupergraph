@@ -1,0 +1,59 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: CheckClearanceResult
+  fields:
+    - name: disciplineClearance
+      type: Boolean!
+    - name: dormitaryClearance
+      type: Boolean!
+    - name: libraryClearance
+      type: Boolean!
+  graphql:
+    typeName: CheckClearanceResult
+    inputTypeName: CheckClearanceResultInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: golang
+      dataConnectorObjectType: CheckClearanceResult
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: CheckClearanceResult
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - disciplineClearance
+          - dormitaryClearance
+          - libraryClearance
+
+---
+kind: Command
+version: v1
+definition:
+  name: CheckClearance
+  outputType: CheckClearanceResult
+  arguments:
+    - name: userId
+      type: String!
+  source:
+    dataConnectorName: golang
+    dataConnectorCommand:
+      function: checkClearance
+  graphql:
+    rootFieldName: checkClearance
+    rootFieldKind: Query
+  description: is the handler called by Hasura
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: CheckClearance
+  permissions:
+    - role: admin
+      allowExecution: true
+

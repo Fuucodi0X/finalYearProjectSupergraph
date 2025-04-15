@@ -1,0 +1,4 @@
+.hasura-connector/
+.codegen/
+*.hml.env*
+compose.yaml

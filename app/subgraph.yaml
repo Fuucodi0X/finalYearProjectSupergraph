@@ -1,0 +1,27 @@
+kind: Subgraph
+version: v2
+definition:
+  name: app
+  generator:
+    rootPath: .
+    namingConvention: graphql
+  includePaths:
+    - metadata
+  envMapping:
+    APP_GOLANG_AUTHORIZATION_HEADER:
+      fromEnv: APP_GOLANG_AUTHORIZATION_HEADER
+    APP_GOLANG_READ_URL:
+      fromEnv: APP_GOLANG_READ_URL
+    APP_GOLANG_WRITE_URL:
+      fromEnv: APP_GOLANG_WRITE_URL
+    APP_PG_DB_AUTHORIZATION_HEADER:
+      fromEnv: APP_PG_DB_AUTHORIZATION_HEADER
+    APP_PG_DB_READ_URL:
+      fromEnv: APP_PG_DB_READ_URL
+    APP_PG_DB_WRITE_URL:
+      fromEnv: APP_PG_DB_WRITE_URL
+  connectors:
+    - path: connector/pg_db/connector.yaml
+      connectorLinkName: pg_db
+    - path: connector/golang/connector.yaml
+      connectorLinkName: golang

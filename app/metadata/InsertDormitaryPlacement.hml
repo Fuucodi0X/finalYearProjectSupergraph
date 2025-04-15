@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertDormitaryPlacementObject
+  fields:
+    - name: blockNumber
+      type: Int2!
+    - name: id
+      type: Uuid!
+    - name: roomNumber
+      type: Int2!
+    - name: status
+      type: Varchar!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertDormitaryPlacementObject
+    inputTypeName: InsertDormitaryPlacementObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_DormitaryPlacement_object
+      fieldMapping:
+        blockNumber:
+          column:
+            name: block_number
+        id:
+          column:
+            name: id
+        roomNumber:
+          column:
+            name: room_number
+        status:
+          column:
+            name: status
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertDormitaryPlacementObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - blockNumber
+          - id
+          - roomNumber
+          - status
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertDormitaryPlacementResponse
+  description: Responses from the 'insert_DormitaryPlacement' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[DormitaryPlacement!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertDormitaryPlacementResponse
+    inputTypeName: InsertDormitaryPlacementResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_DormitaryPlacement_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertDormitaryPlacementResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertDormitaryPlacement
+  outputType: InsertDormitaryPlacementResponse!
+  arguments:
+    - name: objects
+      type: "[InsertDormitaryPlacementObject!]!"
+    - name: postCheck
+      type: DormitaryPlacementBoolExp
+      description: Insert permission predicate over the 'DormitaryPlacement' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_DormitaryPlacement
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertDormitaryPlacement
+    rootFieldKind: Mutation
+  description: Insert into the DormitaryPlacement table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertDormitaryPlacement
+  permissions:
+    - role: admin
+      allowExecution: true
+

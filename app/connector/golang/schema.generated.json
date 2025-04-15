@@ -1,0 +1,65 @@
+{
+  "collections": [],
+  "functions": [
+    {
+      "arguments": {
+        "userId": {
+          "type": {
+            "name": "String",
+            "type": "named"
+          }
+        }
+      },
+      "description": "is the handler called by Hasura",
+      "name": "checkClearance",
+      "result_type": {
+        "type": "nullable",
+        "underlying_type": {
+          "name": "CheckClearanceResult",
+          "type": "named"
+        }
+      }
+    }
+  ],
+  "object_types": {
+    "CheckClearanceResult": {
+      "fields": {
+        "disciplineClearance": {
+          "type": {
+            "name": "Boolean",
+            "type": "named"
+          }
+        },
+        "dormitaryClearance": {
+          "type": {
+            "name": "Boolean",
+            "type": "named"
+          }
+        },
+        "libraryClearance": {
+          "type": {
+            "name": "Boolean",
+            "type": "named"
+          }
+        }
+      }
+    }
+  },
+  "procedures": [],
+  "scalar_types": {
+    "Boolean": {
+      "aggregate_functions": {},
+      "comparison_operators": {},
+      "representation": {
+        "type": "boolean"
+      }
+    },
+    "String": {
+      "aggregate_functions": {},
+      "comparison_operators": {},
+      "representation": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteUsersByPhoneNumberResponse
+  description: Responses from the 'delete_Users_by_phone_number' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Users!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteUsersByPhoneNumberResponse
+    inputTypeName: DeleteUsersByPhoneNumberResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_Users_by_phone_number_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteUsersByPhoneNumberResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteUsersByPhoneNumber
+  outputType: DeleteUsersByPhoneNumberResponse!
+  arguments:
+    - name: keyPhoneNumber
+      type: Int4!
+    - name: preCheck
+      type: UsersBoolExp
+      description: Delete permission predicate over the 'Users' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_Users_by_phone_number
+    argumentMapping:
+      keyPhoneNumber: key_phone_number
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteUsersByPhoneNumber
+    rootFieldKind: Mutation
+  description: Delete any row on the 'Users' collection using the 'phone_number' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteUsersByPhoneNumber
+  permissions:
+    - role: admin
+      allowExecution: true
+

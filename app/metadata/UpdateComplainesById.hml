@@ -1,0 +1,301 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplainesAccusedId
+  description: Update the 'accused_id' column in the 'Complaines' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplainesAccusedId
+    inputTypeName: UpdateColumnComplainesAccusedIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Complaines_accused_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplainesAccusedId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplainesAccuserId
+  description: Update the 'accuser_id' column in the 'Complaines' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplainesAccuserId
+    inputTypeName: UpdateColumnComplainesAccuserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Complaines_accuser_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplainesAccuserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplainesDescription
+  description: Update the 'description' column in the 'Complaines' collection
+  fields:
+    - name: set
+      type: Text!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplainesDescription
+    inputTypeName: UpdateColumnComplainesDescriptionInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Complaines_description
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplainesDescription
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplainesId
+  description: Update the 'id' column in the 'Complaines' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplainesId
+    inputTypeName: UpdateColumnComplainesIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Complaines_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplainesId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnComplainesStatus
+  description: Update the 'status' column in the 'Complaines' collection
+  fields:
+    - name: set
+      type: Varchar
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnComplainesStatus
+    inputTypeName: UpdateColumnComplainesStatusInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Complaines_status
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnComplainesStatus
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateComplainesByIdUpdateColumns
+  description: Update the columns of the 'Complaines' collection
+  fields:
+    - name: accusedId
+      type: UpdateColumnComplainesAccusedId
+      description: Update the 'accused_id' column in the 'Complaines' collection.
+    - name: accuserId
+      type: UpdateColumnComplainesAccuserId
+      description: Update the 'accuser_id' column in the 'Complaines' collection.
+    - name: description
+      type: UpdateColumnComplainesDescription
+      description: Update the 'description' column in the 'Complaines' collection.
+    - name: id
+      type: UpdateColumnComplainesId
+      description: Update the 'id' column in the 'Complaines' collection.
+    - name: status
+      type: UpdateColumnComplainesStatus
+      description: Update the 'status' column in the 'Complaines' collection.
+  graphql:
+    typeName: UpdateComplainesByIdUpdateColumns
+    inputTypeName: UpdateComplainesByIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Complaines_by_id_update_columns
+      fieldMapping:
+        accusedId:
+          column:
+            name: accused_id
+        accuserId:
+          column:
+            name: accuser_id
+        description:
+          column:
+            name: description
+        id:
+          column:
+            name: id
+        status:
+          column:
+            name: status
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateComplainesByIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - accusedId
+          - accuserId
+          - description
+          - id
+          - status
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateComplainesByIdResponse
+  description: Responses from the 'update_Complaines_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Complaines!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateComplainesByIdResponse
+    inputTypeName: UpdateComplainesByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Complaines_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateComplainesByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateComplainesById
+  outputType: UpdateComplainesByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: postCheck
+      type: ComplainesBoolExp
+      description: Update permission post-condition predicate over the 'Complaines'
+        collection
+    - name: preCheck
+      type: ComplainesBoolExp
+      description: Update permission pre-condition predicate over the 'Complaines'
+        collection
+    - name: updateColumns
+      type: UpdateComplainesByIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_Complaines_by_id
+    argumentMapping:
+      keyId: key_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateComplainesById
+    rootFieldKind: Mutation
+  description: Update any row on the 'Complaines' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateComplainesById
+  permissions:
+    - role: admin
+      allowExecution: true
+

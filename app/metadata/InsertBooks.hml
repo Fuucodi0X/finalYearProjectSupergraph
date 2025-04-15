@@ -1,0 +1,104 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertBooksObject
+  fields:
+    - name: amount
+      type: Int2
+    - name: id
+      type: Uuid!
+    - name: title
+      type: Varchar!
+  graphql:
+    typeName: InsertBooksObject
+    inputTypeName: InsertBooksObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Books_object
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertBooksObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - amount
+          - id
+          - title
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertBooksResponse
+  description: Responses from the 'insert_Books' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Books!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertBooksResponse
+    inputTypeName: InsertBooksResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Books_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertBooksResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertBooks
+  outputType: InsertBooksResponse!
+  arguments:
+    - name: objects
+      type: "[InsertBooksObject!]!"
+    - name: postCheck
+      type: BooksBoolExp
+      description: Insert permission predicate over the 'Books' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_Books
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertBooks
+    rootFieldKind: Mutation
+  description: Insert into the Books table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertBooks
+  permissions:
+    - role: admin
+      allowExecution: true
+

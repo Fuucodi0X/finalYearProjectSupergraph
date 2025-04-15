@@ -1,0 +1,180 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Suspensions
+  fields:
+    - name: complainId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: suspendedUserId
+      type: Uuid
+    - name: suspensionApprover
+      type: Uuid
+    - name: suspensionPeriod
+      type: Text
+    - name: time
+      type: Timestamp
+  graphql:
+    typeName: Suspensions
+    inputTypeName: SuspensionsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: Suspensions
+      fieldMapping:
+        complainId:
+          column:
+            name: complain_id
+        id:
+          column:
+            name: id
+        suspendedUserId:
+          column:
+            name: suspended_user_id
+        suspensionApprover:
+          column:
+            name: suspension_approver
+        suspensionPeriod:
+          column:
+            name: suspension_period
+        time:
+          column:
+            name: time
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Suspensions
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complainId
+          - id
+          - suspendedUserId
+          - suspensionApprover
+          - suspensionPeriod
+          - time
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: SuspensionsBoolExp
+  operand:
+    object:
+      type: Suspensions
+      comparableFields:
+        - fieldName: complainId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: suspendedUserId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: suspensionApprover
+          booleanExpressionType: UuidBoolExp
+        - fieldName: suspensionPeriod
+          booleanExpressionType: TextBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: SuspensionsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: SuspensionsAggExp
+  operand:
+    object:
+      aggregatedType: Suspensions
+      aggregatableFields:
+        - fieldName: complainId
+          aggregateExpression: UuidAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: suspendedUserId
+          aggregateExpression: UuidAggExp
+        - fieldName: suspensionApprover
+          aggregateExpression: UuidAggExp
+        - fieldName: suspensionPeriod
+          aggregateExpression: TextAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: SuspensionsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: SuspensionsOrderByExp
+  operand:
+    object:
+      orderedType: Suspensions
+      orderableFields:
+        - fieldName: complainId
+          orderByExpression: UuidOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: suspendedUserId
+          orderByExpression: UuidOrderByExp
+        - fieldName: suspensionApprover
+          orderByExpression: UuidOrderByExp
+        - fieldName: suspensionPeriod
+          orderByExpression: TextOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: SuspensionsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: Suspensions
+  objectType: Suspensions
+  source:
+    dataConnectorName: pg_db
+    collection: Suspensions
+  filterExpressionType: SuspensionsBoolExp
+  aggregateExpression: SuspensionsAggExp
+  orderByExpression: SuspensionsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: suspensions
+      subscription:
+        rootField: suspensions
+    selectUniques:
+      - queryRootField: suspensionsById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: suspensionsById
+    filterInputTypeName: SuspensionsFilterInput
+    aggregate:
+      queryRootField: suspensionsAggregate
+      subscription:
+        rootField: suspensionsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Suspensions
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

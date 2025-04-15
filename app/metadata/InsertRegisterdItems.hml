@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertRegisterdItemsObject
+  fields:
+    - name: id
+      type: Uuid!
+    - name: itemType
+      type: Varchar
+    - name: model
+      type: Varchar
+    - name: serial
+      type: Text
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertRegisterdItemsObject
+    inputTypeName: InsertRegisterdItemsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_RegisterdItems_object
+      fieldMapping:
+        id:
+          column:
+            name: id
+        itemType:
+          column:
+            name: item_type
+        model:
+          column:
+            name: model
+        serial:
+          column:
+            name: serial
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertRegisterdItemsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - itemType
+          - model
+          - serial
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertRegisterdItemsResponse
+  description: Responses from the 'insert_RegisterdItems' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[RegisterdItems!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertRegisterdItemsResponse
+    inputTypeName: InsertRegisterdItemsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_RegisterdItems_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertRegisterdItemsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertRegisterdItems
+  outputType: InsertRegisterdItemsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertRegisterdItemsObject!]!"
+    - name: postCheck
+      type: RegisterdItemsBoolExp
+      description: Insert permission predicate over the 'RegisterdItems' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_RegisterdItems
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertRegisterdItems
+    rootFieldKind: Mutation
+  description: Insert into the RegisterdItems table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertRegisterdItems
+  permissions:
+    - role: admin
+      allowExecution: true
+

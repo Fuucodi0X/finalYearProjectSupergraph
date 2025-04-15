@@ -1,0 +1,168 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Complaines
+  fields:
+    - name: accusedId
+      type: Uuid
+    - name: accuserId
+      type: Uuid
+    - name: description
+      type: Text!
+    - name: id
+      type: Uuid!
+    - name: status
+      type: Varchar
+  graphql:
+    typeName: Complaines
+    inputTypeName: ComplainesInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: Complaines
+      fieldMapping:
+        accusedId:
+          column:
+            name: accused_id
+        accuserId:
+          column:
+            name: accuser_id
+        description:
+          column:
+            name: description
+        id:
+          column:
+            name: id
+        status:
+          column:
+            name: status
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Complaines
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - accusedId
+          - accuserId
+          - description
+          - id
+          - status
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ComplainesBoolExp
+  operand:
+    object:
+      type: Complaines
+      comparableFields:
+        - fieldName: accusedId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: accuserId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: description
+          booleanExpressionType: TextBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: status
+          booleanExpressionType: VarcharBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ComplainesBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ComplainesAggExp
+  operand:
+    object:
+      aggregatedType: Complaines
+      aggregatableFields:
+        - fieldName: accusedId
+          aggregateExpression: UuidAggExp
+        - fieldName: accuserId
+          aggregateExpression: UuidAggExp
+        - fieldName: description
+          aggregateExpression: TextAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: status
+          aggregateExpression: VarcharAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ComplainesAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ComplainesOrderByExp
+  operand:
+    object:
+      orderedType: Complaines
+      orderableFields:
+        - fieldName: accusedId
+          orderByExpression: UuidOrderByExp
+        - fieldName: accuserId
+          orderByExpression: UuidOrderByExp
+        - fieldName: description
+          orderByExpression: TextOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: status
+          orderByExpression: VarcharOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: ComplainesOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: Complaines
+  objectType: Complaines
+  source:
+    dataConnectorName: pg_db
+    collection: Complaines
+  filterExpressionType: ComplainesBoolExp
+  aggregateExpression: ComplainesAggExp
+  orderByExpression: ComplainesOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: complaines
+      subscription:
+        rootField: complaines
+    selectUniques:
+      - queryRootField: complainesById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: complainesById
+    filterInputTypeName: ComplainesFilterInput
+    aggregate:
+      queryRootField: complainesAggregate
+      subscription:
+        rootField: complainesAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Complaines
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

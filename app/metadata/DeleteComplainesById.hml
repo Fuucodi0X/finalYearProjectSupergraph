@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteComplainesByIdResponse
+  description: Responses from the 'delete_Complaines_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Complaines!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteComplainesByIdResponse
+    inputTypeName: DeleteComplainesByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_Complaines_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteComplainesByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteComplainesById
+  outputType: DeleteComplainesByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: ComplainesBoolExp
+      description: Delete permission predicate over the 'Complaines' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_Complaines_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteComplainesById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'Complaines' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteComplainesById
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertComplainesObject
+  fields:
+    - name: accusedId
+      type: Uuid
+    - name: accuserId
+      type: Uuid
+    - name: description
+      type: Text!
+    - name: id
+      type: Uuid!
+    - name: status
+      type: Varchar
+  graphql:
+    typeName: InsertComplainesObject
+    inputTypeName: InsertComplainesObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Complaines_object
+      fieldMapping:
+        accusedId:
+          column:
+            name: accused_id
+        accuserId:
+          column:
+            name: accuser_id
+        description:
+          column:
+            name: description
+        id:
+          column:
+            name: id
+        status:
+          column:
+            name: status
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertComplainesObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - accusedId
+          - accuserId
+          - description
+          - id
+          - status
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertComplainesResponse
+  description: Responses from the 'insert_Complaines' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Complaines!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertComplainesResponse
+    inputTypeName: InsertComplainesResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Complaines_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertComplainesResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertComplaines
+  outputType: InsertComplainesResponse!
+  arguments:
+    - name: objects
+      type: "[InsertComplainesObject!]!"
+    - name: postCheck
+      type: ComplainesBoolExp
+      description: Insert permission predicate over the 'Complaines' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_Complaines
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertComplaines
+    rootFieldKind: Mutation
+  description: Insert into the Complaines table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertComplaines
+  permissions:
+    - role: admin
+      allowExecution: true
+

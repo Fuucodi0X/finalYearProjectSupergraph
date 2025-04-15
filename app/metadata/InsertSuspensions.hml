@@ -1,0 +1,132 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSuspensionsObject
+  fields:
+    - name: complainId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: suspendedUserId
+      type: Uuid
+    - name: suspensionApprover
+      type: Uuid
+    - name: suspensionPeriod
+      type: Text
+    - name: time
+      type: Timestamp
+  graphql:
+    typeName: InsertSuspensionsObject
+    inputTypeName: InsertSuspensionsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Suspensions_object
+      fieldMapping:
+        complainId:
+          column:
+            name: complain_id
+        id:
+          column:
+            name: id
+        suspendedUserId:
+          column:
+            name: suspended_user_id
+        suspensionApprover:
+          column:
+            name: suspension_approver
+        suspensionPeriod:
+          column:
+            name: suspension_period
+        time:
+          column:
+            name: time
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSuspensionsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complainId
+          - id
+          - suspendedUserId
+          - suspensionApprover
+          - suspensionPeriod
+          - time
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertSuspensionsResponse
+  description: Responses from the 'insert_Suspensions' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Suspensions!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertSuspensionsResponse
+    inputTypeName: InsertSuspensionsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Suspensions_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertSuspensionsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertSuspensions
+  outputType: InsertSuspensionsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertSuspensionsObject!]!"
+    - name: postCheck
+      type: SuspensionsBoolExp
+      description: Insert permission predicate over the 'Suspensions' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_Suspensions
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertSuspensions
+    rootFieldKind: Mutation
+  description: Insert into the Suspensions table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertSuspensions
+  permissions:
+    - role: admin
+      allowExecution: true
+

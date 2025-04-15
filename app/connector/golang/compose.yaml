@@ -1,0 +1,16 @@
+services:
+  app_golang:
+    build:
+      context: .
+      dockerfile: .hasura-connector/Dockerfile
+    environment:
+      CONNECTION_URI: $APP_GOLANG_CONNECTION_URI
+      HASURA_SERVICE_TOKEN_SECRET: $APP_GOLANG_HASURA_SERVICE_TOKEN_SECRET
+      MUTATION_CONCURRENCY_LIMIT: $APP_GOLANG_MUTATION_CONCURRENCY_LIMIT
+      OTEL_EXPORTER_OTLP_ENDPOINT: $APP_GOLANG_OTEL_EXPORTER_OTLP_ENDPOINT
+      OTEL_SERVICE_NAME: $APP_GOLANG_OTEL_SERVICE_NAME
+      QUERY_CONCURRENCY_LIMIT: $APP_GOLANG_QUERY_CONCURRENCY_LIMIT
+    extra_hosts:
+      - local.hasura.dev:host-gateway
+    ports:
+      - 8459:8080

@@ -1,0 +1,223 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnGetwayExitLogId
+  description: Update the 'id' column in the 'GetwayExitLog' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnGetwayExitLogId
+    inputTypeName: UpdateColumnGetwayExitLogIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_GetwayExitLog_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnGetwayExitLogId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnGetwayExitLogTime
+  description: Update the 'time' column in the 'GetwayExitLog' collection
+  fields:
+    - name: set
+      type: Timestamp!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnGetwayExitLogTime
+    inputTypeName: UpdateColumnGetwayExitLogTimeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_GetwayExitLog_time
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnGetwayExitLogTime
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnGetwayExitLogUserId
+  description: Update the 'user_id' column in the 'GetwayExitLog' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnGetwayExitLogUserId
+    inputTypeName: UpdateColumnGetwayExitLogUserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_GetwayExitLog_user_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnGetwayExitLogUserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateGetwayExitLogByIdUpdateColumns
+  description: Update the columns of the 'GetwayExitLog' collection
+  fields:
+    - name: id
+      type: UpdateColumnGetwayExitLogId
+      description: Update the 'id' column in the 'GetwayExitLog' collection.
+    - name: time
+      type: UpdateColumnGetwayExitLogTime
+      description: Update the 'time' column in the 'GetwayExitLog' collection.
+    - name: userId
+      type: UpdateColumnGetwayExitLogUserId
+      description: Update the 'user_id' column in the 'GetwayExitLog' collection.
+  graphql:
+    typeName: UpdateGetwayExitLogByIdUpdateColumns
+    inputTypeName: UpdateGetwayExitLogByIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_GetwayExitLog_by_id_update_columns
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateGetwayExitLogByIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateGetwayExitLogByIdResponse
+  description: Responses from the 'update_GetwayExitLog_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[GetwayExitLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateGetwayExitLogByIdResponse
+    inputTypeName: UpdateGetwayExitLogByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_GetwayExitLog_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateGetwayExitLogByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateGetwayExitLogById
+  outputType: UpdateGetwayExitLogByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: postCheck
+      type: GetwayExitLogBoolExp
+      description: Update permission post-condition predicate over the 'GetwayExitLog'
+        collection
+    - name: preCheck
+      type: GetwayExitLogBoolExp
+      description: Update permission pre-condition predicate over the 'GetwayExitLog'
+        collection
+    - name: updateColumns
+      type: UpdateGetwayExitLogByIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_GetwayExitLog_by_id
+    argumentMapping:
+      keyId: key_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateGetwayExitLogById
+    rootFieldKind: Mutation
+  description: Update any row on the 'GetwayExitLog' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateGetwayExitLogById
+  permissions:
+    - role: admin
+      allowExecution: true
+

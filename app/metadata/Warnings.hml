@@ -1,0 +1,168 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Warnings
+  fields:
+    - name: complainId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp
+    - name: warnedUserId
+      type: Uuid
+    - name: warningApprover
+      type: Uuid
+  graphql:
+    typeName: Warnings
+    inputTypeName: WarningsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: Warnings
+      fieldMapping:
+        complainId:
+          column:
+            name: complain_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        warnedUserId:
+          column:
+            name: warned_user_id
+        warningApprover:
+          column:
+            name: warning_approver
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Warnings
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complainId
+          - id
+          - time
+          - warnedUserId
+          - warningApprover
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: WarningsBoolExp
+  operand:
+    object:
+      type: Warnings
+      comparableFields:
+        - fieldName: complainId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: warnedUserId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: warningApprover
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: WarningsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: WarningsAggExp
+  operand:
+    object:
+      aggregatedType: Warnings
+      aggregatableFields:
+        - fieldName: complainId
+          aggregateExpression: UuidAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: warnedUserId
+          aggregateExpression: UuidAggExp
+        - fieldName: warningApprover
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: WarningsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: WarningsOrderByExp
+  operand:
+    object:
+      orderedType: Warnings
+      orderableFields:
+        - fieldName: complainId
+          orderByExpression: UuidOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: warnedUserId
+          orderByExpression: UuidOrderByExp
+        - fieldName: warningApprover
+          orderByExpression: UuidOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: WarningsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: Warnings
+  objectType: Warnings
+  source:
+    dataConnectorName: pg_db
+    collection: Warnings
+  filterExpressionType: WarningsBoolExp
+  aggregateExpression: WarningsAggExp
+  orderByExpression: WarningsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: warnings
+      subscription:
+        rootField: warnings
+    selectUniques:
+      - queryRootField: warningsById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: warningsById
+    filterInputTypeName: WarningsFilterInput
+    aggregate:
+      queryRootField: warningsAggregate
+      subscription:
+        rootField: warningsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Warnings
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

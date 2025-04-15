@@ -1,0 +1,196 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: BorrowedBooks
+  fields:
+    - name: bookId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: BorrowedBooks
+    inputTypeName: BorrowedBooksInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: BorrowedBooks
+      fieldMapping:
+        bookId:
+          column:
+            name: book_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: BorrowedBooks
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bookId
+          - id
+          - time
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: BorrowedBooksBoolExp
+  operand:
+    object:
+      type: BorrowedBooks
+      comparableFields:
+        - fieldName: bookId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: book
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: BorrowedBooksBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: BorrowedBooksAggExp
+  operand:
+    object:
+      aggregatedType: BorrowedBooks
+      aggregatableFields:
+        - fieldName: bookId
+          aggregateExpression: UuidAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: BorrowedBooksAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: BorrowedBooksOrderByExp
+  operand:
+    object:
+      orderedType: BorrowedBooks
+      orderableFields:
+        - fieldName: bookId
+          orderByExpression: UuidOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: book
+        - relationshipName: user
+  graphql:
+    expressionTypeName: BorrowedBooksOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: BorrowedBooks
+  objectType: BorrowedBooks
+  source:
+    dataConnectorName: pg_db
+    collection: BorrowedBooks
+  filterExpressionType: BorrowedBooksBoolExp
+  aggregateExpression: BorrowedBooksAggExp
+  orderByExpression: BorrowedBooksOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: borrowedBooks
+      subscription:
+        rootField: borrowedBooks
+    selectUniques:
+      - queryRootField: borrowedBooksById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: borrowedBooksById
+    filterInputTypeName: BorrowedBooksFilterInput
+    aggregate:
+      queryRootField: borrowedBooksAggregate
+      subscription:
+        rootField: borrowedBooksAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: BorrowedBooks
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: book
+  sourceType: BorrowedBooks
+  target:
+    model:
+      name: Books
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: bookId
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: BorrowedBooks
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

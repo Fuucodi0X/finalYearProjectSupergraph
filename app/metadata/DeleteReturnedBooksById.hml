@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteReturnedBooksByIdResponse
+  description: Responses from the 'delete_ReturnedBooks_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReturnedBooks!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteReturnedBooksByIdResponse
+    inputTypeName: DeleteReturnedBooksByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_ReturnedBooks_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteReturnedBooksByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteReturnedBooksById
+  outputType: DeleteReturnedBooksByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: ReturnedBooksBoolExp
+      description: Delete permission predicate over the 'ReturnedBooks' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_ReturnedBooks_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteReturnedBooksById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'ReturnedBooks' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteReturnedBooksById
+  permissions:
+    - role: admin
+      allowExecution: true
+

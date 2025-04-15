@@ -1,0 +1,4017 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: pg_db
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_PG_DB_READ_URL
+      write:
+        valueFromEnv: APP_PG_DB_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_PG_DB_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        int2:
+          representation:
+            type: int16
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            bit_and:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            bit_or:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            bit_xor:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: int2
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: int2
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: int2
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: int2
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: int2
+                type: named
+        int4:
+          representation:
+            type: int32
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            bit_and:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int4
+                  type: named
+            bit_or:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int4
+                  type: named
+            bit_xor:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int4
+                  type: named
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int4
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int4
+                  type: named
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: int4
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: int4
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: int4
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: int4
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: int4
+                type: named
+        int8:
+          representation:
+            type: int64
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            bit_and:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            bit_or:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            bit_xor:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: int8
+                  type: named
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: int8
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: int8
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: int8
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: int8
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: int8
+                type: named
+        numeric:
+          representation:
+            type: bigdecimal
+          aggregate_functions:
+            avg:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            stddev_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            sum:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_pop:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            var_samp:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+            variance:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: numeric
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: numeric
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: numeric
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: numeric
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: numeric
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: numeric
+                type: named
+        text:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _ilike:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _like:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _lt:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _nilike:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _niregex:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _nlike:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _nregex:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            _regex:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            starts_with:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+            ts_match_tt:
+              type: custom
+              argument_type:
+                name: text
+                type: named
+        timestamp:
+          representation:
+            type: timestamp
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: timestamp
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: timestamp
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: timestamp
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: timestamp
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: timestamp
+                type: named
+        uuid:
+          representation:
+            type: uuid
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: uuid
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: uuid
+                type: named
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                name: uuid
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: uuid
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: uuid
+                type: named
+        varchar:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _gte:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _ilike:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _like:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _lt:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _lte:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _neq:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _nilike:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _niregex:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _nlike:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _nregex:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            _regex:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            starts_with:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+            ts_match_tt:
+              type: custom
+              argument_type:
+                name: varchar
+                type: named
+      object_types:
+        Books:
+          fields:
+            amount:
+              type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            title:
+              type:
+                name: varchar
+                type: named
+        BorrowedBooks:
+          fields:
+            book_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        Complaines:
+          fields:
+            accused_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            accuser_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            description:
+              type:
+                name: text
+                type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            status:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+        DormitaryPlacement:
+          fields:
+            block_number:
+              type:
+                name: int2
+                type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            room_number:
+              type:
+                name: int2
+                type: named
+            status:
+              type:
+                name: varchar
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        GetwayEntryLog:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        GetwayExitLog:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        LibraryEntryLog:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        LibraryExitLog:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        RegisterdItems:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            item_type:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+            model:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+            serial:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        ReturnedBooks:
+          fields:
+            book_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        Suspensions:
+          fields:
+            complain_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            suspended_user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            suspension_approver:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            suspension_period:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+        Users:
+          fields:
+            email:
+              type:
+                name: varchar
+                type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            name:
+              type:
+                name: text
+                type: named
+            phone_number:
+              type:
+                name: int4
+                type: named
+            role:
+              type:
+                name: varchar
+                type: named
+        Warnings:
+          fields:
+            complain_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            warned_user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            warning_approver:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        delete_Books_by_id_response:
+          description: Responses from the 'delete_Books_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Books
+                  type: named
+                type: array
+        delete_BorrowedBooks_by_id_response:
+          description: Responses from the 'delete_BorrowedBooks_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: BorrowedBooks
+                  type: named
+                type: array
+        delete_Complaines_by_id_response:
+          description: Responses from the 'delete_Complaines_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Complaines
+                  type: named
+                type: array
+        delete_DormitaryPlacement_by_id_response:
+          description: Responses from the 'delete_DormitaryPlacement_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: DormitaryPlacement
+                  type: named
+                type: array
+        delete_GetwayEntryLog_by_id_response:
+          description: Responses from the 'delete_GetwayEntryLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayEntryLog
+                  type: named
+                type: array
+        delete_GetwayExitLog_by_id_response:
+          description: Responses from the 'delete_GetwayExitLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayExitLog
+                  type: named
+                type: array
+        delete_LibraryEntryLog_by_id_response:
+          description: Responses from the 'delete_LibraryEntryLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryEntryLog
+                  type: named
+                type: array
+        delete_LibraryExitLog_by_id_response:
+          description: Responses from the 'delete_LibraryExitLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryExitLog
+                  type: named
+                type: array
+        delete_RegisterdItems_by_id_response:
+          description: Responses from the 'delete_RegisterdItems_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: RegisterdItems
+                  type: named
+                type: array
+        delete_ReturnedBooks_by_id_response:
+          description: Responses from the 'delete_ReturnedBooks_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: ReturnedBooks
+                  type: named
+                type: array
+        delete_Suspensions_by_id_response:
+          description: Responses from the 'delete_Suspensions_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Suspensions
+                  type: named
+                type: array
+        delete_Users_by_email_response:
+          description: Responses from the 'delete_Users_by_email' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        delete_Users_by_id_response:
+          description: Responses from the 'delete_Users_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        delete_Users_by_phone_number_response:
+          description: Responses from the 'delete_Users_by_phone_number' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        delete_Warnings_by_id_response:
+          description: Responses from the 'delete_Warnings_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Warnings
+                  type: named
+                type: array
+        insert_Books_object:
+          fields:
+            amount:
+              type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            title:
+              type:
+                name: varchar
+                type: named
+        insert_Books_response:
+          description: Responses from the 'insert_Books' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Books
+                  type: named
+                type: array
+        insert_BorrowedBooks_object:
+          fields:
+            book_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_BorrowedBooks_response:
+          description: Responses from the 'insert_BorrowedBooks' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: BorrowedBooks
+                  type: named
+                type: array
+        insert_Complaines_object:
+          fields:
+            accused_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            accuser_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            description:
+              type:
+                name: text
+                type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            status:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+        insert_Complaines_response:
+          description: Responses from the 'insert_Complaines' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Complaines
+                  type: named
+                type: array
+        insert_DormitaryPlacement_object:
+          fields:
+            block_number:
+              type:
+                name: int2
+                type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            room_number:
+              type:
+                name: int2
+                type: named
+            status:
+              type:
+                name: varchar
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_DormitaryPlacement_response:
+          description: Responses from the 'insert_DormitaryPlacement' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: DormitaryPlacement
+                  type: named
+                type: array
+        insert_GetwayEntryLog_object:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_GetwayEntryLog_response:
+          description: Responses from the 'insert_GetwayEntryLog' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayEntryLog
+                  type: named
+                type: array
+        insert_GetwayExitLog_object:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_GetwayExitLog_response:
+          description: Responses from the 'insert_GetwayExitLog' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayExitLog
+                  type: named
+                type: array
+        insert_LibraryEntryLog_object:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_LibraryEntryLog_response:
+          description: Responses from the 'insert_LibraryEntryLog' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryEntryLog
+                  type: named
+                type: array
+        insert_LibraryExitLog_object:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_LibraryExitLog_response:
+          description: Responses from the 'insert_LibraryExitLog' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryExitLog
+                  type: named
+                type: array
+        insert_RegisterdItems_object:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            item_type:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+            model:
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+            serial:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_RegisterdItems_response:
+          description: Responses from the 'insert_RegisterdItems' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: RegisterdItems
+                  type: named
+                type: array
+        insert_ReturnedBooks_object:
+          fields:
+            book_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                name: timestamp
+                type: named
+            user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_ReturnedBooks_response:
+          description: Responses from the 'insert_ReturnedBooks' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: ReturnedBooks
+                  type: named
+                type: array
+        insert_Suspensions_object:
+          fields:
+            complain_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            suspended_user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            suspension_approver:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            suspension_period:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+        insert_Suspensions_response:
+          description: Responses from the 'insert_Suspensions' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Suspensions
+                  type: named
+                type: array
+        insert_Users_object:
+          fields:
+            email:
+              type:
+                name: varchar
+                type: named
+            id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            name:
+              type:
+                name: text
+                type: named
+            phone_number:
+              type:
+                name: int4
+                type: named
+            role:
+              type:
+                name: varchar
+                type: named
+        insert_Users_response:
+          description: Responses from the 'insert_Users' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        insert_Warnings_object:
+          fields:
+            complain_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            id:
+              type:
+                name: uuid
+                type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            warned_user_id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            warning_approver:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        insert_Warnings_response:
+          description: Responses from the 'insert_Warnings' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Warnings
+                  type: named
+                type: array
+        update_Books_by_id_response:
+          description: Responses from the 'update_Books_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Books
+                  type: named
+                type: array
+        update_Books_by_id_update_columns:
+          description: Update the columns of the 'Books' collection
+          fields:
+            amount:
+              description: Update the 'amount' column in the 'Books' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Books_amount
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Books' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Books_id
+                  type: named
+            title:
+              description: Update the 'title' column in the 'Books' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Books_title
+                  type: named
+        update_BorrowedBooks_by_id_response:
+          description: Responses from the 'update_BorrowedBooks_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: BorrowedBooks
+                  type: named
+                type: array
+        update_BorrowedBooks_by_id_update_columns:
+          description: Update the columns of the 'BorrowedBooks' collection
+          fields:
+            book_id:
+              description: Update the 'book_id' column in the 'BorrowedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_BorrowedBooks_book_id
+                  type: named
+            id:
+              description: Update the 'id' column in the 'BorrowedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_BorrowedBooks_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'BorrowedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_BorrowedBooks_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'BorrowedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_BorrowedBooks_user_id
+                  type: named
+        update_Complaines_by_id_response:
+          description: Responses from the 'update_Complaines_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Complaines
+                  type: named
+                type: array
+        update_Complaines_by_id_update_columns:
+          description: Update the columns of the 'Complaines' collection
+          fields:
+            accused_id:
+              description: Update the 'accused_id' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_accused_id
+                  type: named
+            accuser_id:
+              description: Update the 'accuser_id' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_accuser_id
+                  type: named
+            description:
+              description: Update the 'description' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_description
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_id
+                  type: named
+            status:
+              description: Update the 'status' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_status
+                  type: named
+        update_DormitaryPlacement_by_id_response:
+          description: Responses from the 'update_DormitaryPlacement_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: DormitaryPlacement
+                  type: named
+                type: array
+        update_DormitaryPlacement_by_id_update_columns:
+          description: Update the columns of the 'DormitaryPlacement' collection
+          fields:
+            block_number:
+              description: Update the 'block_number' column in the 'DormitaryPlacement' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_DormitaryPlacement_block_number
+                  type: named
+            id:
+              description: Update the 'id' column in the 'DormitaryPlacement' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_DormitaryPlacement_id
+                  type: named
+            room_number:
+              description: Update the 'room_number' column in the 'DormitaryPlacement' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_DormitaryPlacement_room_number
+                  type: named
+            status:
+              description: Update the 'status' column in the 'DormitaryPlacement' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_DormitaryPlacement_status
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'DormitaryPlacement' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_DormitaryPlacement_user_id
+                  type: named
+        update_GetwayEntryLog_by_id_response:
+          description: Responses from the 'update_GetwayEntryLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayEntryLog
+                  type: named
+                type: array
+        update_GetwayEntryLog_by_id_update_columns:
+          description: Update the columns of the 'GetwayEntryLog' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'GetwayEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayEntryLog_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'GetwayEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayEntryLog_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'GetwayEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayEntryLog_user_id
+                  type: named
+        update_GetwayExitLog_by_id_response:
+          description: Responses from the 'update_GetwayExitLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: GetwayExitLog
+                  type: named
+                type: array
+        update_GetwayExitLog_by_id_update_columns:
+          description: Update the columns of the 'GetwayExitLog' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'GetwayExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayExitLog_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'GetwayExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayExitLog_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'GetwayExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_GetwayExitLog_user_id
+                  type: named
+        update_LibraryEntryLog_by_id_response:
+          description: Responses from the 'update_LibraryEntryLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryEntryLog
+                  type: named
+                type: array
+        update_LibraryEntryLog_by_id_update_columns:
+          description: Update the columns of the 'LibraryEntryLog' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'LibraryEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryEntryLog_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'LibraryEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryEntryLog_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'LibraryEntryLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryEntryLog_user_id
+                  type: named
+        update_LibraryExitLog_by_id_response:
+          description: Responses from the 'update_LibraryExitLog_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: LibraryExitLog
+                  type: named
+                type: array
+        update_LibraryExitLog_by_id_update_columns:
+          description: Update the columns of the 'LibraryExitLog' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'LibraryExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryExitLog_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'LibraryExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryExitLog_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'LibraryExitLog' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_LibraryExitLog_user_id
+                  type: named
+        update_RegisterdItems_by_id_response:
+          description: Responses from the 'update_RegisterdItems_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: RegisterdItems
+                  type: named
+                type: array
+        update_RegisterdItems_by_id_update_columns:
+          description: Update the columns of the 'RegisterdItems' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'RegisterdItems' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_RegisterdItems_id
+                  type: named
+            item_type:
+              description: Update the 'item_type' column in the 'RegisterdItems' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_RegisterdItems_item_type
+                  type: named
+            model:
+              description: Update the 'model' column in the 'RegisterdItems' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_RegisterdItems_model
+                  type: named
+            serial:
+              description: Update the 'serial' column in the 'RegisterdItems' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_RegisterdItems_serial
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'RegisterdItems' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_RegisterdItems_user_id
+                  type: named
+        update_ReturnedBooks_by_id_response:
+          description: Responses from the 'update_ReturnedBooks_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: ReturnedBooks
+                  type: named
+                type: array
+        update_ReturnedBooks_by_id_update_columns:
+          description: Update the columns of the 'ReturnedBooks' collection
+          fields:
+            book_id:
+              description: Update the 'book_id' column in the 'ReturnedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_ReturnedBooks_book_id
+                  type: named
+            id:
+              description: Update the 'id' column in the 'ReturnedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_ReturnedBooks_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'ReturnedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_ReturnedBooks_time
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'ReturnedBooks' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_ReturnedBooks_user_id
+                  type: named
+        update_Suspensions_by_id_response:
+          description: Responses from the 'update_Suspensions_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Suspensions
+                  type: named
+                type: array
+        update_Suspensions_by_id_update_columns:
+          description: Update the columns of the 'Suspensions' collection
+          fields:
+            complain_id:
+              description: Update the 'complain_id' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_complain_id
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_id
+                  type: named
+            suspended_user_id:
+              description: Update the 'suspended_user_id' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_suspended_user_id
+                  type: named
+            suspension_approver:
+              description: Update the 'suspension_approver' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_suspension_approver
+                  type: named
+            suspension_period:
+              description: Update the 'suspension_period' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_suspension_period
+                  type: named
+            time:
+              description: Update the 'time' column in the 'Suspensions' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Suspensions_time
+                  type: named
+        update_Users_by_email_response:
+          description: Responses from the 'update_Users_by_email' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        update_Users_by_email_update_columns:
+          description: Update the columns of the 'Users' collection
+          fields:
+            email:
+              description: Update the 'email' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_email
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_id
+                  type: named
+            name:
+              description: Update the 'name' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_name
+                  type: named
+            phone_number:
+              description: Update the 'phone_number' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_phone_number
+                  type: named
+            role:
+              description: Update the 'role' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_role
+                  type: named
+        update_Users_by_id_response:
+          description: Responses from the 'update_Users_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        update_Users_by_id_update_columns:
+          description: Update the columns of the 'Users' collection
+          fields:
+            email:
+              description: Update the 'email' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_email
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_id
+                  type: named
+            name:
+              description: Update the 'name' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_name
+                  type: named
+            phone_number:
+              description: Update the 'phone_number' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_phone_number
+                  type: named
+            role:
+              description: Update the 'role' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_role
+                  type: named
+        update_Users_by_phone_number_response:
+          description: Responses from the 'update_Users_by_phone_number' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Users
+                  type: named
+                type: array
+        update_Users_by_phone_number_update_columns:
+          description: Update the columns of the 'Users' collection
+          fields:
+            email:
+              description: Update the 'email' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_email
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_id
+                  type: named
+            name:
+              description: Update the 'name' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_name
+                  type: named
+            phone_number:
+              description: Update the 'phone_number' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_phone_number
+                  type: named
+            role:
+              description: Update the 'role' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_role
+                  type: named
+        update_Warnings_by_id_response:
+          description: Responses from the 'update_Warnings_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: Warnings
+                  type: named
+                type: array
+        update_Warnings_by_id_update_columns:
+          description: Update the columns of the 'Warnings' collection
+          fields:
+            complain_id:
+              description: Update the 'complain_id' column in the 'Warnings' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Warnings_complain_id
+                  type: named
+            id:
+              description: Update the 'id' column in the 'Warnings' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Warnings_id
+                  type: named
+            time:
+              description: Update the 'time' column in the 'Warnings' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Warnings_time
+                  type: named
+            warned_user_id:
+              description: Update the 'warned_user_id' column in the 'Warnings' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Warnings_warned_user_id
+                  type: named
+            warning_approver:
+              description: Update the 'warning_approver' column in the 'Warnings' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Warnings_warning_approver
+                  type: named
+        update_column_Books_amount:
+          description: Update the 'amount' column in the 'Books' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: int2
+                  type: named
+        update_column_Books_id:
+          description: Update the 'id' column in the 'Books' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_Books_title:
+          description: Update the 'title' column in the 'Books' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: varchar
+                type: named
+        update_column_BorrowedBooks_book_id:
+          description: Update the 'book_id' column in the 'BorrowedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_BorrowedBooks_id:
+          description: Update the 'id' column in the 'BorrowedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_BorrowedBooks_time:
+          description: Update the 'time' column in the 'BorrowedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_BorrowedBooks_user_id:
+          description: Update the 'user_id' column in the 'BorrowedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Complaines_accused_id:
+          description: Update the 'accused_id' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Complaines_accuser_id:
+          description: Update the 'accuser_id' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Complaines_description:
+          description: Update the 'description' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: text
+                type: named
+        update_column_Complaines_id:
+          description: Update the 'id' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_Complaines_status:
+          description: Update the 'status' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+        update_column_DormitaryPlacement_block_number:
+          description: Update the 'block_number' column in the 'DormitaryPlacement' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: int2
+                type: named
+        update_column_DormitaryPlacement_id:
+          description: Update the 'id' column in the 'DormitaryPlacement' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_DormitaryPlacement_room_number:
+          description: Update the 'room_number' column in the 'DormitaryPlacement' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: int2
+                type: named
+        update_column_DormitaryPlacement_status:
+          description: Update the 'status' column in the 'DormitaryPlacement' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: varchar
+                type: named
+        update_column_DormitaryPlacement_user_id:
+          description: Update the 'user_id' column in the 'DormitaryPlacement' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_GetwayEntryLog_id:
+          description: Update the 'id' column in the 'GetwayEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_GetwayEntryLog_time:
+          description: Update the 'time' column in the 'GetwayEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_GetwayEntryLog_user_id:
+          description: Update the 'user_id' column in the 'GetwayEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_GetwayExitLog_id:
+          description: Update the 'id' column in the 'GetwayExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_GetwayExitLog_time:
+          description: Update the 'time' column in the 'GetwayExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_GetwayExitLog_user_id:
+          description: Update the 'user_id' column in the 'GetwayExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_LibraryEntryLog_id:
+          description: Update the 'id' column in the 'LibraryEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_LibraryEntryLog_time:
+          description: Update the 'time' column in the 'LibraryEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_LibraryEntryLog_user_id:
+          description: Update the 'user_id' column in the 'LibraryEntryLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_LibraryExitLog_id:
+          description: Update the 'id' column in the 'LibraryExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_LibraryExitLog_time:
+          description: Update the 'time' column in the 'LibraryExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_LibraryExitLog_user_id:
+          description: Update the 'user_id' column in the 'LibraryExitLog' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_RegisterdItems_id:
+          description: Update the 'id' column in the 'RegisterdItems' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_RegisterdItems_item_type:
+          description: Update the 'item_type' column in the 'RegisterdItems' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+        update_column_RegisterdItems_model:
+          description: Update the 'model' column in the 'RegisterdItems' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: varchar
+                  type: named
+        update_column_RegisterdItems_serial:
+          description: Update the 'serial' column in the 'RegisterdItems' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+        update_column_RegisterdItems_user_id:
+          description: Update the 'user_id' column in the 'RegisterdItems' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_ReturnedBooks_book_id:
+          description: Update the 'book_id' column in the 'ReturnedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_ReturnedBooks_id:
+          description: Update the 'id' column in the 'ReturnedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_ReturnedBooks_time:
+          description: Update the 'time' column in the 'ReturnedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
+        update_column_ReturnedBooks_user_id:
+          description: Update the 'user_id' column in the 'ReturnedBooks' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Suspensions_complain_id:
+          description: Update the 'complain_id' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Suspensions_id:
+          description: Update the 'id' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_Suspensions_suspended_user_id:
+          description: Update the 'suspended_user_id' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Suspensions_suspension_approver:
+          description: Update the 'suspension_approver' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Suspensions_suspension_period:
+          description: Update the 'suspension_period' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
+        update_column_Suspensions_time:
+          description: Update the 'time' column in the 'Suspensions' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+        update_column_Users_email:
+          description: Update the 'email' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: varchar
+                type: named
+        update_column_Users_id:
+          description: Update the 'id' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_Users_name:
+          description: Update the 'name' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: text
+                type: named
+        update_column_Users_phone_number:
+          description: Update the 'phone_number' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: int4
+                type: named
+        update_column_Users_role:
+          description: Update the 'role' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: varchar
+                type: named
+        update_column_Warnings_complain_id:
+          description: Update the 'complain_id' column in the 'Warnings' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Warnings_id:
+          description: Update the 'id' column in the 'Warnings' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_Warnings_time:
+          description: Update the 'time' column in the 'Warnings' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+        update_column_Warnings_warned_user_id:
+          description: Update the 'warned_user_id' column in the 'Warnings' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+        update_column_Warnings_warning_approver:
+          description: Update the 'warning_approver' column in the 'Warnings' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+      collections:
+        - name: Books
+          arguments: {}
+          type: Books
+          uniqueness_constraints:
+            Books_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: BorrowedBooks
+          arguments: {}
+          type: BorrowedBooks
+          uniqueness_constraints:
+            BorrowedBooks_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            BorrowedBooks_book_id_fkey:
+              column_mapping:
+                book_id: id
+              foreign_collection: Books
+            BorrowedBooks_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: Complaines
+          arguments: {}
+          type: Complaines
+          uniqueness_constraints:
+            Complaines_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: DormitaryPlacement
+          arguments: {}
+          type: DormitaryPlacement
+          uniqueness_constraints:
+            DormitaryPlacement_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: GetwayEntryLog
+          arguments: {}
+          type: GetwayEntryLog
+          uniqueness_constraints:
+            GetwayEntryLog_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            GetwayEntryLog_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: GetwayExitLog
+          arguments: {}
+          type: GetwayExitLog
+          uniqueness_constraints:
+            GetwayExitLog_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            GetwayExitLog_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: LibraryEntryLog
+          arguments: {}
+          type: LibraryEntryLog
+          uniqueness_constraints:
+            LibraryEntryLog_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            LibraryEntryLog_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: LibraryExitLog
+          arguments: {}
+          type: LibraryExitLog
+          uniqueness_constraints:
+            LibraryExitLog_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: RegisterdItems
+          arguments: {}
+          type: RegisterdItems
+          uniqueness_constraints:
+            RegisterdItems_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            RegisterdItems_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: ReturnedBooks
+          arguments: {}
+          type: ReturnedBooks
+          uniqueness_constraints:
+            ReturnedBooks_pkey:
+              unique_columns:
+                - id
+          foreign_keys:
+            ReturnedBooks_book_id_fkey:
+              column_mapping:
+                book_id: id
+              foreign_collection: Books
+            ReturnedBooks_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: Suspensions
+          arguments: {}
+          type: Suspensions
+          uniqueness_constraints:
+            Suspensions_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: Users
+          arguments: {}
+          type: Users
+          uniqueness_constraints:
+            Users_email_key:
+              unique_columns:
+                - email
+            Users_phone_number_key:
+              unique_columns:
+                - phone_number
+            Users_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+        - name: Warnings
+          arguments: {}
+          type: Warnings
+          uniqueness_constraints:
+            Warnings_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
+      functions: []
+      procedures:
+        - name: delete_Books_by_id
+          description: Delete any row on the 'Books' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Books' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Books
+                  type: predicate
+          result_type:
+            name: delete_Books_by_id_response
+            type: named
+        - name: delete_BorrowedBooks_by_id
+          description: Delete any row on the 'BorrowedBooks' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'BorrowedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: BorrowedBooks
+                  type: predicate
+          result_type:
+            name: delete_BorrowedBooks_by_id_response
+            type: named
+        - name: delete_Complaines_by_id
+          description: Delete any row on the 'Complaines' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Complaines' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Complaines
+                  type: predicate
+          result_type:
+            name: delete_Complaines_by_id_response
+            type: named
+        - name: delete_DormitaryPlacement_by_id
+          description: Delete any row on the 'DormitaryPlacement' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'DormitaryPlacement' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: DormitaryPlacement
+                  type: predicate
+          result_type:
+            name: delete_DormitaryPlacement_by_id_response
+            type: named
+        - name: delete_GetwayEntryLog_by_id
+          description: Delete any row on the 'GetwayEntryLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'GetwayEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayEntryLog
+                  type: predicate
+          result_type:
+            name: delete_GetwayEntryLog_by_id_response
+            type: named
+        - name: delete_GetwayExitLog_by_id
+          description: Delete any row on the 'GetwayExitLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'GetwayExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayExitLog
+                  type: predicate
+          result_type:
+            name: delete_GetwayExitLog_by_id_response
+            type: named
+        - name: delete_LibraryEntryLog_by_id
+          description: Delete any row on the 'LibraryEntryLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'LibraryEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryEntryLog
+                  type: predicate
+          result_type:
+            name: delete_LibraryEntryLog_by_id_response
+            type: named
+        - name: delete_LibraryExitLog_by_id
+          description: Delete any row on the 'LibraryExitLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'LibraryExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryExitLog
+                  type: predicate
+          result_type:
+            name: delete_LibraryExitLog_by_id_response
+            type: named
+        - name: delete_RegisterdItems_by_id
+          description: Delete any row on the 'RegisterdItems' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'RegisterdItems' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: RegisterdItems
+                  type: predicate
+          result_type:
+            name: delete_RegisterdItems_by_id_response
+            type: named
+        - name: delete_ReturnedBooks_by_id
+          description: Delete any row on the 'ReturnedBooks' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'ReturnedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: ReturnedBooks
+                  type: predicate
+          result_type:
+            name: delete_ReturnedBooks_by_id_response
+            type: named
+        - name: delete_Suspensions_by_id
+          description: Delete any row on the 'Suspensions' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Suspensions' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Suspensions
+                  type: predicate
+          result_type:
+            name: delete_Suspensions_by_id_response
+            type: named
+        - name: delete_Users_by_email
+          description: Delete any row on the 'Users' collection using the 'email' key
+          arguments:
+            key_email:
+              type:
+                name: varchar
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+          result_type:
+            name: delete_Users_by_email_response
+            type: named
+        - name: delete_Users_by_id
+          description: Delete any row on the 'Users' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+          result_type:
+            name: delete_Users_by_id_response
+            type: named
+        - name: delete_Users_by_phone_number
+          description: Delete any row on the 'Users' collection using the 'phone_number' key
+          arguments:
+            key_phone_number:
+              type:
+                name: int4
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+          result_type:
+            name: delete_Users_by_phone_number_response
+            type: named
+        - name: delete_Warnings_by_id
+          description: Delete any row on the 'Warnings' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'Warnings' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Warnings
+                  type: predicate
+          result_type:
+            name: delete_Warnings_by_id_response
+            type: named
+        - name: insert_Books
+          description: Insert into the Books table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_Books_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'Books' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Books
+                  type: predicate
+          result_type:
+            name: insert_Books_response
+            type: named
+        - name: insert_BorrowedBooks
+          description: Insert into the BorrowedBooks table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_BorrowedBooks_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'BorrowedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: BorrowedBooks
+                  type: predicate
+          result_type:
+            name: insert_BorrowedBooks_response
+            type: named
+        - name: insert_Complaines
+          description: Insert into the Complaines table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_Complaines_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'Complaines' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Complaines
+                  type: predicate
+          result_type:
+            name: insert_Complaines_response
+            type: named
+        - name: insert_DormitaryPlacement
+          description: Insert into the DormitaryPlacement table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_DormitaryPlacement_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'DormitaryPlacement' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: DormitaryPlacement
+                  type: predicate
+          result_type:
+            name: insert_DormitaryPlacement_response
+            type: named
+        - name: insert_GetwayEntryLog
+          description: Insert into the GetwayEntryLog table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_GetwayEntryLog_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'GetwayEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayEntryLog
+                  type: predicate
+          result_type:
+            name: insert_GetwayEntryLog_response
+            type: named
+        - name: insert_GetwayExitLog
+          description: Insert into the GetwayExitLog table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_GetwayExitLog_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'GetwayExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayExitLog
+                  type: predicate
+          result_type:
+            name: insert_GetwayExitLog_response
+            type: named
+        - name: insert_LibraryEntryLog
+          description: Insert into the LibraryEntryLog table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_LibraryEntryLog_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'LibraryEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryEntryLog
+                  type: predicate
+          result_type:
+            name: insert_LibraryEntryLog_response
+            type: named
+        - name: insert_LibraryExitLog
+          description: Insert into the LibraryExitLog table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_LibraryExitLog_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'LibraryExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryExitLog
+                  type: predicate
+          result_type:
+            name: insert_LibraryExitLog_response
+            type: named
+        - name: insert_RegisterdItems
+          description: Insert into the RegisterdItems table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_RegisterdItems_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'RegisterdItems' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: RegisterdItems
+                  type: predicate
+          result_type:
+            name: insert_RegisterdItems_response
+            type: named
+        - name: insert_ReturnedBooks
+          description: Insert into the ReturnedBooks table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_ReturnedBooks_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'ReturnedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: ReturnedBooks
+                  type: predicate
+          result_type:
+            name: insert_ReturnedBooks_response
+            type: named
+        - name: insert_Suspensions
+          description: Insert into the Suspensions table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_Suspensions_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'Suspensions' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Suspensions
+                  type: predicate
+          result_type:
+            name: insert_Suspensions_response
+            type: named
+        - name: insert_Users
+          description: Insert into the Users table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_Users_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+          result_type:
+            name: insert_Users_response
+            type: named
+        - name: insert_Warnings
+          description: Insert into the Warnings table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_Warnings_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'Warnings' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Warnings
+                  type: predicate
+          result_type:
+            name: insert_Warnings_response
+            type: named
+        - name: update_Books_by_id
+          description: Update any row on the 'Books' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Books' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Books
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Books' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Books
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Books_by_id_update_columns
+                type: named
+          result_type:
+            name: update_Books_by_id_response
+            type: named
+        - name: update_BorrowedBooks_by_id
+          description: Update any row on the 'BorrowedBooks' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'BorrowedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: BorrowedBooks
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'BorrowedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: BorrowedBooks
+                  type: predicate
+            update_columns:
+              type:
+                name: update_BorrowedBooks_by_id_update_columns
+                type: named
+          result_type:
+            name: update_BorrowedBooks_by_id_response
+            type: named
+        - name: update_Complaines_by_id
+          description: Update any row on the 'Complaines' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Complaines' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Complaines
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Complaines' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Complaines
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Complaines_by_id_update_columns
+                type: named
+          result_type:
+            name: update_Complaines_by_id_response
+            type: named
+        - name: update_DormitaryPlacement_by_id
+          description: Update any row on the 'DormitaryPlacement' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'DormitaryPlacement' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: DormitaryPlacement
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'DormitaryPlacement' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: DormitaryPlacement
+                  type: predicate
+            update_columns:
+              type:
+                name: update_DormitaryPlacement_by_id_update_columns
+                type: named
+          result_type:
+            name: update_DormitaryPlacement_by_id_response
+            type: named
+        - name: update_GetwayEntryLog_by_id
+          description: Update any row on the 'GetwayEntryLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'GetwayEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayEntryLog
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'GetwayEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayEntryLog
+                  type: predicate
+            update_columns:
+              type:
+                name: update_GetwayEntryLog_by_id_update_columns
+                type: named
+          result_type:
+            name: update_GetwayEntryLog_by_id_response
+            type: named
+        - name: update_GetwayExitLog_by_id
+          description: Update any row on the 'GetwayExitLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'GetwayExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayExitLog
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'GetwayExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: GetwayExitLog
+                  type: predicate
+            update_columns:
+              type:
+                name: update_GetwayExitLog_by_id_update_columns
+                type: named
+          result_type:
+            name: update_GetwayExitLog_by_id_response
+            type: named
+        - name: update_LibraryEntryLog_by_id
+          description: Update any row on the 'LibraryEntryLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'LibraryEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryEntryLog
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'LibraryEntryLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryEntryLog
+                  type: predicate
+            update_columns:
+              type:
+                name: update_LibraryEntryLog_by_id_update_columns
+                type: named
+          result_type:
+            name: update_LibraryEntryLog_by_id_response
+            type: named
+        - name: update_LibraryExitLog_by_id
+          description: Update any row on the 'LibraryExitLog' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'LibraryExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryExitLog
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'LibraryExitLog' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: LibraryExitLog
+                  type: predicate
+            update_columns:
+              type:
+                name: update_LibraryExitLog_by_id_update_columns
+                type: named
+          result_type:
+            name: update_LibraryExitLog_by_id_response
+            type: named
+        - name: update_RegisterdItems_by_id
+          description: Update any row on the 'RegisterdItems' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'RegisterdItems' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: RegisterdItems
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'RegisterdItems' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: RegisterdItems
+                  type: predicate
+            update_columns:
+              type:
+                name: update_RegisterdItems_by_id_update_columns
+                type: named
+          result_type:
+            name: update_RegisterdItems_by_id_response
+            type: named
+        - name: update_ReturnedBooks_by_id
+          description: Update any row on the 'ReturnedBooks' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'ReturnedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: ReturnedBooks
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'ReturnedBooks' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: ReturnedBooks
+                  type: predicate
+            update_columns:
+              type:
+                name: update_ReturnedBooks_by_id_update_columns
+                type: named
+          result_type:
+            name: update_ReturnedBooks_by_id_response
+            type: named
+        - name: update_Suspensions_by_id
+          description: Update any row on the 'Suspensions' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Suspensions' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Suspensions
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Suspensions' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Suspensions
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Suspensions_by_id_update_columns
+                type: named
+          result_type:
+            name: update_Suspensions_by_id_response
+            type: named
+        - name: update_Users_by_email
+          description: Update any row on the 'Users' collection using the 'email' key
+          arguments:
+            key_email:
+              type:
+                name: varchar
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Users_by_email_update_columns
+                type: named
+          result_type:
+            name: update_Users_by_email_response
+            type: named
+        - name: update_Users_by_id
+          description: Update any row on the 'Users' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Users_by_id_update_columns
+                type: named
+          result_type:
+            name: update_Users_by_id_response
+            type: named
+        - name: update_Users_by_phone_number
+          description: Update any row on the 'Users' collection using the 'phone_number' key
+          arguments:
+            key_phone_number:
+              type:
+                name: int4
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Users' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Users
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Users_by_phone_number_update_columns
+                type: named
+          result_type:
+            name: update_Users_by_phone_number_response
+            type: named
+        - name: update_Warnings_by_id
+          description: Update any row on the 'Warnings' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'Warnings' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Warnings
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'Warnings' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: Warnings
+                  type: predicate
+            update_columns:
+              type:
+                name: update_Warnings_by_id_update_columns
+                type: named
+          result_type:
+            name: update_Warnings_by_id_response
+            type: named
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          aggregates: {}
+          variables: {}
+          explain: {}
+          nested_fields:
+            filter_by: {}
+            order_by: {}
+          exists:
+            nested_collections: {}
+        mutation:
+          transactional: {}
+          explain: {}
+        relationships:
+          relation_comparisons: {}
+          order_by_aggregate: {}

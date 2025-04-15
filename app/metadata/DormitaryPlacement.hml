@@ -1,0 +1,168 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DormitaryPlacement
+  fields:
+    - name: blockNumber
+      type: Int2!
+    - name: id
+      type: Uuid!
+    - name: roomNumber
+      type: Int2!
+    - name: status
+      type: Varchar!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: DormitaryPlacement
+    inputTypeName: DormitaryPlacementInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: DormitaryPlacement
+      fieldMapping:
+        blockNumber:
+          column:
+            name: block_number
+        id:
+          column:
+            name: id
+        roomNumber:
+          column:
+            name: room_number
+        status:
+          column:
+            name: status
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DormitaryPlacement
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - blockNumber
+          - id
+          - roomNumber
+          - status
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: DormitaryPlacementBoolExp
+  operand:
+    object:
+      type: DormitaryPlacement
+      comparableFields:
+        - fieldName: blockNumber
+          booleanExpressionType: Int2BoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: roomNumber
+          booleanExpressionType: Int2BoolExp
+        - fieldName: status
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: DormitaryPlacementBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: DormitaryPlacementAggExp
+  operand:
+    object:
+      aggregatedType: DormitaryPlacement
+      aggregatableFields:
+        - fieldName: blockNumber
+          aggregateExpression: Int2AggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: roomNumber
+          aggregateExpression: Int2AggExp
+        - fieldName: status
+          aggregateExpression: VarcharAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: DormitaryPlacementAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: DormitaryPlacementOrderByExp
+  operand:
+    object:
+      orderedType: DormitaryPlacement
+      orderableFields:
+        - fieldName: blockNumber
+          orderByExpression: Int2OrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: roomNumber
+          orderByExpression: Int2OrderByExp
+        - fieldName: status
+          orderByExpression: VarcharOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: DormitaryPlacementOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: DormitaryPlacement
+  objectType: DormitaryPlacement
+  source:
+    dataConnectorName: pg_db
+    collection: DormitaryPlacement
+  filterExpressionType: DormitaryPlacementBoolExp
+  aggregateExpression: DormitaryPlacementAggExp
+  orderByExpression: DormitaryPlacementOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: dormitaryPlacement
+      subscription:
+        rootField: dormitaryPlacement
+    selectUniques:
+      - queryRootField: dormitaryPlacementById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: dormitaryPlacementById
+    filterInputTypeName: DormitaryPlacementFilterInput
+    aggregate:
+      queryRootField: dormitaryPlacementAggregate
+      subscription:
+        rootField: dormitaryPlacementAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: DormitaryPlacement
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

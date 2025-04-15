@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteLibraryExitLogByIdResponse
+  description: Responses from the 'delete_LibraryExitLog_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[LibraryExitLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteLibraryExitLogByIdResponse
+    inputTypeName: DeleteLibraryExitLogByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_LibraryExitLog_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteLibraryExitLogByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteLibraryExitLogById
+  outputType: DeleteLibraryExitLogByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: LibraryExitLogBoolExp
+      description: Delete permission predicate over the 'LibraryExitLog' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_LibraryExitLog_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteLibraryExitLogById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'LibraryExitLog' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteLibraryExitLogById
+  permissions:
+    - role: admin
+      allowExecution: true
+

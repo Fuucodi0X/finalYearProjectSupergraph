@@ -1,0 +1,196 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ReturnedBooks
+  fields:
+    - name: bookId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: ReturnedBooks
+    inputTypeName: ReturnedBooksInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: ReturnedBooks
+      fieldMapping:
+        bookId:
+          column:
+            name: book_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ReturnedBooks
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bookId
+          - id
+          - time
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ReturnedBooksBoolExp
+  operand:
+    object:
+      type: ReturnedBooks
+      comparableFields:
+        - fieldName: bookId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: book
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ReturnedBooksBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ReturnedBooksAggExp
+  operand:
+    object:
+      aggregatedType: ReturnedBooks
+      aggregatableFields:
+        - fieldName: bookId
+          aggregateExpression: UuidAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ReturnedBooksAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: ReturnedBooksOrderByExp
+  operand:
+    object:
+      orderedType: ReturnedBooks
+      orderableFields:
+        - fieldName: bookId
+          orderByExpression: UuidOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: book
+        - relationshipName: user
+  graphql:
+    expressionTypeName: ReturnedBooksOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: ReturnedBooks
+  objectType: ReturnedBooks
+  source:
+    dataConnectorName: pg_db
+    collection: ReturnedBooks
+  filterExpressionType: ReturnedBooksBoolExp
+  aggregateExpression: ReturnedBooksAggExp
+  orderByExpression: ReturnedBooksOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: returnedBooks
+      subscription:
+        rootField: returnedBooks
+    selectUniques:
+      - queryRootField: returnedBooksById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: returnedBooksById
+    filterInputTypeName: ReturnedBooksFilterInput
+    aggregate:
+      queryRootField: returnedBooksAggregate
+      subscription:
+        rootField: returnedBooksAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: ReturnedBooks
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: book
+  sourceType: ReturnedBooks
+  target:
+    model:
+      name: Books
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: bookId
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: ReturnedBooks
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

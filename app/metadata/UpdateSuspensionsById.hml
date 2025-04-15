@@ -1,0 +1,340 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsComplainId
+  description: Update the 'complain_id' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsComplainId
+    inputTypeName: UpdateColumnSuspensionsComplainIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_complain_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsComplainId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsId
+  description: Update the 'id' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsId
+    inputTypeName: UpdateColumnSuspensionsIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsSuspendedUserId
+  description: Update the 'suspended_user_id' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsSuspendedUserId
+    inputTypeName: UpdateColumnSuspensionsSuspendedUserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_suspended_user_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsSuspendedUserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsSuspensionApprover
+  description: Update the 'suspension_approver' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsSuspensionApprover
+    inputTypeName: UpdateColumnSuspensionsSuspensionApproverInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_suspension_approver
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsSuspensionApprover
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsSuspensionPeriod
+  description: Update the 'suspension_period' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsSuspensionPeriod
+    inputTypeName: UpdateColumnSuspensionsSuspensionPeriodInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_suspension_period
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsSuspensionPeriod
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnSuspensionsTime
+  description: Update the 'time' column in the 'Suspensions' collection
+  fields:
+    - name: set
+      type: Timestamp
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnSuspensionsTime
+    inputTypeName: UpdateColumnSuspensionsTimeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Suspensions_time
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnSuspensionsTime
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSuspensionsByIdUpdateColumns
+  description: Update the columns of the 'Suspensions' collection
+  fields:
+    - name: complainId
+      type: UpdateColumnSuspensionsComplainId
+      description: Update the 'complain_id' column in the 'Suspensions' collection.
+    - name: id
+      type: UpdateColumnSuspensionsId
+      description: Update the 'id' column in the 'Suspensions' collection.
+    - name: suspendedUserId
+      type: UpdateColumnSuspensionsSuspendedUserId
+      description: Update the 'suspended_user_id' column in the 'Suspensions' collection.
+    - name: suspensionApprover
+      type: UpdateColumnSuspensionsSuspensionApprover
+      description: Update the 'suspension_approver' column in the 'Suspensions' collection.
+    - name: suspensionPeriod
+      type: UpdateColumnSuspensionsSuspensionPeriod
+      description: Update the 'suspension_period' column in the 'Suspensions' collection.
+    - name: time
+      type: UpdateColumnSuspensionsTime
+      description: Update the 'time' column in the 'Suspensions' collection.
+  graphql:
+    typeName: UpdateSuspensionsByIdUpdateColumns
+    inputTypeName: UpdateSuspensionsByIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Suspensions_by_id_update_columns
+      fieldMapping:
+        complainId:
+          column:
+            name: complain_id
+        id:
+          column:
+            name: id
+        suspendedUserId:
+          column:
+            name: suspended_user_id
+        suspensionApprover:
+          column:
+            name: suspension_approver
+        suspensionPeriod:
+          column:
+            name: suspension_period
+        time:
+          column:
+            name: time
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSuspensionsByIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complainId
+          - id
+          - suspendedUserId
+          - suspensionApprover
+          - suspensionPeriod
+          - time
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateSuspensionsByIdResponse
+  description: Responses from the 'update_Suspensions_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Suspensions!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateSuspensionsByIdResponse
+    inputTypeName: UpdateSuspensionsByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Suspensions_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateSuspensionsByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateSuspensionsById
+  outputType: UpdateSuspensionsByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: postCheck
+      type: SuspensionsBoolExp
+      description: Update permission post-condition predicate over the 'Suspensions'
+        collection
+    - name: preCheck
+      type: SuspensionsBoolExp
+      description: Update permission pre-condition predicate over the 'Suspensions'
+        collection
+    - name: updateColumns
+      type: UpdateSuspensionsByIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_Suspensions_by_id
+    argumentMapping:
+      keyId: key_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateSuspensionsById
+    rootFieldKind: Mutation
+  description: Update any row on the 'Suspensions' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateSuspensionsById
+  permissions:
+    - role: admin
+      allowExecution: true
+

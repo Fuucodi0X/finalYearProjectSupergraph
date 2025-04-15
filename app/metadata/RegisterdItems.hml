@@ -1,0 +1,188 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: RegisterdItems
+  fields:
+    - name: id
+      type: Uuid!
+    - name: itemType
+      type: Varchar
+    - name: model
+      type: Varchar
+    - name: serial
+      type: Text
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: RegisterdItems
+    inputTypeName: RegisterdItemsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: RegisterdItems
+      fieldMapping:
+        id:
+          column:
+            name: id
+        itemType:
+          column:
+            name: item_type
+        model:
+          column:
+            name: model
+        serial:
+          column:
+            name: serial
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: RegisterdItems
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - itemType
+          - model
+          - serial
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: RegisterdItemsBoolExp
+  operand:
+    object:
+      type: RegisterdItems
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: itemType
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: model
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: serial
+          booleanExpressionType: TextBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: RegisterdItemsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: RegisterdItemsAggExp
+  operand:
+    object:
+      aggregatedType: RegisterdItems
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: itemType
+          aggregateExpression: VarcharAggExp
+        - fieldName: model
+          aggregateExpression: VarcharAggExp
+        - fieldName: serial
+          aggregateExpression: TextAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: RegisterdItemsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: RegisterdItemsOrderByExp
+  operand:
+    object:
+      orderedType: RegisterdItems
+      orderableFields:
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: itemType
+          orderByExpression: VarcharOrderByExp
+        - fieldName: model
+          orderByExpression: VarcharOrderByExp
+        - fieldName: serial
+          orderByExpression: TextOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: user
+  graphql:
+    expressionTypeName: RegisterdItemsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: RegisterdItems
+  objectType: RegisterdItems
+  source:
+    dataConnectorName: pg_db
+    collection: RegisterdItems
+  filterExpressionType: RegisterdItemsBoolExp
+  aggregateExpression: RegisterdItemsAggExp
+  orderByExpression: RegisterdItemsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: registerdItems
+      subscription:
+        rootField: registerdItems
+    selectUniques:
+      - queryRootField: registerdItemsById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: registerdItemsById
+    filterInputTypeName: RegisterdItemsFilterInput
+    aggregate:
+      queryRootField: registerdItemsAggregate
+      subscription:
+        rootField: registerdItemsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: RegisterdItems
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: RegisterdItems
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

@@ -1,0 +1,120 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertBorrowedBooksObject
+  fields:
+    - name: bookId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertBorrowedBooksObject
+    inputTypeName: InsertBorrowedBooksObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_BorrowedBooks_object
+      fieldMapping:
+        bookId:
+          column:
+            name: book_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertBorrowedBooksObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bookId
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertBorrowedBooksResponse
+  description: Responses from the 'insert_BorrowedBooks' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[BorrowedBooks!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertBorrowedBooksResponse
+    inputTypeName: InsertBorrowedBooksResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_BorrowedBooks_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertBorrowedBooksResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertBorrowedBooks
+  outputType: InsertBorrowedBooksResponse!
+  arguments:
+    - name: objects
+      type: "[InsertBorrowedBooksObject!]!"
+    - name: postCheck
+      type: BorrowedBooksBoolExp
+      description: Insert permission predicate over the 'BorrowedBooks' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_BorrowedBooks
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertBorrowedBooks
+    rootFieldKind: Mutation
+  description: Insert into the BorrowedBooks table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertBorrowedBooks
+  permissions:
+    - role: admin
+      allowExecution: true
+

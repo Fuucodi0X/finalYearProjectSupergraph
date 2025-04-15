@@ -1,0 +1,20 @@
+kind: Connector
+version: v2
+definition:
+  name: golang
+  subgraph: app
+  source: hasura/go:v1.9.0
+  context: .
+  envMapping:
+    CONNECTION_URI:
+      fromEnv: APP_GOLANG_CONNECTION_URI
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_GOLANG_HASURA_SERVICE_TOKEN_SECRET
+    MUTATION_CONCURRENCY_LIMIT:
+      fromEnv: APP_GOLANG_MUTATION_CONCURRENCY_LIMIT
+    OTEL_EXPORTER_OTLP_ENDPOINT:
+      fromEnv: APP_GOLANG_OTEL_EXPORTER_OTLP_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_GOLANG_OTEL_SERVICE_NAME
+    QUERY_CONCURRENCY_LIMIT:
+      fromEnv: APP_GOLANG_QUERY_CONCURRENCY_LIMIT

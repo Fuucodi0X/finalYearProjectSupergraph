@@ -1,0 +1,114 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertGetwayEntryLogObject
+  fields:
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertGetwayEntryLogObject
+    inputTypeName: InsertGetwayEntryLogObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_GetwayEntryLog_object
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertGetwayEntryLogObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertGetwayEntryLogResponse
+  description: Responses from the 'insert_GetwayEntryLog' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[GetwayEntryLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertGetwayEntryLogResponse
+    inputTypeName: InsertGetwayEntryLogResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_GetwayEntryLog_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertGetwayEntryLogResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertGetwayEntryLog
+  outputType: InsertGetwayEntryLogResponse!
+  arguments:
+    - name: objects
+      type: "[InsertGetwayEntryLogObject!]!"
+    - name: postCheck
+      type: GetwayEntryLogBoolExp
+      description: Insert permission predicate over the 'GetwayEntryLog' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_GetwayEntryLog
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertGetwayEntryLog
+    rootFieldKind: Mutation
+  description: Insert into the GetwayEntryLog table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertGetwayEntryLog
+  permissions:
+    - role: admin
+      allowExecution: true
+

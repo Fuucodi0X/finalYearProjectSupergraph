@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteDormitaryPlacementByIdResponse
+  description: Responses from the 'delete_DormitaryPlacement_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[DormitaryPlacement!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteDormitaryPlacementByIdResponse
+    inputTypeName: DeleteDormitaryPlacementByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_DormitaryPlacement_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteDormitaryPlacementByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteDormitaryPlacementById
+  outputType: DeleteDormitaryPlacementByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: DormitaryPlacementBoolExp
+      description: Delete permission predicate over the 'DormitaryPlacement' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_DormitaryPlacement_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteDormitaryPlacementById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'DormitaryPlacement' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteDormitaryPlacementById
+  permissions:
+    - role: admin
+      allowExecution: true
+

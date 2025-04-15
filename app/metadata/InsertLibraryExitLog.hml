@@ -1,0 +1,114 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertLibraryExitLogObject
+  fields:
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertLibraryExitLogObject
+    inputTypeName: InsertLibraryExitLogObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_LibraryExitLog_object
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertLibraryExitLogObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertLibraryExitLogResponse
+  description: Responses from the 'insert_LibraryExitLog' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[LibraryExitLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertLibraryExitLogResponse
+    inputTypeName: InsertLibraryExitLogResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_LibraryExitLog_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertLibraryExitLogResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertLibraryExitLog
+  outputType: InsertLibraryExitLogResponse!
+  arguments:
+    - name: objects
+      type: "[InsertLibraryExitLogObject!]!"
+    - name: postCheck
+      type: LibraryExitLogBoolExp
+      description: Insert permission predicate over the 'LibraryExitLog' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_LibraryExitLog
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertLibraryExitLog
+    rootFieldKind: Mutation
+  description: Insert into the LibraryExitLog table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertLibraryExitLog
+  permissions:
+    - role: admin
+      allowExecution: true
+

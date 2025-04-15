@@ -1,0 +1,120 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReturnedBooksObject
+  fields:
+    - name: bookId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: InsertReturnedBooksObject
+    inputTypeName: InsertReturnedBooksObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_ReturnedBooks_object
+      fieldMapping:
+        bookId:
+          column:
+            name: book_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReturnedBooksObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bookId
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertReturnedBooksResponse
+  description: Responses from the 'insert_ReturnedBooks' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReturnedBooks!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertReturnedBooksResponse
+    inputTypeName: InsertReturnedBooksResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_ReturnedBooks_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertReturnedBooksResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertReturnedBooks
+  outputType: InsertReturnedBooksResponse!
+  arguments:
+    - name: objects
+      type: "[InsertReturnedBooksObject!]!"
+    - name: postCheck
+      type: ReturnedBooksBoolExp
+      description: Insert permission predicate over the 'ReturnedBooks' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_ReturnedBooks
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertReturnedBooks
+    rootFieldKind: Mutation
+  description: Insert into the ReturnedBooks table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertReturnedBooks
+  permissions:
+    - role: admin
+      allowExecution: true
+

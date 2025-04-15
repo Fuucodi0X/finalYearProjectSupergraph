@@ -1,0 +1,164 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GetwayExitLog
+  fields:
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: GetwayExitLog
+    inputTypeName: GetwayExitLogInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: GetwayExitLog
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GetwayExitLog
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: GetwayExitLogBoolExp
+  operand:
+    object:
+      type: GetwayExitLog
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: GetwayExitLogBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: GetwayExitLogAggExp
+  operand:
+    object:
+      aggregatedType: GetwayExitLog
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: GetwayExitLogAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: GetwayExitLogOrderByExp
+  operand:
+    object:
+      orderedType: GetwayExitLog
+      orderableFields:
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: user
+  graphql:
+    expressionTypeName: GetwayExitLogOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: GetwayExitLog
+  objectType: GetwayExitLog
+  source:
+    dataConnectorName: pg_db
+    collection: GetwayExitLog
+  filterExpressionType: GetwayExitLogBoolExp
+  aggregateExpression: GetwayExitLogAggExp
+  orderByExpression: GetwayExitLogOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: getwayExitLog
+      subscription:
+        rootField: getwayExitLog
+    selectUniques:
+      - queryRootField: getwayExitLogById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: getwayExitLogById
+    filterInputTypeName: GetwayExitLogFilterInput
+    aggregate:
+      queryRootField: getwayExitLogAggregate
+      subscription:
+        rootField: getwayExitLogAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: GetwayExitLog
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: GetwayExitLog
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

@@ -1,0 +1,164 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: LibraryEntryLog
+  fields:
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: LibraryEntryLog
+    inputTypeName: LibraryEntryLogInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: LibraryEntryLog
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: LibraryEntryLog
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: LibraryEntryLogBoolExp
+  operand:
+    object:
+      type: LibraryEntryLog
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: LibraryEntryLogBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: LibraryEntryLogAggExp
+  operand:
+    object:
+      aggregatedType: LibraryEntryLog
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: LibraryEntryLogAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: LibraryEntryLogOrderByExp
+  operand:
+    object:
+      orderedType: LibraryEntryLog
+      orderableFields:
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: user
+  graphql:
+    expressionTypeName: LibraryEntryLogOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: LibraryEntryLog
+  objectType: LibraryEntryLog
+  source:
+    dataConnectorName: pg_db
+    collection: LibraryEntryLog
+  filterExpressionType: LibraryEntryLogBoolExp
+  aggregateExpression: LibraryEntryLogAggExp
+  orderByExpression: LibraryEntryLogOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: libraryEntryLog
+      subscription:
+        rootField: libraryEntryLog
+    selectUniques:
+      - queryRootField: libraryEntryLogById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: libraryEntryLogById
+    filterInputTypeName: LibraryEntryLogFilterInput
+    aggregate:
+      queryRootField: libraryEntryLogAggregate
+      subscription:
+        rootField: libraryEntryLogAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: LibraryEntryLog
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: LibraryEntryLog
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

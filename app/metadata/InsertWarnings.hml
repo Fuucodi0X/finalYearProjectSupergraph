@@ -1,0 +1,126 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertWarningsObject
+  fields:
+    - name: complainId
+      type: Uuid
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp
+    - name: warnedUserId
+      type: Uuid
+    - name: warningApprover
+      type: Uuid
+  graphql:
+    typeName: InsertWarningsObject
+    inputTypeName: InsertWarningsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Warnings_object
+      fieldMapping:
+        complainId:
+          column:
+            name: complain_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        warnedUserId:
+          column:
+            name: warned_user_id
+        warningApprover:
+          column:
+            name: warning_approver
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertWarningsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complainId
+          - id
+          - time
+          - warnedUserId
+          - warningApprover
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertWarningsResponse
+  description: Responses from the 'insert_Warnings' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Warnings!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertWarningsResponse
+    inputTypeName: InsertWarningsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_Warnings_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertWarningsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertWarnings
+  outputType: InsertWarningsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertWarningsObject!]!"
+    - name: postCheck
+      type: WarningsBoolExp
+      description: Insert permission predicate over the 'Warnings' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_Warnings
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertWarnings
+    rootFieldKind: Mutation
+  description: Insert into the Warnings table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertWarnings
+  permissions:
+    - role: admin
+      allowExecution: true
+

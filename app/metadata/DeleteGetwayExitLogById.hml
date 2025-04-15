@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteGetwayExitLogByIdResponse
+  description: Responses from the 'delete_GetwayExitLog_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[GetwayExitLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteGetwayExitLogByIdResponse
+    inputTypeName: DeleteGetwayExitLogByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_GetwayExitLog_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteGetwayExitLogByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteGetwayExitLogById
+  outputType: DeleteGetwayExitLogByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: GetwayExitLogBoolExp
+      description: Delete permission predicate over the 'GetwayExitLog' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_GetwayExitLog_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteGetwayExitLogById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'GetwayExitLog' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteGetwayExitLogById
+  permissions:
+    - role: admin
+      allowExecution: true
+

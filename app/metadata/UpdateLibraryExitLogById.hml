@@ -1,0 +1,223 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnLibraryExitLogId
+  description: Update the 'id' column in the 'LibraryExitLog' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnLibraryExitLogId
+    inputTypeName: UpdateColumnLibraryExitLogIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_LibraryExitLog_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnLibraryExitLogId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnLibraryExitLogTime
+  description: Update the 'time' column in the 'LibraryExitLog' collection
+  fields:
+    - name: set
+      type: Timestamp!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnLibraryExitLogTime
+    inputTypeName: UpdateColumnLibraryExitLogTimeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_LibraryExitLog_time
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnLibraryExitLogTime
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnLibraryExitLogUserId
+  description: Update the 'user_id' column in the 'LibraryExitLog' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnLibraryExitLogUserId
+    inputTypeName: UpdateColumnLibraryExitLogUserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_LibraryExitLog_user_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnLibraryExitLogUserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateLibraryExitLogByIdUpdateColumns
+  description: Update the columns of the 'LibraryExitLog' collection
+  fields:
+    - name: id
+      type: UpdateColumnLibraryExitLogId
+      description: Update the 'id' column in the 'LibraryExitLog' collection.
+    - name: time
+      type: UpdateColumnLibraryExitLogTime
+      description: Update the 'time' column in the 'LibraryExitLog' collection.
+    - name: userId
+      type: UpdateColumnLibraryExitLogUserId
+      description: Update the 'user_id' column in the 'LibraryExitLog' collection.
+  graphql:
+    typeName: UpdateLibraryExitLogByIdUpdateColumns
+    inputTypeName: UpdateLibraryExitLogByIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_LibraryExitLog_by_id_update_columns
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateLibraryExitLogByIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateLibraryExitLogByIdResponse
+  description: Responses from the 'update_LibraryExitLog_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[LibraryExitLog!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateLibraryExitLogByIdResponse
+    inputTypeName: UpdateLibraryExitLogByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_LibraryExitLog_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateLibraryExitLogByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateLibraryExitLogById
+  outputType: UpdateLibraryExitLogByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: postCheck
+      type: LibraryExitLogBoolExp
+      description: Update permission post-condition predicate over the
+        'LibraryExitLog' collection
+    - name: preCheck
+      type: LibraryExitLogBoolExp
+      description: Update permission pre-condition predicate over the 'LibraryExitLog'
+        collection
+    - name: updateColumns
+      type: UpdateLibraryExitLogByIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_LibraryExitLog_by_id
+    argumentMapping:
+      keyId: key_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateLibraryExitLogById
+    rootFieldKind: Mutation
+  description: Update any row on the 'LibraryExitLog' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateLibraryExitLogById
+  permissions:
+    - role: admin
+      allowExecution: true
+

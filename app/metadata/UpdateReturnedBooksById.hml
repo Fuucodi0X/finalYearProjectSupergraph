@@ -1,0 +1,262 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReturnedBooksBookId
+  description: Update the 'book_id' column in the 'ReturnedBooks' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReturnedBooksBookId
+    inputTypeName: UpdateColumnReturnedBooksBookIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_ReturnedBooks_book_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReturnedBooksBookId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReturnedBooksId
+  description: Update the 'id' column in the 'ReturnedBooks' collection
+  fields:
+    - name: set
+      type: Uuid!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReturnedBooksId
+    inputTypeName: UpdateColumnReturnedBooksIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_ReturnedBooks_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReturnedBooksId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReturnedBooksTime
+  description: Update the 'time' column in the 'ReturnedBooks' collection
+  fields:
+    - name: set
+      type: Timestamp!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReturnedBooksTime
+    inputTypeName: UpdateColumnReturnedBooksTimeInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_ReturnedBooks_time
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReturnedBooksTime
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnReturnedBooksUserId
+  description: Update the 'user_id' column in the 'ReturnedBooks' collection
+  fields:
+    - name: set
+      type: Uuid
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnReturnedBooksUserId
+    inputTypeName: UpdateColumnReturnedBooksUserIdInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_ReturnedBooks_user_id
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnReturnedBooksUserId
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReturnedBooksByIdUpdateColumns
+  description: Update the columns of the 'ReturnedBooks' collection
+  fields:
+    - name: bookId
+      type: UpdateColumnReturnedBooksBookId
+      description: Update the 'book_id' column in the 'ReturnedBooks' collection.
+    - name: id
+      type: UpdateColumnReturnedBooksId
+      description: Update the 'id' column in the 'ReturnedBooks' collection.
+    - name: time
+      type: UpdateColumnReturnedBooksTime
+      description: Update the 'time' column in the 'ReturnedBooks' collection.
+    - name: userId
+      type: UpdateColumnReturnedBooksUserId
+      description: Update the 'user_id' column in the 'ReturnedBooks' collection.
+  graphql:
+    typeName: UpdateReturnedBooksByIdUpdateColumns
+    inputTypeName: UpdateReturnedBooksByIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_ReturnedBooks_by_id_update_columns
+      fieldMapping:
+        bookId:
+          column:
+            name: book_id
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReturnedBooksByIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - bookId
+          - id
+          - time
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateReturnedBooksByIdResponse
+  description: Responses from the 'update_ReturnedBooks_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[ReturnedBooks!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateReturnedBooksByIdResponse
+    inputTypeName: UpdateReturnedBooksByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_ReturnedBooks_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateReturnedBooksByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateReturnedBooksById
+  outputType: UpdateReturnedBooksByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: postCheck
+      type: ReturnedBooksBoolExp
+      description: Update permission post-condition predicate over the 'ReturnedBooks'
+        collection
+    - name: preCheck
+      type: ReturnedBooksBoolExp
+      description: Update permission pre-condition predicate over the 'ReturnedBooks'
+        collection
+    - name: updateColumns
+      type: UpdateReturnedBooksByIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_ReturnedBooks_by_id
+    argumentMapping:
+      keyId: key_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateReturnedBooksById
+    rootFieldKind: Mutation
+  description: Update any row on the 'ReturnedBooks' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateReturnedBooksById
+  permissions:
+    - role: admin
+      allowExecution: true
+

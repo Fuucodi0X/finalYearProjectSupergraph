@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteSuspensionsByIdResponse
+  description: Responses from the 'delete_Suspensions_by_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Suspensions!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteSuspensionsByIdResponse
+    inputTypeName: DeleteSuspensionsByIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_Suspensions_by_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteSuspensionsByIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteSuspensionsById
+  outputType: DeleteSuspensionsByIdResponse!
+  arguments:
+    - name: keyId
+      type: Uuid!
+    - name: preCheck
+      type: SuspensionsBoolExp
+      description: Delete permission predicate over the 'Suspensions' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_Suspensions_by_id
+    argumentMapping:
+      keyId: key_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteSuspensionsById
+    rootFieldKind: Mutation
+  description: Delete any row on the 'Suspensions' collection using the 'id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteSuspensionsById
+  permissions:
+    - role: admin
+      allowExecution: true
+

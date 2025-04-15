@@ -1,0 +1,144 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: LibraryExitLog
+  fields:
+    - name: id
+      type: Uuid!
+    - name: time
+      type: Timestamp!
+    - name: userId
+      type: Uuid
+  graphql:
+    typeName: LibraryExitLog
+    inputTypeName: LibraryExitLogInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: LibraryExitLog
+      fieldMapping:
+        id:
+          column:
+            name: id
+        time:
+          column:
+            name: time
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: LibraryExitLog
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - time
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: LibraryExitLogBoolExp
+  operand:
+    object:
+      type: LibraryExitLog
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: LibraryExitLogBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: LibraryExitLogAggExp
+  operand:
+    object:
+      aggregatedType: LibraryExitLog
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: LibraryExitLogAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: LibraryExitLogOrderByExp
+  operand:
+    object:
+      orderedType: LibraryExitLog
+      orderableFields:
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: LibraryExitLogOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: LibraryExitLog
+  objectType: LibraryExitLog
+  source:
+    dataConnectorName: pg_db
+    collection: LibraryExitLog
+  filterExpressionType: LibraryExitLogBoolExp
+  aggregateExpression: LibraryExitLogAggExp
+  orderByExpression: LibraryExitLogOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: libraryExitLog
+      subscription:
+        rootField: libraryExitLog
+    selectUniques:
+      - queryRootField: libraryExitLogById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: libraryExitLogById
+    filterInputTypeName: LibraryExitLogFilterInput
+    aggregate:
+      queryRootField: libraryExitLogAggregate
+      subscription:
+        rootField: libraryExitLogAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: LibraryExitLog
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+

@@ -1,0 +1,139 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateUsersByPhoneNumberUpdateColumns
+  description: Update the columns of the 'Users' collection
+  fields:
+    - name: email
+      type: UpdateColumnUsersEmail
+      description: Update the 'email' column in the 'Users' collection.
+    - name: id
+      type: UpdateColumnUsersId
+      description: Update the 'id' column in the 'Users' collection.
+    - name: name
+      type: UpdateColumnUsersName
+      description: Update the 'name' column in the 'Users' collection.
+    - name: phoneNumber
+      type: UpdateColumnUsersPhoneNumber
+      description: Update the 'phone_number' column in the 'Users' collection.
+    - name: role
+      type: UpdateColumnUsersRole
+      description: Update the 'role' column in the 'Users' collection.
+  graphql:
+    typeName: UpdateUsersByPhoneNumberUpdateColumns
+    inputTypeName: UpdateUsersByPhoneNumberUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Users_by_phone_number_update_columns
+      fieldMapping:
+        email:
+          column:
+            name: email
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        phoneNumber:
+          column:
+            name: phone_number
+        role:
+          column:
+            name: role
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateUsersByPhoneNumberUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - email
+          - id
+          - name
+          - phoneNumber
+          - role
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateUsersByPhoneNumberResponse
+  description: Responses from the 'update_Users_by_phone_number' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Users!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateUsersByPhoneNumberResponse
+    inputTypeName: UpdateUsersByPhoneNumberResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_Users_by_phone_number_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateUsersByPhoneNumberResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateUsersByPhoneNumber
+  outputType: UpdateUsersByPhoneNumberResponse!
+  arguments:
+    - name: keyPhoneNumber
+      type: Int4!
+    - name: postCheck
+      type: UsersBoolExp
+      description: Update permission post-condition predicate over the 'Users' collection
+    - name: preCheck
+      type: UsersBoolExp
+      description: Update permission pre-condition predicate over the 'Users' collection
+    - name: updateColumns
+      type: UpdateUsersByPhoneNumberUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_Users_by_phone_number
+    argumentMapping:
+      keyPhoneNumber: key_phone_number
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateUsersByPhoneNumber
+    rootFieldKind: Mutation
+  description: Update any row on the 'Users' collection using the 'phone_number' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateUsersByPhoneNumber
+  permissions:
+    - role: admin
+      allowExecution: true
+

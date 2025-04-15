@@ -1,0 +1,65 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: golang
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_GOLANG_READ_URL
+      write:
+        valueFromEnv: APP_GOLANG_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_GOLANG_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Boolean:
+          representation:
+            type: boolean
+          aggregate_functions: {}
+          comparison_operators: {}
+        String:
+          representation:
+            type: string
+          aggregate_functions: {}
+          comparison_operators: {}
+      object_types:
+        CheckClearanceResult:
+          fields:
+            disciplineClearance:
+              type:
+                name: Boolean
+                type: named
+            dormitaryClearance:
+              type:
+                name: Boolean
+                type: named
+            libraryClearance:
+              type:
+                name: Boolean
+                type: named
+      collections: []
+      functions:
+        - name: checkClearance
+          description: is the handler called by Hasura
+          arguments:
+            userId:
+              type:
+                name: String
+                type: named
+          result_type:
+            type: nullable
+            underlying_type:
+              name: CheckClearanceResult
+              type: named
+      procedures: []
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          variables: {}
+          nested_fields: {}
+          exists: {}
+        mutation: {}

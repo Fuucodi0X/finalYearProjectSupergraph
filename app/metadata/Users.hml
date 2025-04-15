@@ -1,0 +1,316 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Users
+  fields:
+    - name: email
+      type: Varchar!
+    - name: id
+      type: Uuid!
+    - name: name
+      type: Text!
+    - name: phoneNumber
+      type: Int4!
+    - name: role
+      type: Varchar!
+  graphql:
+    typeName: Users
+    inputTypeName: UsersInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: Users
+      fieldMapping:
+        email:
+          column:
+            name: email
+        id:
+          column:
+            name: id
+        name:
+          column:
+            name: name
+        phoneNumber:
+          column:
+            name: phone_number
+        role:
+          column:
+            name: role
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Users
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - email
+          - id
+          - name
+          - phoneNumber
+          - role
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: UsersBoolExp
+  operand:
+    object:
+      type: Users
+      comparableFields:
+        - fieldName: email
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: phoneNumber
+          booleanExpressionType: Int4BoolExp
+        - fieldName: role
+          booleanExpressionType: VarcharBoolExp
+      comparableRelationships:
+        - relationshipName: borrowedBooks
+        - relationshipName: getwayEntryLogs
+        - relationshipName: getwayExitLogs
+        - relationshipName: libraryEntryLogs
+        - relationshipName: registerdItems
+        - relationshipName: returnedBooks
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: UsersBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: UsersAggExp
+  operand:
+    object:
+      aggregatedType: Users
+      aggregatableFields:
+        - fieldName: email
+          aggregateExpression: VarcharAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: phoneNumber
+          aggregateExpression: Int4AggExp
+        - fieldName: role
+          aggregateExpression: VarcharAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: UsersAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: UsersOrderByExp
+  operand:
+    object:
+      orderedType: Users
+      orderableFields:
+        - fieldName: email
+          orderByExpression: VarcharOrderByExp
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: name
+          orderByExpression: TextOrderByExp
+        - fieldName: phoneNumber
+          orderByExpression: Int4OrderByExp
+        - fieldName: role
+          orderByExpression: VarcharOrderByExp
+      orderableRelationships: []
+  graphql:
+    expressionTypeName: UsersOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: Users
+  objectType: Users
+  source:
+    dataConnectorName: pg_db
+    collection: Users
+  filterExpressionType: UsersBoolExp
+  aggregateExpression: UsersAggExp
+  orderByExpression: UsersOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: users
+      subscription:
+        rootField: users
+    selectUniques:
+      - queryRootField: usersByEmail
+        uniqueIdentifier:
+          - email
+        subscription:
+          rootField: usersByEmail
+      - queryRootField: usersByPhoneNumber
+        uniqueIdentifier:
+          - phoneNumber
+        subscription:
+          rootField: usersByPhoneNumber
+      - queryRootField: usersById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: usersById
+    filterInputTypeName: UsersFilterInput
+    aggregate:
+      queryRootField: usersAggregate
+      subscription:
+        rootField: usersAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Users
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: borrowedBooks
+  sourceType: Users
+  target:
+    model:
+      name: BorrowedBooks
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: BorrowedBooksAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: borrowedBooksAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: getwayEntryLogs
+  sourceType: Users
+  target:
+    model:
+      name: GetwayEntryLog
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: GetwayEntryLogAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: getwayEntryLogsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: getwayExitLogs
+  sourceType: Users
+  target:
+    model:
+      name: GetwayExitLog
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: GetwayExitLogAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: getwayExitLogsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: libraryEntryLogs
+  sourceType: Users
+  target:
+    model:
+      name: LibraryEntryLog
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: LibraryEntryLogAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: libraryEntryLogsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: registerdItems
+  sourceType: Users
+  target:
+    model:
+      name: RegisterdItems
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: RegisterdItemsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: registerdItemsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: returnedBooks
+  sourceType: Users
+  target:
+    model:
+      name: ReturnedBooks
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: ReturnedBooksAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: returnedBooksAggregate
+
