@@ -5,15 +5,17 @@ definition:
   name: Complaines
   fields:
     - name: accusedId
-      type: Uuid
+      type: Uuid!
     - name: accuserId
-      type: Uuid
+      type: Uuid!
     - name: description
       type: Text!
     - name: id
       type: Uuid!
     - name: status
       type: Varchar
+    - name: time
+      type: Timestamp!
   graphql:
     typeName: Complaines
     inputTypeName: ComplainesInput
@@ -36,6 +38,9 @@ definition:
         status:
           column:
             name: status
+        time:
+          column:
+            name: time
 
 ---
 kind: TypePermissions
@@ -51,6 +56,7 @@ definition:
           - description
           - id
           - status
+          - time
 
 ---
 kind: BooleanExpressionType
@@ -71,6 +77,8 @@ definition:
           booleanExpressionType: UuidBoolExp
         - fieldName: status
           booleanExpressionType: VarcharBoolExp
+        - fieldName: time
+          booleanExpressionType: TimestampBoolExp
       comparableRelationships: []
   logicalOperators:
     enable: true
@@ -98,6 +106,8 @@ definition:
           aggregateExpression: UuidAggExp
         - fieldName: status
           aggregateExpression: VarcharAggExp
+        - fieldName: time
+          aggregateExpression: TimestampAggExp
   count:
     enable: true
   graphql:
@@ -122,6 +132,8 @@ definition:
           orderByExpression: UuidOrderByExp
         - fieldName: status
           orderByExpression: VarcharOrderByExp
+        - fieldName: time
+          orderByExpression: TimestampOrderByExp
       orderableRelationships: []
   graphql:
     expressionTypeName: ComplainesOrderByExp

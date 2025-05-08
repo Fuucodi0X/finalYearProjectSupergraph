@@ -1,0 +1,127 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateStudentNfcByUserIdUpdateColumns
+  description: Update the columns of the 'StudentNFC' collection
+  fields:
+    - name: id
+      type: UpdateColumnStudentNfcId
+      description: Update the 'id' column in the 'StudentNFC' collection.
+    - name: nfcId
+      type: UpdateColumnStudentNfcNfcId
+      description: Update the 'nfc_id' column in the 'StudentNFC' collection.
+    - name: userId
+      type: UpdateColumnStudentNfcUserId
+      description: Update the 'user_id' column in the 'StudentNFC' collection.
+  graphql:
+    typeName: UpdateStudentNfcByUserIdUpdateColumns
+    inputTypeName: UpdateStudentNfcByUserIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_StudentNFC_by_user_id_update_columns
+      fieldMapping:
+        id:
+          column:
+            name: id
+        nfcId:
+          column:
+            name: nfc_id
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateStudentNfcByUserIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - nfcId
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateStudentNfcByUserIdResponse
+  description: Responses from the 'update_StudentNFC_by_user_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[StudentNfc!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateStudentNfcByUserIdResponse
+    inputTypeName: UpdateStudentNfcByUserIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_StudentNFC_by_user_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateStudentNfcByUserIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateStudentNfcByUserId
+  outputType: UpdateStudentNfcByUserIdResponse!
+  arguments:
+    - name: keyUserId
+      type: Uuid!
+    - name: postCheck
+      type: StudentNfcBoolExp
+      description: Update permission post-condition predicate over the 'StudentNFC'
+        collection
+    - name: preCheck
+      type: StudentNfcBoolExp
+      description: Update permission pre-condition predicate over the 'StudentNFC'
+        collection
+    - name: updateColumns
+      type: UpdateStudentNfcByUserIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_StudentNFC_by_user_id
+    argumentMapping:
+      keyUserId: key_user_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateStudentNfcByUserId
+    rootFieldKind: Mutation
+  description: Update any row on the 'StudentNFC' collection using the 'user_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateStudentNfcByUserId
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -7,13 +7,13 @@ definition:
     - name: blockNumber
       type: Int2!
     - name: id
-      type: Uuid!
+      type: Uuid
     - name: roomNumber
       type: Int2!
     - name: status
       type: Varchar!
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: InsertDormitaryPlacementObject
     inputTypeName: InsertDormitaryPlacementObjectInput

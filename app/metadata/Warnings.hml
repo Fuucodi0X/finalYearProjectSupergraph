@@ -5,15 +5,15 @@ definition:
   name: Warnings
   fields:
     - name: complainId
-      type: Uuid
+      type: Uuid!
     - name: id
       type: Uuid!
     - name: time
       type: Timestamp
     - name: warnedUserId
-      type: Uuid
+      type: Uuid!
     - name: warningApprover
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: Warnings
     inputTypeName: WarningsInput

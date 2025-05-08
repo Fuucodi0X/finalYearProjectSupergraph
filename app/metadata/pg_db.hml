@@ -738,10 +738,8 @@ definition:
           fields:
             book_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             id:
               type:
                 name: uuid
@@ -752,24 +750,18 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         Complaines:
           fields:
             accused_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             accuser_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             description:
               type:
                 name: text
@@ -784,6 +776,10 @@ definition:
                 underlying_type:
                   name: varchar
                   type: named
+            time:
+              type:
+                name: timestamp
+                type: named
         DormitaryPlacement:
           fields:
             block_number:
@@ -804,10 +800,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         GetwayEntryLog:
           fields:
             id:
@@ -820,10 +814,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         GetwayExitLog:
           fields:
             id:
@@ -836,10 +828,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         LibraryEntryLog:
           fields:
             id:
@@ -852,10 +842,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         LibraryExitLog:
           fields:
             id:
@@ -868,10 +856,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         RegisterdItems:
           fields:
             id:
@@ -898,18 +884,14 @@ definition:
                   type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         ReturnedBooks:
           fields:
             book_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             id:
               type:
                 name: uuid
@@ -920,34 +902,40 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
+        StudentNFC:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         Suspensions:
           fields:
             complain_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             id:
               type:
                 name: uuid
                 type: named
             suspended_user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             suspension_approver:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             suspension_period:
               type:
                 type: nullable
@@ -962,6 +950,12 @@ definition:
                   type: named
         Users:
           fields:
+            avatar:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
             email:
               type:
                 name: varchar
@@ -986,10 +980,8 @@ definition:
           fields:
             complain_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             id:
               type:
                 name: uuid
@@ -1002,16 +994,12 @@ definition:
                   type: named
             warned_user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             warning_approver:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         delete_Books_by_id_response:
           description: Responses from the 'delete_Books_by_id' procedure
           fields:
@@ -1162,6 +1150,36 @@ definition:
                   name: ReturnedBooks
                   type: named
                 type: array
+        delete_StudentNFC_by_id_response:
+          description: Responses from the 'delete_StudentNFC_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: StudentNFC
+                  type: named
+                type: array
+        delete_StudentNFC_by_user_id_response:
+          description: Responses from the 'delete_StudentNFC_by_user_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: StudentNFC
+                  type: named
+                type: array
         delete_Suspensions_by_id_response:
           description: Responses from the 'delete_Suspensions_by_id' procedure
           fields:
@@ -1247,8 +1265,10 @@ definition:
                   type: named
             id:
               type:
-                name: uuid
-                type: named
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
             title:
               type:
                 name: varchar
@@ -1272,24 +1292,24 @@ definition:
           fields:
             book_id:
               type:
+                name: uuid
+                type: named
+            id:
+              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
-            id:
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
               type:
                 name: uuid
                 type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
         insert_BorrowedBooks_response:
           description: Responses from the 'insert_BorrowedBooks' procedure
           fields:
@@ -1309,29 +1329,33 @@ definition:
           fields:
             accused_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             accuser_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             description:
               type:
                 name: text
                 type: named
             id:
               type:
-                name: uuid
-                type: named
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
             status:
               type:
                 type: nullable
                 underlying_type:
                   name: varchar
+                  type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
                   type: named
         insert_Complaines_response:
           description: Responses from the 'insert_Complaines' procedure
@@ -1356,8 +1380,10 @@ definition:
                 type: named
             id:
               type:
-                name: uuid
-                type: named
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
             room_number:
               type:
                 name: int2
@@ -1368,10 +1394,8 @@ definition:
                 type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         insert_DormitaryPlacement_response:
           description: Responses from the 'insert_DormitaryPlacement' procedure
           fields:
@@ -1391,18 +1415,20 @@ definition:
           fields:
             id:
               type:
-                name: uuid
-                type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         insert_GetwayEntryLog_response:
           description: Responses from the 'insert_GetwayEntryLog' procedure
           fields:
@@ -1422,18 +1448,20 @@ definition:
           fields:
             id:
               type:
-                name: uuid
-                type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         insert_GetwayExitLog_response:
           description: Responses from the 'insert_GetwayExitLog' procedure
           fields:
@@ -1453,18 +1481,20 @@ definition:
           fields:
             id:
               type:
-                name: uuid
-                type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         insert_LibraryEntryLog_response:
           description: Responses from the 'insert_LibraryEntryLog' procedure
           fields:
@@ -1484,18 +1514,20 @@ definition:
           fields:
             id:
               type:
-                name: uuid
-                type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         insert_LibraryExitLog_response:
           description: Responses from the 'insert_LibraryExitLog' procedure
           fields:
@@ -1515,8 +1547,10 @@ definition:
           fields:
             id:
               type:
-                name: uuid
-                type: named
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
             item_type:
               type:
                 type: nullable
@@ -1537,10 +1571,8 @@ definition:
                   type: named
             user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         insert_RegisterdItems_response:
           description: Responses from the 'insert_RegisterdItems' procedure
           fields:
@@ -1560,24 +1592,24 @@ definition:
           fields:
             book_id:
               type:
+                name: uuid
+                type: named
+            id:
+              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
-            id:
+            time:
+              type:
+                type: nullable
+                underlying_type:
+                  name: timestamp
+                  type: named
+            user_id:
               type:
                 name: uuid
                 type: named
-            time:
-              type:
-                name: timestamp
-                type: named
-            user_id:
-              type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
         insert_ReturnedBooks_response:
           description: Responses from the 'insert_ReturnedBooks' procedure
           fields:
@@ -1593,30 +1625,57 @@ definition:
                   name: ReturnedBooks
                   type: named
                 type: array
+        insert_StudentNFC_object:
+          fields:
+            id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
+        insert_StudentNFC_response:
+          description: Responses from the 'insert_StudentNFC' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: StudentNFC
+                  type: named
+                type: array
         insert_Suspensions_object:
           fields:
             complain_id:
               type:
+                name: uuid
+                type: named
+            id:
+              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
-            id:
+            suspended_user_id:
               type:
                 name: uuid
                 type: named
-            suspended_user_id:
-              type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
             suspension_approver:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             suspension_period:
               type:
                 type: nullable
@@ -1646,6 +1705,12 @@ definition:
                 type: array
         insert_Users_object:
           fields:
+            avatar:
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
+                  type: named
             email:
               type:
                 name: varchar
@@ -1687,14 +1752,14 @@ definition:
           fields:
             complain_id:
               type:
+                name: uuid
+                type: named
+            id:
+              type:
                 type: nullable
                 underlying_type:
                   name: uuid
                   type: named
-            id:
-              type:
-                name: uuid
-                type: named
             time:
               type:
                 type: nullable
@@ -1703,16 +1768,12 @@ definition:
                   type: named
             warned_user_id:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
             warning_approver:
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         insert_Warnings_response:
           description: Responses from the 'insert_Warnings' procedure
           fields:
@@ -1865,6 +1926,13 @@ definition:
                 type: nullable
                 underlying_type:
                   name: update_column_Complaines_status
+                  type: named
+            time:
+              description: Update the 'time' column in the 'Complaines' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Complaines_time
                   type: named
         update_DormitaryPlacement_by_id_response:
           description: Responses from the 'update_DormitaryPlacement_by_id' procedure
@@ -2174,6 +2242,84 @@ definition:
                 underlying_type:
                   name: update_column_ReturnedBooks_user_id
                   type: named
+        update_StudentNFC_by_id_response:
+          description: Responses from the 'update_StudentNFC_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: StudentNFC
+                  type: named
+                type: array
+        update_StudentNFC_by_id_update_columns:
+          description: Update the columns of the 'StudentNFC' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_nfc_id
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_user_id
+                  type: named
+        update_StudentNFC_by_user_id_response:
+          description: Responses from the 'update_StudentNFC_by_user_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: StudentNFC
+                  type: named
+                type: array
+        update_StudentNFC_by_user_id_update_columns:
+          description: Update the columns of the 'StudentNFC' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_nfc_id
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'StudentNFC' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_StudentNFC_user_id
+                  type: named
         update_Suspensions_by_id_response:
           description: Responses from the 'update_Suspensions_by_id' procedure
           fields:
@@ -2252,6 +2398,13 @@ definition:
         update_Users_by_email_update_columns:
           description: Update the columns of the 'Users' collection
           fields:
+            avatar:
+              description: Update the 'avatar' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_avatar
+                  type: named
             email:
               description: Update the 'email' column in the 'Users' collection.
               type:
@@ -2305,6 +2458,13 @@ definition:
         update_Users_by_id_update_columns:
           description: Update the columns of the 'Users' collection
           fields:
+            avatar:
+              description: Update the 'avatar' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_avatar
+                  type: named
             email:
               description: Update the 'email' column in the 'Users' collection.
               type:
@@ -2358,6 +2518,13 @@ definition:
         update_Users_by_phone_number_update_columns:
           description: Update the columns of the 'Users' collection
           fields:
+            avatar:
+              description: Update the 'avatar' column in the 'Users' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_Users_avatar
+                  type: named
             email:
               description: Update the 'email' column in the 'Users' collection.
               type:
@@ -2478,10 +2645,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_BorrowedBooks_id:
           description: Update the 'id' column in the 'BorrowedBooks' collection
           fields:
@@ -2504,30 +2669,24 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Complaines_accused_id:
           description: Update the 'accused_id' column in the 'Complaines' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Complaines_accuser_id:
           description: Update the 'accuser_id' column in the 'Complaines' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Complaines_description:
           description: Update the 'description' column in the 'Complaines' collection
           fields:
@@ -2554,6 +2713,14 @@ definition:
                 underlying_type:
                   name: varchar
                   type: named
+        update_column_Complaines_time:
+          description: Update the 'time' column in the 'Complaines' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: timestamp
+                type: named
         update_column_DormitaryPlacement_block_number:
           description: Update the 'block_number' column in the 'DormitaryPlacement' collection
           fields:
@@ -2592,10 +2759,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_GetwayEntryLog_id:
           description: Update the 'id' column in the 'GetwayEntryLog' collection
           fields:
@@ -2618,10 +2783,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_GetwayExitLog_id:
           description: Update the 'id' column in the 'GetwayExitLog' collection
           fields:
@@ -2644,10 +2807,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_LibraryEntryLog_id:
           description: Update the 'id' column in the 'LibraryEntryLog' collection
           fields:
@@ -2670,10 +2831,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_LibraryExitLog_id:
           description: Update the 'id' column in the 'LibraryExitLog' collection
           fields:
@@ -2696,10 +2855,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_RegisterdItems_id:
           description: Update the 'id' column in the 'RegisterdItems' collection
           fields:
@@ -2744,20 +2901,16 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_ReturnedBooks_book_id:
           description: Update the 'book_id' column in the 'ReturnedBooks' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_ReturnedBooks_id:
           description: Update the 'id' column in the 'ReturnedBooks' collection
           fields:
@@ -2780,20 +2933,40 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
+        update_column_StudentNFC_id:
+          description: Update the 'id' column in the 'StudentNFC' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_StudentNFC_nfc_id:
+          description: Update the 'nfc_id' column in the 'StudentNFC' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: text
+                type: named
+        update_column_StudentNFC_user_id:
+          description: Update the 'user_id' column in the 'StudentNFC' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
         update_column_Suspensions_complain_id:
           description: Update the 'complain_id' column in the 'Suspensions' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Suspensions_id:
           description: Update the 'id' column in the 'Suspensions' collection
           fields:
@@ -2808,20 +2981,16 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Suspensions_suspension_approver:
           description: Update the 'suspension_approver' column in the 'Suspensions' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Suspensions_suspension_period:
           description: Update the 'suspension_period' column in the 'Suspensions' collection
           fields:
@@ -2841,6 +3010,16 @@ definition:
                 type: nullable
                 underlying_type:
                   name: timestamp
+                  type: named
+        update_column_Users_avatar:
+          description: Update the 'avatar' column in the 'Users' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: nullable
+                underlying_type:
+                  name: text
                   type: named
         update_column_Users_email:
           description: Update the 'email' column in the 'Users' collection
@@ -2888,10 +3067,8 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Warnings_id:
           description: Update the 'id' column in the 'Warnings' collection
           fields:
@@ -2916,20 +3093,16 @@ definition:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
         update_column_Warnings_warning_approver:
           description: Update the 'warning_approver' column in the 'Warnings' collection
           fields:
             _set:
               description: Set the column to this value
               type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
+                name: uuid
+                type: named
       collections:
         - name: Books
           arguments: {}
@@ -3040,6 +3213,21 @@ definition:
                 book_id: id
               foreign_collection: Books
             ReturnedBooks_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
+        - name: StudentNFC
+          arguments: {}
+          type: StudentNFC
+          uniqueness_constraints:
+            StudentNFC_pkey:
+              unique_columns:
+                - id
+            StudentNFC_user_id_key:
+              unique_columns:
+                - user_id
+          foreign_keys:
+            StudentNFC_user_id_fkey:
               column_mapping:
                 user_id: id
               foreign_collection: Users
@@ -3244,6 +3432,40 @@ definition:
                   type: predicate
           result_type:
             name: delete_ReturnedBooks_by_id_response
+            type: named
+        - name: delete_StudentNFC_by_id
+          description: Delete any row on the 'StudentNFC' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+          result_type:
+            name: delete_StudentNFC_by_id_response
+            type: named
+        - name: delete_StudentNFC_by_user_id
+          description: Delete any row on the 'StudentNFC' collection using the 'user_id' key
+          arguments:
+            key_user_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+          result_type:
+            name: delete_StudentNFC_by_user_id_response
             type: named
         - name: delete_Suspensions_by_id
           description: Delete any row on the 'Suspensions' collection using the 'id' key
@@ -3519,6 +3741,25 @@ definition:
                   type: predicate
           result_type:
             name: insert_ReturnedBooks_response
+            type: named
+        - name: insert_StudentNFC
+          description: Insert into the StudentNFC table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_StudentNFC_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+          result_type:
+            name: insert_StudentNFC_response
             type: named
         - name: insert_Suspensions
           description: Insert into the Suspensions table
@@ -3856,6 +4097,62 @@ definition:
                 type: named
           result_type:
             name: update_ReturnedBooks_by_id_response
+            type: named
+        - name: update_StudentNFC_by_id
+          description: Update any row on the 'StudentNFC' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+            update_columns:
+              type:
+                name: update_StudentNFC_by_id_update_columns
+                type: named
+          result_type:
+            name: update_StudentNFC_by_id_response
+            type: named
+        - name: update_StudentNFC_by_user_id
+          description: Update any row on the 'StudentNFC' collection using the 'user_id' key
+          arguments:
+            key_user_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'StudentNFC' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: StudentNFC
+                  type: predicate
+            update_columns:
+              type:
+                name: update_StudentNFC_by_user_id_update_columns
+                type: named
+          result_type:
+            name: update_StudentNFC_by_user_id_response
             type: named
         - name: update_Suspensions_by_id
           description: Update any row on the 'Suspensions' collection using the 'id' key

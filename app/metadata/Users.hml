@@ -14,6 +14,8 @@ definition:
       type: Int4!
     - name: role
       type: Varchar!
+    - name: avatar
+      type: Text
   graphql:
     typeName: Users
     inputTypeName: UsersInput
@@ -36,6 +38,9 @@ definition:
         role:
           column:
             name: role
+        avatar:
+          column:
+            name: avatar
 
 ---
 kind: TypePermissions
@@ -51,6 +56,7 @@ definition:
           - name
           - phoneNumber
           - role
+          - avatar
 
 ---
 kind: BooleanExpressionType
@@ -71,6 +77,8 @@ definition:
           booleanExpressionType: Int4BoolExp
         - fieldName: role
           booleanExpressionType: VarcharBoolExp
+        - fieldName: avatar
+          booleanExpressionType: TextBoolExp
       comparableRelationships:
         - relationshipName: borrowedBooks
         - relationshipName: getwayEntryLogs
@@ -78,6 +86,7 @@ definition:
         - relationshipName: libraryEntryLogs
         - relationshipName: registerdItems
         - relationshipName: returnedBooks
+        - relationshipName: studentNfcs
   logicalOperators:
     enable: true
   isNull:
@@ -104,6 +113,8 @@ definition:
           aggregateExpression: Int4AggExp
         - fieldName: role
           aggregateExpression: VarcharAggExp
+        - fieldName: avatar
+          aggregateExpression: TextAggExp
   count:
     enable: true
   graphql:
@@ -128,6 +139,8 @@ definition:
           orderByExpression: Int4OrderByExp
         - fieldName: role
           orderByExpression: VarcharOrderByExp
+        - fieldName: avatar
+          orderByExpression: TextOrderByExp
       orderableRelationships: []
   graphql:
     expressionTypeName: UsersOrderByExp
@@ -313,4 +326,26 @@ definition:
           - fieldName: userId
   graphql:
     aggregateFieldName: returnedBooksAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: studentNfcs
+  sourceType: Users
+  target:
+    model:
+      name: StudentNfc
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: StudentNfcAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: studentNfcsAggregate
 

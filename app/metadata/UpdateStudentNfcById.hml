@@ -2,18 +2,18 @@
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateColumnLibraryEntryLogId
-  description: Update the 'id' column in the 'LibraryEntryLog' collection
+  name: UpdateColumnStudentNfcId
+  description: Update the 'id' column in the 'StudentNFC' collection
   fields:
     - name: set
       type: Uuid!
       description: Set the column to this value
   graphql:
-    typeName: UpdateColumnLibraryEntryLogId
-    inputTypeName: UpdateColumnLibraryEntryLogIdInput
+    typeName: UpdateColumnStudentNfcId
+    inputTypeName: UpdateColumnStudentNfcIdInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_column_LibraryEntryLog_id
+      dataConnectorObjectType: update_column_StudentNFC_id
       fieldMapping:
         set:
           column:
@@ -23,7 +23,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateColumnLibraryEntryLogId
+  typeName: UpdateColumnStudentNfcId
   permissions:
     - role: admin
       output:
@@ -34,18 +34,18 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateColumnLibraryEntryLogTime
-  description: Update the 'time' column in the 'LibraryEntryLog' collection
+  name: UpdateColumnStudentNfcNfcId
+  description: Update the 'nfc_id' column in the 'StudentNFC' collection
   fields:
     - name: set
-      type: Timestamp!
+      type: Text!
       description: Set the column to this value
   graphql:
-    typeName: UpdateColumnLibraryEntryLogTime
-    inputTypeName: UpdateColumnLibraryEntryLogTimeInput
+    typeName: UpdateColumnStudentNfcNfcId
+    inputTypeName: UpdateColumnStudentNfcNfcIdInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_column_LibraryEntryLog_time
+      dataConnectorObjectType: update_column_StudentNFC_nfc_id
       fieldMapping:
         set:
           column:
@@ -55,7 +55,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateColumnLibraryEntryLogTime
+  typeName: UpdateColumnStudentNfcNfcId
   permissions:
     - role: admin
       output:
@@ -66,18 +66,18 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateColumnLibraryEntryLogUserId
-  description: Update the 'user_id' column in the 'LibraryEntryLog' collection
+  name: UpdateColumnStudentNfcUserId
+  description: Update the 'user_id' column in the 'StudentNFC' collection
   fields:
     - name: set
       type: Uuid!
       description: Set the column to this value
   graphql:
-    typeName: UpdateColumnLibraryEntryLogUserId
-    inputTypeName: UpdateColumnLibraryEntryLogUserIdInput
+    typeName: UpdateColumnStudentNfcUserId
+    inputTypeName: UpdateColumnStudentNfcUserIdInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_column_LibraryEntryLog_user_id
+      dataConnectorObjectType: update_column_StudentNFC_user_id
       fieldMapping:
         set:
           column:
@@ -87,7 +87,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateColumnLibraryEntryLogUserId
+  typeName: UpdateColumnStudentNfcUserId
   permissions:
     - role: admin
       output:
@@ -98,31 +98,31 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateLibraryEntryLogByIdUpdateColumns
-  description: Update the columns of the 'LibraryEntryLog' collection
+  name: UpdateStudentNfcByIdUpdateColumns
+  description: Update the columns of the 'StudentNFC' collection
   fields:
     - name: id
-      type: UpdateColumnLibraryEntryLogId
-      description: Update the 'id' column in the 'LibraryEntryLog' collection.
-    - name: time
-      type: UpdateColumnLibraryEntryLogTime
-      description: Update the 'time' column in the 'LibraryEntryLog' collection.
+      type: UpdateColumnStudentNfcId
+      description: Update the 'id' column in the 'StudentNFC' collection.
+    - name: nfcId
+      type: UpdateColumnStudentNfcNfcId
+      description: Update the 'nfc_id' column in the 'StudentNFC' collection.
     - name: userId
-      type: UpdateColumnLibraryEntryLogUserId
-      description: Update the 'user_id' column in the 'LibraryEntryLog' collection.
+      type: UpdateColumnStudentNfcUserId
+      description: Update the 'user_id' column in the 'StudentNFC' collection.
   graphql:
-    typeName: UpdateLibraryEntryLogByIdUpdateColumns
-    inputTypeName: UpdateLibraryEntryLogByIdUpdateColumnsInput
+    typeName: UpdateStudentNfcByIdUpdateColumns
+    inputTypeName: UpdateStudentNfcByIdUpdateColumnsInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_LibraryEntryLog_by_id_update_columns
+      dataConnectorObjectType: update_StudentNFC_by_id_update_columns
       fieldMapping:
         id:
           column:
             name: id
-        time:
+        nfcId:
           column:
-            name: time
+            name: nfc_id
         userId:
           column:
             name: user_id
@@ -131,34 +131,34 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateLibraryEntryLogByIdUpdateColumns
+  typeName: UpdateStudentNfcByIdUpdateColumns
   permissions:
     - role: admin
       output:
         allowedFields:
           - id
-          - time
+          - nfcId
           - userId
 
 ---
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateLibraryEntryLogByIdResponse
-  description: Responses from the 'update_LibraryEntryLog_by_id' procedure
+  name: UpdateStudentNfcByIdResponse
+  description: Responses from the 'update_StudentNFC_by_id' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[LibraryEntryLog!]!"
+      type: "[StudentNfc!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: UpdateLibraryEntryLogByIdResponse
-    inputTypeName: UpdateLibraryEntryLogByIdResponseInput
+    typeName: UpdateStudentNfcByIdResponse
+    inputTypeName: UpdateStudentNfcByIdResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_LibraryEntryLog_by_id_response
+      dataConnectorObjectType: update_StudentNFC_by_id_response
       fieldMapping:
         affectedRows:
           column:
@@ -171,7 +171,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateLibraryEntryLogByIdResponse
+  typeName: UpdateStudentNfcByIdResponse
   permissions:
     - role: admin
       output:
@@ -183,40 +183,40 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: UpdateLibraryEntryLogById
-  outputType: UpdateLibraryEntryLogByIdResponse!
+  name: UpdateStudentNfcById
+  outputType: UpdateStudentNfcByIdResponse!
   arguments:
     - name: keyId
       type: Uuid!
     - name: postCheck
-      type: LibraryEntryLogBoolExp
-      description: Update permission post-condition predicate over the
-        'LibraryEntryLog' collection
+      type: StudentNfcBoolExp
+      description: Update permission post-condition predicate over the 'StudentNFC'
+        collection
     - name: preCheck
-      type: LibraryEntryLogBoolExp
-      description: Update permission pre-condition predicate over the
-        'LibraryEntryLog' collection
+      type: StudentNfcBoolExp
+      description: Update permission pre-condition predicate over the 'StudentNFC'
+        collection
     - name: updateColumns
-      type: UpdateLibraryEntryLogByIdUpdateColumns!
+      type: UpdateStudentNfcByIdUpdateColumns!
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: update_LibraryEntryLog_by_id
+      procedure: update_StudentNFC_by_id
     argumentMapping:
       keyId: key_id
       postCheck: post_check
       preCheck: pre_check
       updateColumns: update_columns
   graphql:
-    rootFieldName: updateLibraryEntryLogById
+    rootFieldName: updateStudentNfcById
     rootFieldKind: Mutation
-  description: Update any row on the 'LibraryEntryLog' collection using the 'id' key
+  description: Update any row on the 'StudentNFC' collection using the 'id' key
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: UpdateLibraryEntryLogById
+  commandName: UpdateStudentNfcById
   permissions:
     - role: admin
       allowExecution: true

@@ -5,13 +5,13 @@ definition:
   name: InsertBorrowedBooksObject
   fields:
     - name: bookId
-      type: Uuid
-    - name: id
       type: Uuid!
-    - name: time
-      type: Timestamp!
-    - name: userId
+    - name: id
       type: Uuid
+    - name: time
+      type: Timestamp
+    - name: userId
+      type: Uuid!
   graphql:
     typeName: InsertBorrowedBooksObject
     inputTypeName: InsertBorrowedBooksObjectInput

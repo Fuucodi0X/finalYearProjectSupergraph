@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteStudentNfcByUserIdResponse
+  description: Responses from the 'delete_StudentNFC_by_user_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[StudentNfc!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteStudentNfcByUserIdResponse
+    inputTypeName: DeleteStudentNfcByUserIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_StudentNFC_by_user_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteStudentNfcByUserIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteStudentNfcByUserId
+  outputType: DeleteStudentNfcByUserIdResponse!
+  arguments:
+    - name: keyUserId
+      type: Uuid!
+    - name: preCheck
+      type: StudentNfcBoolExp
+      description: Delete permission predicate over the 'StudentNFC' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_StudentNFC_by_user_id
+    argumentMapping:
+      keyUserId: key_user_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteStudentNfcByUserId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'StudentNFC' collection using the 'user_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteStudentNfcByUserId
+  permissions:
+    - role: admin
+      allowExecution: true
+

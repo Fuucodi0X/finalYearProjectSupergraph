@@ -5,7 +5,7 @@ definition:
   name: InsertRegisterdItemsObject
   fields:
     - name: id
-      type: Uuid!
+      type: Uuid
     - name: itemType
       type: Varchar
     - name: model
@@ -13,7 +13,7 @@ definition:
     - name: serial
       type: Text
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: InsertRegisterdItemsObject
     inputTypeName: InsertRegisterdItemsObjectInput

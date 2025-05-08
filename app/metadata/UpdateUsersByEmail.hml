@@ -180,6 +180,9 @@ definition:
     - name: role
       type: UpdateColumnUsersRole
       description: Update the 'role' column in the 'Users' collection.
+    - name: avatar
+      type: UpdateColumnUsersAvatar
+      description: Update the 'avatar' column in the 'Users' collection.
   graphql:
     typeName: UpdateUsersByEmailUpdateColumns
     inputTypeName: UpdateUsersByEmailUpdateColumnsInput
@@ -202,6 +205,9 @@ definition:
         role:
           column:
             name: role
+        avatar:
+          column:
+            name: avatar
 
 ---
 kind: TypePermissions
@@ -217,6 +223,7 @@ definition:
           - name
           - phoneNumber
           - role
+          - avatar
 
 ---
 kind: ObjectType
@@ -296,4 +303,36 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateColumnUsersAvatar
+  description: Update the 'avatar' column in the 'Users' collection
+  fields:
+    - name: set
+      type: Text
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnUsersAvatar
+    inputTypeName: UpdateColumnUsersAvatarInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_column_Users_avatar
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnUsersAvatar
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
 

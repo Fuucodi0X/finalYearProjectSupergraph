@@ -9,7 +9,7 @@ definition:
     - name: time
       type: Timestamp!
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: GetwayEntryLog
     inputTypeName: GetwayEntryLogInput

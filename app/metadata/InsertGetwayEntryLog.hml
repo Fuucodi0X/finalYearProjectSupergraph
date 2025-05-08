@@ -5,11 +5,11 @@ definition:
   name: InsertGetwayEntryLogObject
   fields:
     - name: id
-      type: Uuid!
-    - name: time
-      type: Timestamp!
-    - name: userId
       type: Uuid
+    - name: time
+      type: Timestamp
+    - name: userId
+      type: Uuid!
   graphql:
     typeName: InsertGetwayEntryLogObject
     inputTypeName: InsertGetwayEntryLogObjectInput

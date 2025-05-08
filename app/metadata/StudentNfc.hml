@@ -2,27 +2,27 @@
 kind: ObjectType
 version: v1
 definition:
-  name: GetwayExitLog
+  name: StudentNfc
   fields:
     - name: id
       type: Uuid!
-    - name: time
-      type: Timestamp!
+    - name: nfcId
+      type: Text!
     - name: userId
       type: Uuid!
   graphql:
-    typeName: GetwayExitLog
-    inputTypeName: GetwayExitLogInput
+    typeName: StudentNfc
+    inputTypeName: StudentNfcInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: GetwayExitLog
+      dataConnectorObjectType: StudentNFC
       fieldMapping:
         id:
           column:
             name: id
-        time:
+        nfcId:
           column:
-            name: time
+            name: nfc_id
         userId:
           column:
             name: user_id
@@ -31,28 +31,28 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: GetwayExitLog
+  typeName: StudentNfc
   permissions:
     - role: admin
       output:
         allowedFields:
           - id
-          - time
+          - nfcId
           - userId
 
 ---
 kind: BooleanExpressionType
 version: v1
 definition:
-  name: GetwayExitLogBoolExp
+  name: StudentNfcBoolExp
   operand:
     object:
-      type: GetwayExitLog
+      type: StudentNfc
       comparableFields:
         - fieldName: id
           booleanExpressionType: UuidBoolExp
-        - fieldName: time
-          booleanExpressionType: TimestampBoolExp
+        - fieldName: nfcId
+          booleanExpressionType: TextBoolExp
         - fieldName: userId
           booleanExpressionType: UuidBoolExp
       comparableRelationships:
@@ -62,82 +62,87 @@ definition:
   isNull:
     enable: true
   graphql:
-    typeName: GetwayExitLogBoolExp
+    typeName: StudentNfcBoolExp
 
 ---
 kind: AggregateExpression
 version: v1
 definition:
-  name: GetwayExitLogAggExp
+  name: StudentNfcAggExp
   operand:
     object:
-      aggregatedType: GetwayExitLog
+      aggregatedType: StudentNfc
       aggregatableFields:
         - fieldName: id
           aggregateExpression: UuidAggExp
-        - fieldName: time
-          aggregateExpression: TimestampAggExp
+        - fieldName: nfcId
+          aggregateExpression: TextAggExp
         - fieldName: userId
           aggregateExpression: UuidAggExp
   count:
     enable: true
   graphql:
-    selectTypeName: GetwayExitLogAggExp
+    selectTypeName: StudentNfcAggExp
 
 ---
 kind: OrderByExpression
 version: v1
 definition:
-  name: GetwayExitLogOrderByExp
+  name: StudentNfcOrderByExp
   operand:
     object:
-      orderedType: GetwayExitLog
+      orderedType: StudentNfc
       orderableFields:
         - fieldName: id
           orderByExpression: UuidOrderByExp
-        - fieldName: time
-          orderByExpression: TimestampOrderByExp
+        - fieldName: nfcId
+          orderByExpression: TextOrderByExp
         - fieldName: userId
           orderByExpression: UuidOrderByExp
       orderableRelationships:
         - relationshipName: user
   graphql:
-    expressionTypeName: GetwayExitLogOrderByExp
+    expressionTypeName: StudentNfcOrderByExp
 
 ---
 kind: Model
 version: v2
 definition:
-  name: GetwayExitLog
-  objectType: GetwayExitLog
+  name: StudentNfc
+  objectType: StudentNfc
   source:
     dataConnectorName: pg_db
-    collection: GetwayExitLog
-  filterExpressionType: GetwayExitLogBoolExp
-  aggregateExpression: GetwayExitLogAggExp
-  orderByExpression: GetwayExitLogOrderByExp
+    collection: StudentNFC
+  filterExpressionType: StudentNfcBoolExp
+  aggregateExpression: StudentNfcAggExp
+  orderByExpression: StudentNfcOrderByExp
   graphql:
     selectMany:
-      queryRootField: getwayExitLog
+      queryRootField: studentNfc
       subscription:
-        rootField: getwayExitLog
+        rootField: studentNfc
     selectUniques:
-      - queryRootField: getwayExitLogById
+      - queryRootField: studentNfcById
         uniqueIdentifier:
           - id
         subscription:
-          rootField: getwayExitLogById
-    filterInputTypeName: GetwayExitLogFilterInput
+          rootField: studentNfcById
+      - queryRootField: studentNfcByUserId
+        uniqueIdentifier:
+          - userId
+        subscription:
+          rootField: studentNfcByUserId
+    filterInputTypeName: StudentNfcFilterInput
     aggregate:
-      queryRootField: getwayExitLogAggregate
+      queryRootField: studentNfcAggregate
       subscription:
-        rootField: getwayExitLogAggregate
+        rootField: studentNfcAggregate
 
 ---
 kind: ModelPermissions
 version: v1
 definition:
-  modelName: GetwayExitLog
+  modelName: StudentNfc
   permissions:
     - role: admin
       select:
@@ -149,7 +154,7 @@ kind: Relationship
 version: v1
 definition:
   name: user
-  sourceType: GetwayExitLog
+  sourceType: StudentNfc
   target:
     model:
       name: Users

@@ -6,7 +6,7 @@ definition:
   description: Update the 'complain_id' column in the 'Warnings' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnWarningsComplainId
@@ -102,7 +102,7 @@ definition:
   description: Update the 'warned_user_id' column in the 'Warnings' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnWarningsWarnedUserId
@@ -134,7 +134,7 @@ definition:
   description: Update the 'warning_approver' column in the 'Warnings' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnWarningsWarningApprover

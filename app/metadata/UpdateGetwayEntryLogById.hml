@@ -70,7 +70,7 @@ definition:
   description: Update the 'user_id' column in the 'GetwayEntryLog' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnGetwayEntryLogUserId

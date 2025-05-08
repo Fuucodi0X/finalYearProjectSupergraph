@@ -20,6 +20,9 @@ definition:
     - name: role
       type: UpdateColumnUsersRole
       description: Update the 'role' column in the 'Users' collection.
+    - name: avatar
+      type: UpdateColumnUsersAvatar
+      description: Update the 'avatar' column in the 'Users' collection.
   graphql:
     typeName: UpdateUsersByIdUpdateColumns
     inputTypeName: UpdateUsersByIdUpdateColumnsInput
@@ -42,6 +45,9 @@ definition:
         role:
           column:
             name: role
+        avatar:
+          column:
+            name: avatar
 
 ---
 kind: TypePermissions
@@ -57,6 +63,7 @@ definition:
           - name
           - phoneNumber
           - role
+          - avatar
 
 ---
 kind: ObjectType

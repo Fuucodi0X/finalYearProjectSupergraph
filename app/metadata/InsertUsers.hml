@@ -14,6 +14,8 @@ definition:
       type: Int4!
     - name: role
       type: Varchar!
+    - name: avatar
+      type: Text
   graphql:
     typeName: InsertUsersObject
     inputTypeName: InsertUsersObjectInput
@@ -36,6 +38,9 @@ definition:
         role:
           column:
             name: role
+        avatar:
+          column:
+            name: avatar
 
 ---
 kind: TypePermissions
@@ -51,6 +56,7 @@ definition:
           - name
           - phoneNumber
           - role
+          - avatar
 
 ---
 kind: ObjectType

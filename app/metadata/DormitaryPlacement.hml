@@ -13,7 +13,7 @@ definition:
     - name: status
       type: Varchar!
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: DormitaryPlacement
     inputTypeName: DormitaryPlacementInput

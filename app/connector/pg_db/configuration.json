@@ -34,6 +34,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "title": {
@@ -62,7 +63,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "id": {
@@ -71,6 +72,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -79,6 +81,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -86,7 +89,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -122,7 +125,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "accuser_id": {
@@ -130,7 +133,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "description": {
@@ -147,6 +150,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "status": {
@@ -155,6 +159,15 @@
               "scalarType": "varchar"
             },
             "nullable": "nullable",
+            "description": null
+          },
+          "time": {
+            "name": "time",
+            "type": {
+              "scalarType": "timestamp"
+            },
+            "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           }
         },
@@ -184,6 +197,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "room_number": {
@@ -207,7 +221,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -229,6 +243,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -237,6 +252,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -244,7 +260,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -274,6 +290,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -282,6 +299,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -289,7 +307,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -319,6 +337,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -327,6 +346,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -334,7 +354,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -364,6 +384,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -372,6 +393,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -379,7 +401,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -401,6 +423,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "item_type": {
@@ -432,7 +455,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -461,7 +484,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "id": {
@@ -470,6 +493,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -478,6 +502,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "user_id": {
@@ -485,7 +510,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },
@@ -512,6 +537,55 @@
         },
         "description": null
       },
+      "StudentNFC": {
+        "schemaName": "public",
+        "tableName": "StudentNFC",
+        "columns": {
+          "id": {
+            "name": "id",
+            "type": {
+              "scalarType": "uuid"
+            },
+            "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
+            "description": null
+          },
+          "nfc_id": {
+            "name": "nfc_id",
+            "type": {
+              "scalarType": "text"
+            },
+            "nullable": "nonNullable",
+            "description": null
+          },
+          "user_id": {
+            "name": "user_id",
+            "type": {
+              "scalarType": "uuid"
+            },
+            "nullable": "nonNullable",
+            "description": null
+          }
+        },
+        "uniquenessConstraints": {
+          "StudentNFC_pkey": [
+            "id"
+          ],
+          "StudentNFC_user_id_key": [
+            "user_id"
+          ]
+        },
+        "foreignRelations": {
+          "StudentNFC_user_id_fkey": {
+            "foreignSchema": "public",
+            "foreignTable": "Users",
+            "columnMapping": {
+              "user_id": "id"
+            }
+          }
+        },
+        "description": null
+      },
       "Suspensions": {
         "schemaName": "public",
         "tableName": "Suspensions",
@@ -521,7 +595,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "id": {
@@ -530,6 +604,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "suspended_user_id": {
@@ -537,7 +612,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "suspension_approver": {
@@ -545,7 +620,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "suspension_period": {
@@ -562,6 +637,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nullable",
+            "hasDefault": "hasDefault",
             "description": null
           }
         },
@@ -577,6 +653,14 @@
         "schemaName": "public",
         "tableName": "Users",
         "columns": {
+          "avatar": {
+            "name": "avatar",
+            "type": {
+              "scalarType": "text"
+            },
+            "nullable": "nullable",
+            "description": null
+          },
           "email": {
             "name": "email",
             "type": {
@@ -642,7 +726,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "id": {
@@ -651,6 +735,7 @@
               "scalarType": "uuid"
             },
             "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "time": {
@@ -659,6 +744,7 @@
               "scalarType": "timestamp"
             },
             "nullable": "nullable",
+            "hasDefault": "hasDefault",
             "description": null
           },
           "warned_user_id": {
@@ -666,7 +752,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           },
           "warning_approver": {
@@ -674,7 +760,7 @@
             "type": {
               "scalarType": "uuid"
             },
-            "nullable": "nullable",
+            "nullable": "nonNullable",
             "description": null
           }
         },

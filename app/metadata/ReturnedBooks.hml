@@ -5,13 +5,13 @@ definition:
   name: ReturnedBooks
   fields:
     - name: bookId
-      type: Uuid
+      type: Uuid!
     - name: id
       type: Uuid!
     - name: time
       type: Timestamp!
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: ReturnedBooks
     inputTypeName: ReturnedBooksInput

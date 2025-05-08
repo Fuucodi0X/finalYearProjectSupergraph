@@ -5,15 +5,17 @@ definition:
   name: InsertComplainesObject
   fields:
     - name: accusedId
-      type: Uuid
+      type: Uuid!
     - name: accuserId
-      type: Uuid
+      type: Uuid!
     - name: description
       type: Text!
     - name: id
-      type: Uuid!
+      type: Uuid
     - name: status
       type: Varchar
+    - name: time
+      type: Timestamp
   graphql:
     typeName: InsertComplainesObject
     inputTypeName: InsertComplainesObjectInput
@@ -36,6 +38,9 @@ definition:
         status:
           column:
             name: status
+        time:
+          column:
+            name: time
 
 ---
 kind: TypePermissions
@@ -51,6 +56,7 @@ definition:
           - description
           - id
           - status
+          - time
 
 ---
 kind: ObjectType

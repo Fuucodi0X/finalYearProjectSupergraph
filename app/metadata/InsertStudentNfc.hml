@@ -2,53 +2,63 @@
 kind: ObjectType
 version: v1
 definition:
-  name: InsertBooksObject
+  name: InsertStudentNfcObject
   fields:
-    - name: amount
-      type: Int2
     - name: id
       type: Uuid
-    - name: title
-      type: Varchar!
+    - name: nfcId
+      type: Text!
+    - name: userId
+      type: Uuid!
   graphql:
-    typeName: InsertBooksObject
-    inputTypeName: InsertBooksObjectInput
+    typeName: InsertStudentNfcObject
+    inputTypeName: InsertStudentNfcObjectInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: insert_Books_object
+      dataConnectorObjectType: insert_StudentNFC_object
+      fieldMapping:
+        id:
+          column:
+            name: id
+        nfcId:
+          column:
+            name: nfc_id
+        userId:
+          column:
+            name: user_id
 
 ---
 kind: TypePermissions
 version: v1
 definition:
-  typeName: InsertBooksObject
+  typeName: InsertStudentNfcObject
   permissions:
     - role: admin
       output:
         allowedFields:
-          - amount
           - id
-          - title
+          - nfcId
+          - userId
 
 ---
 kind: ObjectType
 version: v1
 definition:
-  name: InsertBooksResponse
-  description: Responses from the 'insert_Books' procedure
+  name: InsertStudentNfcResponse
+  description: Responses from the 'insert_StudentNFC' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[Books!]!"
+      type: "[StudentNfc!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: InsertBooksResponse
-    inputTypeName: InsertBooksResponseInput
+    typeName: InsertStudentNfcResponse
+    inputTypeName: InsertStudentNfcResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: insert_Books_response
+      dataConnectorObjectType: insert_StudentNFC_response
       fieldMapping:
         affectedRows:
           column:
@@ -61,7 +71,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: InsertBooksResponse
+  typeName: InsertStudentNfcResponse
   permissions:
     - role: admin
       output:
@@ -73,31 +83,31 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: InsertBooks
-  outputType: InsertBooksResponse!
+  name: InsertStudentNfc
+  outputType: InsertStudentNfcResponse!
   arguments:
     - name: objects
-      type: "[InsertBooksObject!]!"
+      type: "[InsertStudentNfcObject!]!"
     - name: postCheck
-      type: BooksBoolExp
-      description: Insert permission predicate over the 'Books' collection
+      type: StudentNfcBoolExp
+      description: Insert permission predicate over the 'StudentNFC' collection
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: insert_Books
+      procedure: insert_StudentNFC
     argumentMapping:
       objects: objects
       postCheck: post_check
   graphql:
-    rootFieldName: insertBooks
+    rootFieldName: insertStudentNfc
     rootFieldKind: Mutation
-  description: Insert into the Books table
+  description: Insert into the StudentNFC table
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: InsertBooks
+  commandName: InsertStudentNfc
   permissions:
     - role: admin
       allowExecution: true

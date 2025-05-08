@@ -5,13 +5,13 @@ definition:
   name: InsertSuspensionsObject
   fields:
     - name: complainId
-      type: Uuid
-    - name: id
       type: Uuid!
+    - name: id
+      type: Uuid
     - name: suspendedUserId
-      type: Uuid
+      type: Uuid!
     - name: suspensionApprover
-      type: Uuid
+      type: Uuid!
     - name: suspensionPeriod
       type: Text
     - name: time

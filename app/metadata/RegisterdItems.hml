@@ -13,7 +13,7 @@ definition:
     - name: serial
       type: Text
     - name: userId
-      type: Uuid
+      type: Uuid!
   graphql:
     typeName: RegisterdItems
     inputTypeName: RegisterdItemsInput

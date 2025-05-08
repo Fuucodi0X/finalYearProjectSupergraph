@@ -6,7 +6,7 @@ definition:
   description: Update the 'book_id' column in the 'ReturnedBooks' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnReturnedBooksBookId
@@ -102,7 +102,7 @@ definition:
   description: Update the 'user_id' column in the 'ReturnedBooks' collection
   fields:
     - name: set
-      type: Uuid
+      type: Uuid!
       description: Set the column to this value
   graphql:
     typeName: UpdateColumnReturnedBooksUserId
