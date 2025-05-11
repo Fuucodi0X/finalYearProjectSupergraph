@@ -59,42 +59,6 @@ definition:
           - avatar
 
 ---
-kind: BooleanExpressionType
-version: v1
-definition:
-  name: UsersBoolExp
-  operand:
-    object:
-      type: Users
-      comparableFields:
-        - fieldName: email
-          booleanExpressionType: VarcharBoolExp
-        - fieldName: id
-          booleanExpressionType: UuidBoolExp
-        - fieldName: name
-          booleanExpressionType: TextBoolExp
-        - fieldName: phoneNumber
-          booleanExpressionType: Int4BoolExp
-        - fieldName: role
-          booleanExpressionType: VarcharBoolExp
-        - fieldName: avatar
-          booleanExpressionType: TextBoolExp
-      comparableRelationships:
-        - relationshipName: borrowedBooks
-        - relationshipName: getwayEntryLogs
-        - relationshipName: getwayExitLogs
-        - relationshipName: libraryEntryLogs
-        - relationshipName: registerdItems
-        - relationshipName: returnedBooks
-        - relationshipName: studentNfcs
-  logicalOperators:
-    enable: true
-  isNull:
-    enable: true
-  graphql:
-    typeName: UsersBoolExp
-
----
 kind: AggregateExpression
 version: v1
 definition:
@@ -331,14 +295,14 @@ definition:
 kind: Relationship
 version: v1
 definition:
-  name: studentNfcs
+  name: assignedCards
   sourceType: Users
   target:
     model:
-      name: StudentNfc
+      name: AssignedCards
       relationshipType: Array
       aggregate:
-        aggregateExpression: StudentNfcAggExp
+        aggregateExpression: AssignedCardsAggExp
   mapping:
     - source:
         fieldPath:
@@ -347,5 +311,41 @@ definition:
         modelField:
           - fieldName: userId
   graphql:
-    aggregateFieldName: studentNfcsAggregate
+    aggregateFieldName: assignedCardsAggregate
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: UsersBoolExp
+  operand:
+    object:
+      type: Users
+      comparableFields:
+        - fieldName: email
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: phoneNumber
+          booleanExpressionType: Int4BoolExp
+        - fieldName: role
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: avatar
+          booleanExpressionType: TextBoolExp
+      comparableRelationships:
+        - relationshipName: borrowedBooks
+        - relationshipName: getwayEntryLogs
+        - relationshipName: getwayExitLogs
+        - relationshipName: libraryEntryLogs
+        - relationshipName: registerdItems
+        - relationshipName: returnedBooks
+        - relationshipName: assignedCards
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: UsersBoolExp
 

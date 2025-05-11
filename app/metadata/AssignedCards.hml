@@ -1,0 +1,189 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: AssignedCards
+  fields:
+    - name: id
+      type: Uuid!
+    - name: nfcId
+      type: Text!
+    - name: userId
+      type: Uuid!
+  graphql:
+    typeName: AssignedCards
+    inputTypeName: AssignedCardsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: AssignedCards
+      fieldMapping:
+        id:
+          column:
+            name: id
+        nfcId:
+          column:
+            name: nfc_id
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: AssignedCards
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - nfcId
+          - userId
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: AssignedCardsBoolExp
+  operand:
+    object:
+      type: AssignedCards
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: nfcId
+          booleanExpressionType: TextBoolExp
+        - fieldName: userId
+          booleanExpressionType: UuidBoolExp
+      comparableRelationships:
+        - relationshipName: nfcCard
+        - relationshipName: user
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: AssignedCardsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: AssignedCardsAggExp
+  operand:
+    object:
+      aggregatedType: AssignedCards
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: nfcId
+          aggregateExpression: TextAggExp
+        - fieldName: userId
+          aggregateExpression: UuidAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: AssignedCardsAggExp
+
+---
+kind: OrderByExpression
+version: v1
+definition:
+  name: AssignedCardsOrderByExp
+  operand:
+    object:
+      orderedType: AssignedCards
+      orderableFields:
+        - fieldName: id
+          orderByExpression: UuidOrderByExp
+        - fieldName: nfcId
+          orderByExpression: TextOrderByExp
+        - fieldName: userId
+          orderByExpression: UuidOrderByExp
+      orderableRelationships:
+        - relationshipName: nfcCard
+        - relationshipName: user
+  graphql:
+    expressionTypeName: AssignedCardsOrderByExp
+
+---
+kind: Model
+version: v2
+definition:
+  name: AssignedCards
+  objectType: AssignedCards
+  source:
+    dataConnectorName: pg_db
+    collection: AssignedCards
+  filterExpressionType: AssignedCardsBoolExp
+  aggregateExpression: AssignedCardsAggExp
+  orderByExpression: AssignedCardsOrderByExp
+  graphql:
+    selectMany:
+      queryRootField: assignedCards
+      subscription:
+        rootField: assignedCards
+    selectUniques:
+      - queryRootField: assignedCardsById
+        uniqueIdentifier:
+          - id
+        subscription:
+          rootField: assignedCardsById
+      - queryRootField: assignedCardsByUserId
+        uniqueIdentifier:
+          - userId
+        subscription:
+          rootField: assignedCardsByUserId
+    filterInputTypeName: AssignedCardsFilterInput
+    aggregate:
+      queryRootField: assignedCardsAggregate
+      subscription:
+        rootField: assignedCardsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: AssignedCards
+  permissions:
+    - role: admin
+      select:
+        filter: null
+        allowSubscriptions: true
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: nfcCard
+  sourceType: AssignedCards
+  target:
+    model:
+      name: NfcCards
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: nfcId
+      target:
+        modelField:
+          - fieldName: nfcId
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: user
+  sourceType: AssignedCards
+  target:
+    model:
+      name: Users
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: userId
+      target:
+        modelField:
+          - fieldName: id
+

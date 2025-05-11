@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: DeleteNfcCardsByNfcIdResponse
+  description: Responses from the 'delete_NFCCards_by_nfc_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[NfcCards!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: DeleteNfcCardsByNfcIdResponse
+    inputTypeName: DeleteNfcCardsByNfcIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: delete_NFCCards_by_nfc_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: DeleteNfcCardsByNfcIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteNfcCardsByNfcId
+  outputType: DeleteNfcCardsByNfcIdResponse!
+  arguments:
+    - name: keyNfcId
+      type: Text!
+    - name: preCheck
+      type: NfcCardsBoolExp
+      description: Delete permission predicate over the 'NFCCards' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: delete_NFCCards_by_nfc_id
+    argumentMapping:
+      keyNfcId: key_nfc_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: deleteNfcCardsByNfcId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'NFCCards' collection using the 'nfc_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteNfcCardsByNfcId
+  permissions:
+    - role: admin
+      allowExecution: true
+

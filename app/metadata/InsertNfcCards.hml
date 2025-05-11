@@ -2,20 +2,18 @@
 kind: ObjectType
 version: v1
 definition:
-  name: InsertStudentNfcObject
+  name: InsertNfcCardsObject
   fields:
     - name: id
       type: Uuid
     - name: nfcId
       type: Text!
-    - name: userId
-      type: Uuid!
   graphql:
-    typeName: InsertStudentNfcObject
-    inputTypeName: InsertStudentNfcObjectInput
+    typeName: InsertNfcCardsObject
+    inputTypeName: InsertNfcCardsObjectInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: insert_StudentNFC_object
+      dataConnectorObjectType: insert_NFCCards_object
       fieldMapping:
         id:
           column:
@@ -23,42 +21,38 @@ definition:
         nfcId:
           column:
             name: nfc_id
-        userId:
-          column:
-            name: user_id
 
 ---
 kind: TypePermissions
 version: v1
 definition:
-  typeName: InsertStudentNfcObject
+  typeName: InsertNfcCardsObject
   permissions:
     - role: admin
       output:
         allowedFields:
           - id
           - nfcId
-          - userId
 
 ---
 kind: ObjectType
 version: v1
 definition:
-  name: InsertStudentNfcResponse
-  description: Responses from the 'insert_StudentNFC' procedure
+  name: InsertNfcCardsResponse
+  description: Responses from the 'insert_NFCCards' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[StudentNfc!]!"
+      type: "[NfcCards!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: InsertStudentNfcResponse
-    inputTypeName: InsertStudentNfcResponseInput
+    typeName: InsertNfcCardsResponse
+    inputTypeName: InsertNfcCardsResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: insert_StudentNFC_response
+      dataConnectorObjectType: insert_NFCCards_response
       fieldMapping:
         affectedRows:
           column:
@@ -71,7 +65,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: InsertStudentNfcResponse
+  typeName: InsertNfcCardsResponse
   permissions:
     - role: admin
       output:
@@ -83,31 +77,31 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: InsertStudentNfc
-  outputType: InsertStudentNfcResponse!
+  name: InsertNfcCards
+  outputType: InsertNfcCardsResponse!
   arguments:
     - name: objects
-      type: "[InsertStudentNfcObject!]!"
+      type: "[InsertNfcCardsObject!]!"
     - name: postCheck
-      type: StudentNfcBoolExp
-      description: Insert permission predicate over the 'StudentNFC' collection
+      type: NfcCardsBoolExp
+      description: Insert permission predicate over the 'NFCCards' collection
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: insert_StudentNFC
+      procedure: insert_NFCCards
     argumentMapping:
       objects: objects
       postCheck: post_check
   graphql:
-    rootFieldName: insertStudentNfc
+    rootFieldName: insertNfcCards
     rootFieldKind: Mutation
-  description: Insert into the StudentNFC table
+  description: Insert into the NFCCards table
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: InsertStudentNfc
+  commandName: InsertNfcCards
   permissions:
     - role: admin
       allowExecution: true

@@ -16,6 +16,62 @@
   },
   "metadata": {
     "tables": {
+      "AssignedCards": {
+        "schemaName": "public",
+        "tableName": "AssignedCards",
+        "columns": {
+          "id": {
+            "name": "id",
+            "type": {
+              "scalarType": "uuid"
+            },
+            "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
+            "description": null
+          },
+          "nfc_id": {
+            "name": "nfc_id",
+            "type": {
+              "scalarType": "text"
+            },
+            "nullable": "nonNullable",
+            "description": null
+          },
+          "user_id": {
+            "name": "user_id",
+            "type": {
+              "scalarType": "uuid"
+            },
+            "nullable": "nonNullable",
+            "description": null
+          }
+        },
+        "uniquenessConstraints": {
+          "StudentNFC_pkey": [
+            "id"
+          ],
+          "StudentNFC_user_id_key": [
+            "user_id"
+          ]
+        },
+        "foreignRelations": {
+          "AssignedCards_nfc_id_fkey": {
+            "foreignSchema": "public",
+            "foreignTable": "NFCCards",
+            "columnMapping": {
+              "nfc_id": "nfc_id"
+            }
+          },
+          "StudentNFC_user_id_fkey": {
+            "foreignSchema": "public",
+            "foreignTable": "Users",
+            "columnMapping": {
+              "user_id": "id"
+            }
+          }
+        },
+        "description": null
+      },
       "Books": {
         "schemaName": "public",
         "tableName": "Books",
@@ -413,6 +469,39 @@
         "foreignRelations": {},
         "description": null
       },
+      "NFCCards": {
+        "schemaName": "public",
+        "tableName": "NFCCards",
+        "columns": {
+          "id": {
+            "name": "id",
+            "type": {
+              "scalarType": "uuid"
+            },
+            "nullable": "nonNullable",
+            "hasDefault": "hasDefault",
+            "description": null
+          },
+          "nfc_id": {
+            "name": "nfc_id",
+            "type": {
+              "scalarType": "text"
+            },
+            "nullable": "nonNullable",
+            "description": null
+          }
+        },
+        "uniquenessConstraints": {
+          "NFCCards_nfc_id_key": [
+            "nfc_id"
+          ],
+          "NFCCards_pkey": [
+            "id"
+          ]
+        },
+        "foreignRelations": {},
+        "description": null
+      },
       "RegisterdItems": {
         "schemaName": "public",
         "tableName": "RegisterdItems",
@@ -528,55 +617,6 @@
             }
           },
           "ReturnedBooks_user_id_fkey": {
-            "foreignSchema": "public",
-            "foreignTable": "Users",
-            "columnMapping": {
-              "user_id": "id"
-            }
-          }
-        },
-        "description": null
-      },
-      "StudentNFC": {
-        "schemaName": "public",
-        "tableName": "StudentNFC",
-        "columns": {
-          "id": {
-            "name": "id",
-            "type": {
-              "scalarType": "uuid"
-            },
-            "nullable": "nonNullable",
-            "hasDefault": "hasDefault",
-            "description": null
-          },
-          "nfc_id": {
-            "name": "nfc_id",
-            "type": {
-              "scalarType": "text"
-            },
-            "nullable": "nonNullable",
-            "description": null
-          },
-          "user_id": {
-            "name": "user_id",
-            "type": {
-              "scalarType": "uuid"
-            },
-            "nullable": "nonNullable",
-            "description": null
-          }
-        },
-        "uniquenessConstraints": {
-          "StudentNFC_pkey": [
-            "id"
-          ],
-          "StudentNFC_user_id_key": [
-            "user_id"
-          ]
-        },
-        "foreignRelations": {
-          "StudentNFC_user_id_fkey": {
             "foreignSchema": "public",
             "foreignTable": "Users",
             "columnMapping": {

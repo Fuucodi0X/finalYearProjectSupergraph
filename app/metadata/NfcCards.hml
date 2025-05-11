@@ -2,20 +2,18 @@
 kind: ObjectType
 version: v1
 definition:
-  name: StudentNfc
+  name: NfcCards
   fields:
     - name: id
       type: Uuid!
     - name: nfcId
       type: Text!
-    - name: userId
-      type: Uuid!
   graphql:
-    typeName: StudentNfc
-    inputTypeName: StudentNfcInput
+    typeName: NfcCards
+    inputTypeName: NfcCardsInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: StudentNFC
+      dataConnectorObjectType: NFCCards
       fieldMapping:
         id:
           column:
@@ -23,126 +21,115 @@ definition:
         nfcId:
           column:
             name: nfc_id
-        userId:
-          column:
-            name: user_id
 
 ---
 kind: TypePermissions
 version: v1
 definition:
-  typeName: StudentNfc
+  typeName: NfcCards
   permissions:
     - role: admin
       output:
         allowedFields:
           - id
           - nfcId
-          - userId
 
 ---
 kind: BooleanExpressionType
 version: v1
 definition:
-  name: StudentNfcBoolExp
+  name: NfcCardsBoolExp
   operand:
     object:
-      type: StudentNfc
+      type: NfcCards
       comparableFields:
         - fieldName: id
           booleanExpressionType: UuidBoolExp
         - fieldName: nfcId
           booleanExpressionType: TextBoolExp
-        - fieldName: userId
-          booleanExpressionType: UuidBoolExp
       comparableRelationships:
-        - relationshipName: user
+        - relationshipName: assignedCards
   logicalOperators:
     enable: true
   isNull:
     enable: true
   graphql:
-    typeName: StudentNfcBoolExp
+    typeName: NfcCardsBoolExp
 
 ---
 kind: AggregateExpression
 version: v1
 definition:
-  name: StudentNfcAggExp
+  name: NfcCardsAggExp
   operand:
     object:
-      aggregatedType: StudentNfc
+      aggregatedType: NfcCards
       aggregatableFields:
         - fieldName: id
           aggregateExpression: UuidAggExp
         - fieldName: nfcId
           aggregateExpression: TextAggExp
-        - fieldName: userId
-          aggregateExpression: UuidAggExp
   count:
     enable: true
   graphql:
-    selectTypeName: StudentNfcAggExp
+    selectTypeName: NfcCardsAggExp
 
 ---
 kind: OrderByExpression
 version: v1
 definition:
-  name: StudentNfcOrderByExp
+  name: NfcCardsOrderByExp
   operand:
     object:
-      orderedType: StudentNfc
+      orderedType: NfcCards
       orderableFields:
         - fieldName: id
           orderByExpression: UuidOrderByExp
         - fieldName: nfcId
           orderByExpression: TextOrderByExp
-        - fieldName: userId
-          orderByExpression: UuidOrderByExp
-      orderableRelationships:
-        - relationshipName: user
+      orderableRelationships: []
   graphql:
-    expressionTypeName: StudentNfcOrderByExp
+    expressionTypeName: NfcCardsOrderByExp
 
 ---
 kind: Model
 version: v2
 definition:
-  name: StudentNfc
-  objectType: StudentNfc
+  name: NfcCards
+  objectType: NfcCards
   source:
     dataConnectorName: pg_db
-    collection: StudentNFC
-  filterExpressionType: StudentNfcBoolExp
-  aggregateExpression: StudentNfcAggExp
-  orderByExpression: StudentNfcOrderByExp
+    collection: NFCCards
+  filterExpressionType: NfcCardsBoolExp
+  aggregateExpression: NfcCardsAggExp
+  orderByExpression: NfcCardsOrderByExp
   graphql:
     selectMany:
-      queryRootField: studentNfc
+      queryRootField: nfcCards
       subscription:
-        rootField: studentNfc
+        rootField: nfcCards
     selectUniques:
-      - queryRootField: studentNfcById
+      - queryRootField: nfcCardsByNfcId
+        uniqueIdentifier:
+          - nfcId
+        subscription:
+          rootField: nfcCardsByNfcId
+      - queryRootField: nfcCardsById
         uniqueIdentifier:
           - id
         subscription:
-          rootField: studentNfcById
-      - queryRootField: studentNfcByUserId
-        uniqueIdentifier:
-          - userId
-        subscription:
-          rootField: studentNfcByUserId
-    filterInputTypeName: StudentNfcFilterInput
+          rootField: nfcCardsById
+    filterInputTypeName: NfcCardsFilterInput
     aggregate:
-      queryRootField: studentNfcAggregate
+      queryRootField: nfcCardsAggregate
       subscription:
-        rootField: studentNfcAggregate
+        rootField: nfcCardsAggregate
 
 ---
 kind: ModelPermissions
 version: v1
 definition:
-  modelName: StudentNfc
+  modelName: NfcCards
   permissions:
     - role: admin
       select:
@@ -153,17 +140,21 @@ definition:
 kind: Relationship
 version: v1
 definition:
-  name: user
-  sourceType: StudentNfc
+  name: assignedCards
+  sourceType: NfcCards
   target:
     model:
-      name: Users
-      relationshipType: Object
+      name: AssignedCards
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: AssignedCardsAggExp
   mapping:
     - source:
         fieldPath:
-          - fieldName: userId
+          - fieldName: nfcId
       target:
         modelField:
-          - fieldName: id
+          - fieldName: nfcId
+  graphql:
+    aggregateFieldName: assignedCardsAggregate
 

@@ -718,6 +718,20 @@ definition:
                 name: varchar
                 type: named
       object_types:
+        AssignedCards:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
         Books:
           fields:
             amount:
@@ -858,6 +872,16 @@ definition:
               type:
                 name: uuid
                 type: named
+        NFCCards:
+          fields:
+            id:
+              type:
+                name: uuid
+                type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
         RegisterdItems:
           fields:
             id:
@@ -899,20 +923,6 @@ definition:
             time:
               type:
                 name: timestamp
-                type: named
-            user_id:
-              type:
-                name: uuid
-                type: named
-        StudentNFC:
-          fields:
-            id:
-              type:
-                name: uuid
-                type: named
-            nfc_id:
-              type:
-                name: text
                 type: named
             user_id:
               type:
@@ -1000,6 +1010,36 @@ definition:
               type:
                 name: uuid
                 type: named
+        delete_AssignedCards_by_id_response:
+          description: Responses from the 'delete_AssignedCards_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: AssignedCards
+                  type: named
+                type: array
+        delete_AssignedCards_by_user_id_response:
+          description: Responses from the 'delete_AssignedCards_by_user_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: AssignedCards
+                  type: named
+                type: array
         delete_Books_by_id_response:
           description: Responses from the 'delete_Books_by_id' procedure
           fields:
@@ -1120,6 +1160,36 @@ definition:
                   name: LibraryExitLog
                   type: named
                 type: array
+        delete_NFCCards_by_id_response:
+          description: Responses from the 'delete_NFCCards_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: NFCCards
+                  type: named
+                type: array
+        delete_NFCCards_by_nfc_id_response:
+          description: Responses from the 'delete_NFCCards_by_nfc_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: NFCCards
+                  type: named
+                type: array
         delete_RegisterdItems_by_id_response:
           description: Responses from the 'delete_RegisterdItems_by_id' procedure
           fields:
@@ -1148,36 +1218,6 @@ definition:
               type:
                 element_type:
                   name: ReturnedBooks
-                  type: named
-                type: array
-        delete_StudentNFC_by_id_response:
-          description: Responses from the 'delete_StudentNFC_by_id' procedure
-          fields:
-            affected_rows:
-              description: The number of rows affected by the mutation
-              type:
-                name: int4
-                type: named
-            returning:
-              description: Data from rows affected by the mutation
-              type:
-                element_type:
-                  name: StudentNFC
-                  type: named
-                type: array
-        delete_StudentNFC_by_user_id_response:
-          description: Responses from the 'delete_StudentNFC_by_user_id' procedure
-          fields:
-            affected_rows:
-              description: The number of rows affected by the mutation
-              type:
-                name: int4
-                type: named
-            returning:
-              description: Data from rows affected by the mutation
-              type:
-                element_type:
-                  name: StudentNFC
                   type: named
                 type: array
         delete_Suspensions_by_id_response:
@@ -1253,6 +1293,37 @@ definition:
               type:
                 element_type:
                   name: Warnings
+                  type: named
+                type: array
+        insert_AssignedCards_object:
+          fields:
+            id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
+            user_id:
+              type:
+                name: uuid
+                type: named
+        insert_AssignedCards_response:
+          description: Responses from the 'insert_AssignedCards' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: AssignedCards
                   type: named
                 type: array
         insert_Books_object:
@@ -1543,6 +1614,33 @@ definition:
                   name: LibraryExitLog
                   type: named
                 type: array
+        insert_NFCCards_object:
+          fields:
+            id:
+              type:
+                type: nullable
+                underlying_type:
+                  name: uuid
+                  type: named
+            nfc_id:
+              type:
+                name: text
+                type: named
+        insert_NFCCards_response:
+          description: Responses from the 'insert_NFCCards' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: NFCCards
+                  type: named
+                type: array
         insert_RegisterdItems_object:
           fields:
             id:
@@ -1623,37 +1721,6 @@ definition:
               type:
                 element_type:
                   name: ReturnedBooks
-                  type: named
-                type: array
-        insert_StudentNFC_object:
-          fields:
-            id:
-              type:
-                type: nullable
-                underlying_type:
-                  name: uuid
-                  type: named
-            nfc_id:
-              type:
-                name: text
-                type: named
-            user_id:
-              type:
-                name: uuid
-                type: named
-        insert_StudentNFC_response:
-          description: Responses from the 'insert_StudentNFC' procedure
-          fields:
-            affected_rows:
-              description: The number of rows affected by the mutation
-              type:
-                name: int4
-                type: named
-            returning:
-              description: Data from rows affected by the mutation
-              type:
-                element_type:
-                  name: StudentNFC
                   type: named
                 type: array
         insert_Suspensions_object:
@@ -1789,6 +1856,84 @@ definition:
                   name: Warnings
                   type: named
                 type: array
+        update_AssignedCards_by_id_response:
+          description: Responses from the 'update_AssignedCards_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: AssignedCards
+                  type: named
+                type: array
+        update_AssignedCards_by_id_update_columns:
+          description: Update the columns of the 'AssignedCards' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_nfc_id
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_user_id
+                  type: named
+        update_AssignedCards_by_user_id_response:
+          description: Responses from the 'update_AssignedCards_by_user_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: AssignedCards
+                  type: named
+                type: array
+        update_AssignedCards_by_user_id_update_columns:
+          description: Update the columns of the 'AssignedCards' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_nfc_id
+                  type: named
+            user_id:
+              description: Update the 'user_id' column in the 'AssignedCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_AssignedCards_user_id
+                  type: named
         update_Books_by_id_response:
           description: Responses from the 'update_Books_by_id' procedure
           fields:
@@ -2143,6 +2288,70 @@ definition:
                 underlying_type:
                   name: update_column_LibraryExitLog_user_id
                   type: named
+        update_NFCCards_by_id_response:
+          description: Responses from the 'update_NFCCards_by_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: NFCCards
+                  type: named
+                type: array
+        update_NFCCards_by_id_update_columns:
+          description: Update the columns of the 'NFCCards' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'NFCCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_NFCCards_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'NFCCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_NFCCards_nfc_id
+                  type: named
+        update_NFCCards_by_nfc_id_response:
+          description: Responses from the 'update_NFCCards_by_nfc_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                name: int4
+                type: named
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                element_type:
+                  name: NFCCards
+                  type: named
+                type: array
+        update_NFCCards_by_nfc_id_update_columns:
+          description: Update the columns of the 'NFCCards' collection
+          fields:
+            id:
+              description: Update the 'id' column in the 'NFCCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_NFCCards_id
+                  type: named
+            nfc_id:
+              description: Update the 'nfc_id' column in the 'NFCCards' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  name: update_column_NFCCards_nfc_id
+                  type: named
         update_RegisterdItems_by_id_response:
           description: Responses from the 'update_RegisterdItems_by_id' procedure
           fields:
@@ -2241,84 +2450,6 @@ definition:
                 type: nullable
                 underlying_type:
                   name: update_column_ReturnedBooks_user_id
-                  type: named
-        update_StudentNFC_by_id_response:
-          description: Responses from the 'update_StudentNFC_by_id' procedure
-          fields:
-            affected_rows:
-              description: The number of rows affected by the mutation
-              type:
-                name: int4
-                type: named
-            returning:
-              description: Data from rows affected by the mutation
-              type:
-                element_type:
-                  name: StudentNFC
-                  type: named
-                type: array
-        update_StudentNFC_by_id_update_columns:
-          description: Update the columns of the 'StudentNFC' collection
-          fields:
-            id:
-              description: Update the 'id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_id
-                  type: named
-            nfc_id:
-              description: Update the 'nfc_id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_nfc_id
-                  type: named
-            user_id:
-              description: Update the 'user_id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_user_id
-                  type: named
-        update_StudentNFC_by_user_id_response:
-          description: Responses from the 'update_StudentNFC_by_user_id' procedure
-          fields:
-            affected_rows:
-              description: The number of rows affected by the mutation
-              type:
-                name: int4
-                type: named
-            returning:
-              description: Data from rows affected by the mutation
-              type:
-                element_type:
-                  name: StudentNFC
-                  type: named
-                type: array
-        update_StudentNFC_by_user_id_update_columns:
-          description: Update the columns of the 'StudentNFC' collection
-          fields:
-            id:
-              description: Update the 'id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_id
-                  type: named
-            nfc_id:
-              description: Update the 'nfc_id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_nfc_id
-                  type: named
-            user_id:
-              description: Update the 'user_id' column in the 'StudentNFC' collection.
-              type:
-                type: nullable
-                underlying_type:
-                  name: update_column_StudentNFC_user_id
                   type: named
         update_Suspensions_by_id_response:
           description: Responses from the 'update_Suspensions_by_id' procedure
@@ -2613,6 +2744,30 @@ definition:
                 underlying_type:
                   name: update_column_Warnings_warning_approver
                   type: named
+        update_column_AssignedCards_id:
+          description: Update the 'id' column in the 'AssignedCards' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_AssignedCards_nfc_id:
+          description: Update the 'nfc_id' column in the 'AssignedCards' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: text
+                type: named
+        update_column_AssignedCards_user_id:
+          description: Update the 'user_id' column in the 'AssignedCards' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
         update_column_Books_amount:
           description: Update the 'amount' column in the 'Books' collection
           fields:
@@ -2857,6 +3012,22 @@ definition:
               type:
                 name: uuid
                 type: named
+        update_column_NFCCards_id:
+          description: Update the 'id' column in the 'NFCCards' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: uuid
+                type: named
+        update_column_NFCCards_nfc_id:
+          description: Update the 'nfc_id' column in the 'NFCCards' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                name: text
+                type: named
         update_column_RegisterdItems_id:
           description: Update the 'id' column in the 'RegisterdItems' collection
           fields:
@@ -2929,30 +3100,6 @@ definition:
                 type: named
         update_column_ReturnedBooks_user_id:
           description: Update the 'user_id' column in the 'ReturnedBooks' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                name: uuid
-                type: named
-        update_column_StudentNFC_id:
-          description: Update the 'id' column in the 'StudentNFC' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                name: uuid
-                type: named
-        update_column_StudentNFC_nfc_id:
-          description: Update the 'nfc_id' column in the 'StudentNFC' collection
-          fields:
-            _set:
-              description: Set the column to this value
-              type:
-                name: text
-                type: named
-        update_column_StudentNFC_user_id:
-          description: Update the 'user_id' column in the 'StudentNFC' collection
           fields:
             _set:
               description: Set the column to this value
@@ -3104,6 +3251,25 @@ definition:
                 name: uuid
                 type: named
       collections:
+        - name: AssignedCards
+          arguments: {}
+          type: AssignedCards
+          uniqueness_constraints:
+            StudentNFC_pkey:
+              unique_columns:
+                - id
+            StudentNFC_user_id_key:
+              unique_columns:
+                - user_id
+          foreign_keys:
+            AssignedCards_nfc_id_fkey:
+              column_mapping:
+                nfc_id: nfc_id
+              foreign_collection: NFCCards
+            StudentNFC_user_id_fkey:
+              column_mapping:
+                user_id: id
+              foreign_collection: Users
         - name: Books
           arguments: {}
           type: Books
@@ -3188,6 +3354,17 @@ definition:
               unique_columns:
                 - id
           foreign_keys: {}
+        - name: NFCCards
+          arguments: {}
+          type: NFCCards
+          uniqueness_constraints:
+            NFCCards_nfc_id_key:
+              unique_columns:
+                - nfc_id
+            NFCCards_pkey:
+              unique_columns:
+                - id
+          foreign_keys: {}
         - name: RegisterdItems
           arguments: {}
           type: RegisterdItems
@@ -3213,21 +3390,6 @@ definition:
                 book_id: id
               foreign_collection: Books
             ReturnedBooks_user_id_fkey:
-              column_mapping:
-                user_id: id
-              foreign_collection: Users
-        - name: StudentNFC
-          arguments: {}
-          type: StudentNFC
-          uniqueness_constraints:
-            StudentNFC_pkey:
-              unique_columns:
-                - id
-            StudentNFC_user_id_key:
-              unique_columns:
-                - user_id
-          foreign_keys:
-            StudentNFC_user_id_fkey:
               column_mapping:
                 user_id: id
               foreign_collection: Users
@@ -3263,6 +3425,40 @@ definition:
           foreign_keys: {}
       functions: []
       procedures:
+        - name: delete_AssignedCards_by_id
+          description: Delete any row on the 'AssignedCards' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+          result_type:
+            name: delete_AssignedCards_by_id_response
+            type: named
+        - name: delete_AssignedCards_by_user_id
+          description: Delete any row on the 'AssignedCards' collection using the 'user_id' key
+          arguments:
+            key_user_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+          result_type:
+            name: delete_AssignedCards_by_user_id_response
+            type: named
         - name: delete_Books_by_id
           description: Delete any row on the 'Books' collection using the 'id' key
           arguments:
@@ -3399,6 +3595,40 @@ definition:
           result_type:
             name: delete_LibraryExitLog_by_id_response
             type: named
+        - name: delete_NFCCards_by_id
+          description: Delete any row on the 'NFCCards' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+          result_type:
+            name: delete_NFCCards_by_id_response
+            type: named
+        - name: delete_NFCCards_by_nfc_id
+          description: Delete any row on the 'NFCCards' collection using the 'nfc_id' key
+          arguments:
+            key_nfc_id:
+              type:
+                name: text
+                type: named
+            pre_check:
+              description: Delete permission predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+          result_type:
+            name: delete_NFCCards_by_nfc_id_response
+            type: named
         - name: delete_RegisterdItems_by_id
           description: Delete any row on the 'RegisterdItems' collection using the 'id' key
           arguments:
@@ -3432,40 +3662,6 @@ definition:
                   type: predicate
           result_type:
             name: delete_ReturnedBooks_by_id_response
-            type: named
-        - name: delete_StudentNFC_by_id
-          description: Delete any row on the 'StudentNFC' collection using the 'id' key
-          arguments:
-            key_id:
-              type:
-                name: uuid
-                type: named
-            pre_check:
-              description: Delete permission predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-          result_type:
-            name: delete_StudentNFC_by_id_response
-            type: named
-        - name: delete_StudentNFC_by_user_id
-          description: Delete any row on the 'StudentNFC' collection using the 'user_id' key
-          arguments:
-            key_user_id:
-              type:
-                name: uuid
-                type: named
-            pre_check:
-              description: Delete permission predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-          result_type:
-            name: delete_StudentNFC_by_user_id_response
             type: named
         - name: delete_Suspensions_by_id
           description: Delete any row on the 'Suspensions' collection using the 'id' key
@@ -3551,6 +3747,25 @@ definition:
                   type: predicate
           result_type:
             name: delete_Warnings_by_id_response
+            type: named
+        - name: insert_AssignedCards
+          description: Insert into the AssignedCards table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_AssignedCards_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+          result_type:
+            name: insert_AssignedCards_response
             type: named
         - name: insert_Books
           description: Insert into the Books table
@@ -3704,6 +3919,25 @@ definition:
           result_type:
             name: insert_LibraryExitLog_response
             type: named
+        - name: insert_NFCCards
+          description: Insert into the NFCCards table
+          arguments:
+            objects:
+              type:
+                element_type:
+                  name: insert_NFCCards_object
+                  type: named
+                type: array
+            post_check:
+              description: Insert permission predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+          result_type:
+            name: insert_NFCCards_response
+            type: named
         - name: insert_RegisterdItems
           description: Insert into the RegisterdItems table
           arguments:
@@ -3741,25 +3975,6 @@ definition:
                   type: predicate
           result_type:
             name: insert_ReturnedBooks_response
-            type: named
-        - name: insert_StudentNFC
-          description: Insert into the StudentNFC table
-          arguments:
-            objects:
-              type:
-                element_type:
-                  name: insert_StudentNFC_object
-                  type: named
-                type: array
-            post_check:
-              description: Insert permission predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-          result_type:
-            name: insert_StudentNFC_response
             type: named
         - name: insert_Suspensions
           description: Insert into the Suspensions table
@@ -3817,6 +4032,62 @@ definition:
                   type: predicate
           result_type:
             name: insert_Warnings_response
+            type: named
+        - name: update_AssignedCards_by_id
+          description: Update any row on the 'AssignedCards' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+            update_columns:
+              type:
+                name: update_AssignedCards_by_id_update_columns
+                type: named
+          result_type:
+            name: update_AssignedCards_by_id_response
+            type: named
+        - name: update_AssignedCards_by_user_id
+          description: Update any row on the 'AssignedCards' collection using the 'user_id' key
+          arguments:
+            key_user_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'AssignedCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: AssignedCards
+                  type: predicate
+            update_columns:
+              type:
+                name: update_AssignedCards_by_user_id_update_columns
+                type: named
+          result_type:
+            name: update_AssignedCards_by_user_id_response
             type: named
         - name: update_Books_by_id
           description: Update any row on the 'Books' collection using the 'id' key
@@ -4042,6 +4313,62 @@ definition:
           result_type:
             name: update_LibraryExitLog_by_id_response
             type: named
+        - name: update_NFCCards_by_id
+          description: Update any row on the 'NFCCards' collection using the 'id' key
+          arguments:
+            key_id:
+              type:
+                name: uuid
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+            update_columns:
+              type:
+                name: update_NFCCards_by_id_update_columns
+                type: named
+          result_type:
+            name: update_NFCCards_by_id_response
+            type: named
+        - name: update_NFCCards_by_nfc_id
+          description: Update any row on the 'NFCCards' collection using the 'nfc_id' key
+          arguments:
+            key_nfc_id:
+              type:
+                name: text
+                type: named
+            post_check:
+              description: Update permission post-condition predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+            pre_check:
+              description: Update permission pre-condition predicate over the 'NFCCards' collection
+              type:
+                type: nullable
+                underlying_type:
+                  object_type_name: NFCCards
+                  type: predicate
+            update_columns:
+              type:
+                name: update_NFCCards_by_nfc_id_update_columns
+                type: named
+          result_type:
+            name: update_NFCCards_by_nfc_id_response
+            type: named
         - name: update_RegisterdItems_by_id
           description: Update any row on the 'RegisterdItems' collection using the 'id' key
           arguments:
@@ -4097,62 +4424,6 @@ definition:
                 type: named
           result_type:
             name: update_ReturnedBooks_by_id_response
-            type: named
-        - name: update_StudentNFC_by_id
-          description: Update any row on the 'StudentNFC' collection using the 'id' key
-          arguments:
-            key_id:
-              type:
-                name: uuid
-                type: named
-            post_check:
-              description: Update permission post-condition predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-            pre_check:
-              description: Update permission pre-condition predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-            update_columns:
-              type:
-                name: update_StudentNFC_by_id_update_columns
-                type: named
-          result_type:
-            name: update_StudentNFC_by_id_response
-            type: named
-        - name: update_StudentNFC_by_user_id
-          description: Update any row on the 'StudentNFC' collection using the 'user_id' key
-          arguments:
-            key_user_id:
-              type:
-                name: uuid
-                type: named
-            post_check:
-              description: Update permission post-condition predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-            pre_check:
-              description: Update permission pre-condition predicate over the 'StudentNFC' collection
-              type:
-                type: nullable
-                underlying_type:
-                  object_type_name: StudentNFC
-                  type: predicate
-            update_columns:
-              type:
-                name: update_StudentNFC_by_user_id_update_columns
-                type: named
-          result_type:
-            name: update_StudentNFC_by_user_id_response
             type: named
         - name: update_Suspensions_by_id
           description: Update any row on the 'Suspensions' collection using the 'id' key

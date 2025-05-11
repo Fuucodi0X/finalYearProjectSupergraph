@@ -2,21 +2,21 @@
 kind: ObjectType
 version: v1
 definition:
-  name: DeleteStudentNfcByUserIdResponse
-  description: Responses from the 'delete_StudentNFC_by_user_id' procedure
+  name: DeleteNfcCardsByIdResponse
+  description: Responses from the 'delete_NFCCards_by_id' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[StudentNfc!]!"
+      type: "[NfcCards!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: DeleteStudentNfcByUserIdResponse
-    inputTypeName: DeleteStudentNfcByUserIdResponseInput
+    typeName: DeleteNfcCardsByIdResponse
+    inputTypeName: DeleteNfcCardsByIdResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: delete_StudentNFC_by_user_id_response
+      dataConnectorObjectType: delete_NFCCards_by_id_response
       fieldMapping:
         affectedRows:
           column:
@@ -29,7 +29,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: DeleteStudentNfcByUserIdResponse
+  typeName: DeleteNfcCardsByIdResponse
   permissions:
     - role: admin
       output:
@@ -41,31 +41,31 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: DeleteStudentNfcByUserId
-  outputType: DeleteStudentNfcByUserIdResponse!
+  name: DeleteNfcCardsById
+  outputType: DeleteNfcCardsByIdResponse!
   arguments:
-    - name: keyUserId
+    - name: keyId
       type: Uuid!
     - name: preCheck
-      type: StudentNfcBoolExp
-      description: Delete permission predicate over the 'StudentNFC' collection
+      type: NfcCardsBoolExp
+      description: Delete permission predicate over the 'NFCCards' collection
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: delete_StudentNFC_by_user_id
+      procedure: delete_NFCCards_by_id
     argumentMapping:
-      keyUserId: key_user_id
+      keyId: key_id
       preCheck: pre_check
   graphql:
-    rootFieldName: deleteStudentNfcByUserId
+    rootFieldName: deleteNfcCardsById
     rootFieldKind: Mutation
-  description: Delete any row on the 'StudentNFC' collection using the 'user_id' key
+  description: Delete any row on the 'NFCCards' collection using the 'id' key
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: DeleteStudentNfcByUserId
+  commandName: DeleteNfcCardsById
   permissions:
     - role: admin
       allowExecution: true

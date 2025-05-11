@@ -2,21 +2,21 @@
 kind: ObjectType
 version: v1
 definition:
-  name: DeleteStudentNfcByIdResponse
-  description: Responses from the 'delete_StudentNFC_by_id' procedure
+  name: DeleteAssignedCardsByUserIdResponse
+  description: Responses from the 'delete_AssignedCards_by_user_id' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[StudentNfc!]!"
+      type: "[AssignedCards!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: DeleteStudentNfcByIdResponse
-    inputTypeName: DeleteStudentNfcByIdResponseInput
+    typeName: DeleteAssignedCardsByUserIdResponse
+    inputTypeName: DeleteAssignedCardsByUserIdResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: delete_StudentNFC_by_id_response
+      dataConnectorObjectType: delete_AssignedCards_by_user_id_response
       fieldMapping:
         affectedRows:
           column:
@@ -29,7 +29,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: DeleteStudentNfcByIdResponse
+  typeName: DeleteAssignedCardsByUserIdResponse
   permissions:
     - role: admin
       output:
@@ -41,31 +41,31 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: DeleteStudentNfcById
-  outputType: DeleteStudentNfcByIdResponse!
+  name: DeleteAssignedCardsByUserId
+  outputType: DeleteAssignedCardsByUserIdResponse!
   arguments:
-    - name: keyId
+    - name: keyUserId
       type: Uuid!
     - name: preCheck
-      type: StudentNfcBoolExp
-      description: Delete permission predicate over the 'StudentNFC' collection
+      type: AssignedCardsBoolExp
+      description: Delete permission predicate over the 'AssignedCards' collection
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: delete_StudentNFC_by_id
+      procedure: delete_AssignedCards_by_user_id
     argumentMapping:
-      keyId: key_id
+      keyUserId: key_user_id
       preCheck: pre_check
   graphql:
-    rootFieldName: deleteStudentNfcById
+    rootFieldName: deleteAssignedCardsByUserId
     rootFieldKind: Mutation
-  description: Delete any row on the 'StudentNFC' collection using the 'id' key
+  description: Delete any row on the 'AssignedCards' collection using the 'user_id' key
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: DeleteStudentNfcById
+  commandName: DeleteAssignedCardsByUserId
   permissions:
     - role: admin
       allowExecution: true

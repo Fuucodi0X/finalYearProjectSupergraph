@@ -2,24 +2,24 @@
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateStudentNfcByUserIdUpdateColumns
-  description: Update the columns of the 'StudentNFC' collection
+  name: UpdateAssignedCardsByUserIdUpdateColumns
+  description: Update the columns of the 'AssignedCards' collection
   fields:
     - name: id
-      type: UpdateColumnStudentNfcId
-      description: Update the 'id' column in the 'StudentNFC' collection.
+      type: UpdateColumnAssignedCardsId
+      description: Update the 'id' column in the 'AssignedCards' collection.
     - name: nfcId
-      type: UpdateColumnStudentNfcNfcId
-      description: Update the 'nfc_id' column in the 'StudentNFC' collection.
+      type: UpdateColumnAssignedCardsNfcId
+      description: Update the 'nfc_id' column in the 'AssignedCards' collection.
     - name: userId
-      type: UpdateColumnStudentNfcUserId
-      description: Update the 'user_id' column in the 'StudentNFC' collection.
+      type: UpdateColumnAssignedCardsUserId
+      description: Update the 'user_id' column in the 'AssignedCards' collection.
   graphql:
-    typeName: UpdateStudentNfcByUserIdUpdateColumns
-    inputTypeName: UpdateStudentNfcByUserIdUpdateColumnsInput
+    typeName: UpdateAssignedCardsByUserIdUpdateColumns
+    inputTypeName: UpdateAssignedCardsByUserIdUpdateColumnsInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_StudentNFC_by_user_id_update_columns
+      dataConnectorObjectType: update_AssignedCards_by_user_id_update_columns
       fieldMapping:
         id:
           column:
@@ -35,7 +35,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateStudentNfcByUserIdUpdateColumns
+  typeName: UpdateAssignedCardsByUserIdUpdateColumns
   permissions:
     - role: admin
       output:
@@ -48,21 +48,21 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: UpdateStudentNfcByUserIdResponse
-  description: Responses from the 'update_StudentNFC_by_user_id' procedure
+  name: UpdateAssignedCardsByUserIdResponse
+  description: Responses from the 'update_AssignedCards_by_user_id' procedure
   fields:
     - name: affectedRows
       type: Int4!
       description: The number of rows affected by the mutation
     - name: returning
-      type: "[StudentNfc!]!"
+      type: "[AssignedCards!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: UpdateStudentNfcByUserIdResponse
-    inputTypeName: UpdateStudentNfcByUserIdResponseInput
+    typeName: UpdateAssignedCardsByUserIdResponse
+    inputTypeName: UpdateAssignedCardsByUserIdResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: pg_db
-      dataConnectorObjectType: update_StudentNFC_by_user_id_response
+      dataConnectorObjectType: update_AssignedCards_by_user_id_response
       fieldMapping:
         affectedRows:
           column:
@@ -75,7 +75,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: UpdateStudentNfcByUserIdResponse
+  typeName: UpdateAssignedCardsByUserIdResponse
   permissions:
     - role: admin
       output:
@@ -87,40 +87,40 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: UpdateStudentNfcByUserId
-  outputType: UpdateStudentNfcByUserIdResponse!
+  name: UpdateAssignedCardsByUserId
+  outputType: UpdateAssignedCardsByUserIdResponse!
   arguments:
     - name: keyUserId
       type: Uuid!
     - name: postCheck
-      type: StudentNfcBoolExp
-      description: Update permission post-condition predicate over the 'StudentNFC'
+      type: AssignedCardsBoolExp
+      description: Update permission post-condition predicate over the 'AssignedCards'
         collection
     - name: preCheck
-      type: StudentNfcBoolExp
-      description: Update permission pre-condition predicate over the 'StudentNFC'
+      type: AssignedCardsBoolExp
+      description: Update permission pre-condition predicate over the 'AssignedCards'
         collection
     - name: updateColumns
-      type: UpdateStudentNfcByUserIdUpdateColumns!
+      type: UpdateAssignedCardsByUserIdUpdateColumns!
   source:
     dataConnectorName: pg_db
     dataConnectorCommand:
-      procedure: update_StudentNFC_by_user_id
+      procedure: update_AssignedCards_by_user_id
     argumentMapping:
       keyUserId: key_user_id
       postCheck: post_check
       preCheck: pre_check
       updateColumns: update_columns
   graphql:
-    rootFieldName: updateStudentNfcByUserId
+    rootFieldName: updateAssignedCardsByUserId
     rootFieldKind: Mutation
-  description: Update any row on the 'StudentNFC' collection using the 'user_id' key
+  description: Update any row on the 'AssignedCards' collection using the 'user_id' key
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: UpdateStudentNfcByUserId
+  commandName: UpdateAssignedCardsByUserId
   permissions:
     - role: admin
       allowExecution: true

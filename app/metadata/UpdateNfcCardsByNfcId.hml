@@ -1,0 +1,118 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateNfcCardsByNfcIdUpdateColumns
+  description: Update the columns of the 'NFCCards' collection
+  fields:
+    - name: id
+      type: UpdateColumnNfcCardsId
+      description: Update the 'id' column in the 'NFCCards' collection.
+    - name: nfcId
+      type: UpdateColumnNfcCardsNfcId
+      description: Update the 'nfc_id' column in the 'NFCCards' collection.
+  graphql:
+    typeName: UpdateNfcCardsByNfcIdUpdateColumns
+    inputTypeName: UpdateNfcCardsByNfcIdUpdateColumnsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_NFCCards_by_nfc_id_update_columns
+      fieldMapping:
+        id:
+          column:
+            name: id
+        nfcId:
+          column:
+            name: nfc_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateNfcCardsByNfcIdUpdateColumns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - nfcId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: UpdateNfcCardsByNfcIdResponse
+  description: Responses from the 'update_NFCCards_by_nfc_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[NfcCards!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: UpdateNfcCardsByNfcIdResponse
+    inputTypeName: UpdateNfcCardsByNfcIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: update_NFCCards_by_nfc_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateNfcCardsByNfcIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: UpdateNfcCardsByNfcId
+  outputType: UpdateNfcCardsByNfcIdResponse!
+  arguments:
+    - name: keyNfcId
+      type: Text!
+    - name: postCheck
+      type: NfcCardsBoolExp
+      description: Update permission post-condition predicate over the 'NFCCards' collection
+    - name: preCheck
+      type: NfcCardsBoolExp
+      description: Update permission pre-condition predicate over the 'NFCCards' collection
+    - name: updateColumns
+      type: UpdateNfcCardsByNfcIdUpdateColumns!
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: update_NFCCards_by_nfc_id
+    argumentMapping:
+      keyNfcId: key_nfc_id
+      postCheck: post_check
+      preCheck: pre_check
+      updateColumns: update_columns
+  graphql:
+    rootFieldName: updateNfcCardsByNfcId
+    rootFieldKind: Mutation
+  description: Update any row on the 'NFCCards' collection using the 'nfc_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: UpdateNfcCardsByNfcId
+  permissions:
+    - role: admin
+      allowExecution: true
+

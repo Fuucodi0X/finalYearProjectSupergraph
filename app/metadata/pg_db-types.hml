@@ -183,40 +183,6 @@ definition:
     typeName: Numeric
 
 ---
-kind: BooleanExpressionType
-version: v1
-definition:
-  name: NumericBoolExp
-  operand:
-    scalar:
-      type: Numeric
-      comparisonOperators:
-        - name: _eq
-          argumentType: Numeric!
-        - name: _gt
-          argumentType: Numeric!
-        - name: _gte
-          argumentType: Numeric!
-        - name: _in
-          argumentType: "[Numeric!]!"
-        - name: _lt
-          argumentType: Numeric!
-        - name: _lte
-          argumentType: Numeric!
-        - name: _neq
-          argumentType: Numeric!
-      dataConnectorOperatorMapping:
-        - dataConnectorName: pg_db
-          dataConnectorScalarType: numeric
-          operatorMapping: {}
-  logicalOperators:
-    enable: true
-  isNull:
-    enable: true
-  graphql:
-    typeName: NumericBoolExp
-
----
 kind: DataConnectorScalarRepresentation
 version: v1
 definition:
@@ -233,40 +199,6 @@ definition:
   name: Int8
   graphql:
     typeName: Int8
-
----
-kind: BooleanExpressionType
-version: v1
-definition:
-  name: Int8BoolExp
-  operand:
-    scalar:
-      type: Int8
-      comparisonOperators:
-        - name: _eq
-          argumentType: Int8!
-        - name: _gt
-          argumentType: Int8!
-        - name: _gte
-          argumentType: Int8!
-        - name: _in
-          argumentType: "[Int8!]!"
-        - name: _lt
-          argumentType: Int8!
-        - name: _lte
-          argumentType: Int8!
-        - name: _neq
-          argumentType: Int8!
-      dataConnectorOperatorMapping:
-        - dataConnectorName: pg_db
-          dataConnectorScalarType: int8
-          operatorMapping: {}
-  logicalOperators:
-    enable: true
-  isNull:
-    enable: true
-  graphql:
-    typeName: Int8BoolExp
 
 ---
 kind: DataConnectorScalarRepresentation

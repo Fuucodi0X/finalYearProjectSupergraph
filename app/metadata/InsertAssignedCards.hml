@@ -1,0 +1,114 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertAssignedCardsObject
+  fields:
+    - name: id
+      type: Uuid
+    - name: nfcId
+      type: Text!
+    - name: userId
+      type: Uuid!
+  graphql:
+    typeName: InsertAssignedCardsObject
+    inputTypeName: InsertAssignedCardsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_AssignedCards_object
+      fieldMapping:
+        id:
+          column:
+            name: id
+        nfcId:
+          column:
+            name: nfc_id
+        userId:
+          column:
+            name: user_id
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertAssignedCardsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - nfcId
+          - userId
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: InsertAssignedCardsResponse
+  description: Responses from the 'insert_AssignedCards' procedure
+  fields:
+    - name: affectedRows
+      type: Int4!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[AssignedCards!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: InsertAssignedCardsResponse
+    inputTypeName: InsertAssignedCardsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: pg_db
+      dataConnectorObjectType: insert_AssignedCards_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: InsertAssignedCardsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: InsertAssignedCards
+  outputType: InsertAssignedCardsResponse!
+  arguments:
+    - name: objects
+      type: "[InsertAssignedCardsObject!]!"
+    - name: postCheck
+      type: AssignedCardsBoolExp
+      description: Insert permission predicate over the 'AssignedCards' collection
+  source:
+    dataConnectorName: pg_db
+    dataConnectorCommand:
+      procedure: insert_AssignedCards
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: insertAssignedCards
+    rootFieldKind: Mutation
+  description: Insert into the AssignedCards table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: InsertAssignedCards
+  permissions:
+    - role: admin
+      allowExecution: true
+
